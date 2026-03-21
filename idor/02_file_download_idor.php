@@ -5,8 +5,6 @@ $module_icon = '📁';
 $module_desc = '演示通过IDOR漏洞下载任意文件的场景。';
 
 $error = '';
-$file_content = '';
-$file_name = '';
 
 // 处理文件下载请求
 if (isset($_GET['file'])) {
@@ -15,9 +13,17 @@ if (isset($_GET['file'])) {
     // 危险：直接使用用户输入作为文件路径
     // 没有任何路径验证和过滤
     if (file_exists($file)) {
-        // 直接输出文件内容
+        // 直接下载文件
         $file_name = basename($file);
-        $file_content = file_get_contents($file);
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . $file_name . '"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file));
+        readfile($file);
+        exit;
     } else {
         $error = '文件不存在！';
     }
@@ -101,32 +107,7 @@ $content = '<div class="card">
 
             <div class="card mb-3">
                 <div class="card-header">
-                    <h6>📄 文件内容</h6>
-                </div>
-                <div class="card-body">
-                    ';
-
-if ($error) {
-    $content .= '<div class="alert alert-danger">
-                        <strong>错误：</strong>
-                        <p>' . htmlspecialchars($error) . '</p>
-                    </div>';
-}
-
-if ($file_content) {
-    $content .= '<div class="alert alert-success">
-                        <strong>文件：</strong> ' . htmlspecialchars($file_name) . '<br>
-                        <strong>内容：</strong>
-                        <pre class="bg-dark text-light p-3 rounded mt-2"><code>' . htmlspecialchars($file_content) . '</code></pre>
-                    </div>';
-}
-
-$content .= '                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h6>💻 漏洞代码</h6>
+                    <h6>� 漏洞代码</h6>
                 </div>
                 <div class="card-body">
                     <pre class="bg-dark text-light p-3 rounded"><code>// 危险的文件下载代码
@@ -136,9 +117,17 @@ if (isset($_GET["file"])) {
     // 漏洞：直接使用用户输入作为文件路径
     // 没有任何路径验证和过滤
     if (file_exists($file)) {
-        // 直接输出文件内容
+        // 直接下载文件
         $file_name = basename($file);
-        $file_content = file_get_contents($file);
+        header("Content-Description: File Transfer");
+        header("Content-Type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=\"" . $file_name . "\"");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate");
+        header("Pragma: public");
+        header("Content-Length: " . filesize($file));
+        readfile($file);
+        exit;
     } else {
         $error = "文件不存在！";
     }
@@ -156,7 +145,7 @@ if (isset($_GET["file"])) {
                         <li><strong>限制文件路径</strong> - 将文件路径限制在特定目录内</li>
                         <li><strong>使用文件ID映射</strong> - 使用文件ID而不是直接路径</li>
                         <li><strong>验证文件类型</strong> - 只允许下载特定类型的文件</li>
-                        <li><strong>使用安全的文件读取函数</strong> - 避免直接使用file_get_contents</li>
+                        <li><strong>使用安全的文件读取函数</strong> - 避免直接使用readfile</li>
                         <li><strong>设置正确的Content-Type</strong> - 防止浏览器执行恶意文件</li>
                     </ol>
 
@@ -179,9 +168,15 @@ if (isset($_GET["file_id"])) {
         // 验证文件路径是否在允许的目录内
         $base_dir = realpath("./files/");
         if (strpos($file_path, $base_dir) === 0 && file_exists($file_path)) {
-            // 安全地输出文件
+            // 安全地下载文件
             $file_name = basename($file_path);
+            header("Content-Description: File Transfer");
+            header("Content-Type: application/octet-stream");
             header("Content-Disposition: attachment; filename=\"" . $file_name . "\"");
+            header("Expires: 0");
+            header("Cache-Control: must-revalidate");
+            header("Pragma: public");
+            header("Content-Length: " . filesize($file_path));
             readfile($file_path);
             exit;
         }
