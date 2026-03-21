@@ -16,19 +16,7 @@ if (isset($_POST['xml'])) {
         // 确保启用外部实体解析（默认情况下可能被禁用）
         libxml_disable_entity_loader(false);
         
-        // 调试信息：检查文件是否存在
-        if (file_exists('d:/phpstudy_pro/WWW/zhaosec/xxe/flag.txt')) {
-            $result .= '调试信息：flag.txt文件存在<br>';
-            $result .= '调试信息：文件内容：' . htmlspecialchars(file_get_contents('d:/phpstudy_pro/WWW/zhaosec/xxe/flag.txt')) . '<br>';
-        } else {
-            $result .= '调试信息：flag.txt文件不存在<br>';
-        }
-        
-        // 调试信息：显示接收到的XML
-        $result .= '调试信息：接收到的XML：' . htmlspecialchars($xml) . '<br>';
-        
-        // 方法1：使用DOMDocument
-        $result .= '方法1：使用DOMDocument<br>';
+        // 使用DOMDocument解析XML，支持外部实体
         $dom = new DOMDocument();
         $dom->resolveExternals = true;
         $dom->substituteEntities = true;
@@ -37,23 +25,13 @@ if (isset($_POST['xml'])) {
             $root = $dom->documentElement;
             $name = $root->getElementsByTagName('name')->item(0);
             if ($name) {
-                $result .= 'DOMDocument解析成功：' . htmlspecialchars($name->nodeValue) . '<br>';
+                $result = 'XML解析成功：' . htmlspecialchars($name->nodeValue);
             } else {
-                $result .= 'DOMDocument解析成功，但未找到name元素<br>';
+                $result = 'XML解析成功，但未找到name元素';
             }
         } else {
-            $result .= 'DOMDocument解析失败<br>';
+            $error = 'XML解析失败';
         }
-        
-        // 方法2：使用simplexml_load_string
-        $result .= '方法2：使用simplexml_load_string<br>';
-        $simplexml = simplexml_load_string($xml, null, LIBXML_NOENT);
-        if ($simplexml) {
-            $result .= 'simplexml解析成功：' . htmlspecialchars(print_r($simplexml, true)) . '<br>';
-        } else {
-            $result .= 'simplexml解析失败<br>';
-        }
-        
     } catch (Exception $e) {
         $error = '解析错误：' . $e->getMessage();
     }
