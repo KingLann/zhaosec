@@ -7,7 +7,6 @@ $vulns = [
     ['name' => 'HTTP请求走私', 'desc' => '通过构造特殊的HTTP请求，绕过安全设备或服务器的防护', 'file' => '01_http_request_smuggling.php', 'level' => 'medium'],
     ['name' => 'HTTP头注入', 'desc' => '通过注入恶意HTTP头信息，执行未授权操作或绕过安全限制', 'file' => '02_http_header_injection.php', 'level' => 'medium'],
     ['name' => 'Cookie安全问题', 'desc' => '学习Cookie的安全配置和常见的Cookie相关漏洞', 'file' => '03_cookie_security.php', 'level' => 'low'],
-    ['name' => 'HTTP/2漏洞', 'desc' => '了解HTTP/2协议的安全问题和潜在漏洞', 'file' => '04_http2_vulnerabilities.php', 'level' => 'high'],
 ];
 include '../template/module_template.php';
 ?>
