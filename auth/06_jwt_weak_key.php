@@ -34,11 +34,23 @@ if (isset($_COOKIE['jwt_token'])) {
     }
 }
 
-// 如果已有有效token，直接跳转到dashboard
+// 验证token是否有效，只有有效token才自动跳转
 if ($jwt_token) {
-    $_SESSION['token'] = $jwt_token;
-    header('Location: jwt_dashboard.php');
-    exit;
+    $parts = explode('.', $jwt_token);
+    if (count($parts) === 3) {
+        $payload_json = base64_decode(strtr($parts[1], '-_', '+/'));
+        $payload_data = json_decode($payload_json, true);
+        
+        // 检查token是否过期
+        if ($payload_data && isset($payload_data['exp']) && $payload_data['exp'] > time()) {
+            $_SESSION['token'] = $jwt_token;
+            header('Location: jwt_dashboard.php');
+            exit;
+        } else {
+            // Token已过期，清除Cookie
+            setcookie('jwt_token', '', time() - 3600, '/');
+        }
+    }
 }
 
 // 处理登录请求
@@ -304,18 +316,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <div id="forge1" class="tab-content active">
                 <p>在浏览器控制台执行以下代码修改Cookie：</p>
-                <div class="code-block">// 1. 先复制当前Cookie中的jwt_token值
+                <div class="code-block">// 1. 先复制当前Cookie中的jwt_token值<br>
 // 2. 解码JWT（第三部分签名可以忽略）
 const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoidGVzdCIsInJvbGUiOiJ1c2VyIn0.xxx';
-const parts = token.split('.');
+const parts = token.split('.');<br>
 
 // 3. 解码payload并修改role
 const payload = JSON.parse(atob(parts[1]));
-payload.role = 'admin';
+payload.role = 'admin';<br>
 
 // 4. 重新编码（这里只是演示，实际需要签名）
 const newPayload = btoa(JSON.stringify(payload)).replace(/=/g, '');
-console.log('修改后的payload:', newPayload);
+console.log('修改后的payload:', newPayload);<br>
 
 // 5. 使用jwt.io或jwt_tool重新签名</div>
                 <button class="btn" onclick="document.cookie='jwt_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MDQwNjA4MDB9.'; location.reload();">

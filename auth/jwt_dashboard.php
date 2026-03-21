@@ -243,8 +243,16 @@ $is_admin = ($payload['role'] ?? '') === 'admin';
             
             <br>
             <a href="index.php" class="back-link">← 返回身份认证首页</a>
-            <a href="logout.php?redirect=06_jwt_weak_key.php" style="margin-left: 20px; color: #dc3545; text-decoration: none; font-weight: 600;">退出登录</a>
+            <a href="logout.php?redirect=06_jwt_weak_key.php" onclick="clearJWTCookie()" style="margin-left: 20px; color: #dc3545; text-decoration: none; font-weight: 600;">退出登录</a>
         </div>
     </div>
+    
+    <script>
+        // 清除JWT Cookie的辅助函数
+        function clearJWTCookie() {
+            document.cookie = 'jwt_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            console.log('JWT Cookie已清除');
+        }
+    </script>
 </body>
 </html>
