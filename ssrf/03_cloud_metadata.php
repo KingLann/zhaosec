@@ -31,6 +31,9 @@ if (isset($_GET['metadata'])) {
         curl_setopt($ch, CURLOPT_URL, $endpoint);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // 跟随重定向
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 禁用SSL证书验证
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // 禁用SSL主机验证
         
         // 对于GCP，需要添加元数据头
         if (strpos($metadata, 'gcp') === 0) {

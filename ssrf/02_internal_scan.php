@@ -18,6 +18,9 @@ if (isset($_GET['target'])) {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 2);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // 跟随重定向
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 禁用SSL证书验证
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // 禁用SSL主机验证
         
         $start_time = microtime(true);
         $response = curl_exec($ch);
