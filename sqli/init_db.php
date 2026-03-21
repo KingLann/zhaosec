@@ -6,6 +6,7 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "123456";
 $dbname = "zhao";
+$reset = isset($_GET['reset']) && $_GET['reset'] == '1';
 
 // 先连接到MySQL服务器（不指定数据库）
 $conn = new mysqli($servername, $username, $password);
@@ -31,6 +32,22 @@ if (!$conn->select_db($dbname)) {
 }
 
 echo "选择数据库 $dbname 成功<br>";
+
+// 如果是重置模式，先删除表
+if ($reset) {
+    echo "<strong>重置模式：开始清空数据库...</strong><br>";
+    
+    // 删除表（按照依赖关系顺序）
+    $tables = ['flags', 'products', 'users'];
+    foreach ($tables as $table) {
+        $drop_sql = "DROP TABLE IF EXISTS $table";
+        if ($conn->query($drop_sql) === TRUE) {
+            echo "删除表 $table 成功<br>";
+        } else {
+            echo "删除表 $table 失败: " . $conn->error . "<br>";
+        }
+    }
+}
 
 // 创建users表
 $create_users_sql = "CREATE TABLE IF NOT EXISTS users (
@@ -118,5 +135,12 @@ if ($conn->query($insert_flags_sql) === TRUE) {
 // 关闭连接
 $conn->close();
 
-echo "数据库初始化完成！";
+if ($reset) {
+    echo "<strong>数据库重置完成！</strong><br>";
+} else {
+    echo "数据库初始化完成！<br>";
+}
+
+// 添加操作链接
+echo "<br><a href='index.php'>返回SQL注入模块首页</a> | <a href='init_db.php?reset=1' onclick='return confirm(\'确定要重置数据库吗？这将清空所有数据并重新初始化。\');'>重置数据库</a>";
 ?>

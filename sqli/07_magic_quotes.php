@@ -266,15 +266,15 @@ $conn->close();
                 通过在输入中插入单引号和逻辑运算符，改变SQL语句的逻辑结构，使WHERE条件永远为真。
             </div>
             <div class="sql-code">
--- 原始SQL语句
-SELECT * FROM users WHERE username='admin' AND password='123456';
+-- 原始SQL语句<br>
+SELECT * FROM users WHERE username='admin' AND password='123456';<br>
 
--- 注入后的SQL语句
-SELECT * FROM users WHERE username='admin' AND password='1' OR '1'='1';
+-- 注入后的SQL语句<br>
+SELECT * FROM users WHERE username='admin' AND password='1' OR '1'='1';<br> 
 
--- 解释：
--- '1'='1' 永远为真，所以整个条件永远为真
--- 这样就可以绕过密码验证，直接登录
+-- 解释：<br>
+-- '1'='1' 永远为真，所以整个条件永远为真<br>
+-- 这样就可以绕过密码验证，直接登录<br> 
             </div>
         </div>
 
