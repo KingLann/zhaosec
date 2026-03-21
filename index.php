@@ -104,14 +104,7 @@
             color: #667eea;
             text-decoration: none;
         }
-        .badge-level {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 15px;
-        }
-        .level-low { background: #d4edda; color: #155724; }
-        .level-medium { background: #fff3cd; color: #856404; }
-        .level-high { background: #f8d7da; color: #721c24; }
+
     </style>
 </head>
 <body>
@@ -126,9 +119,8 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-logic text-white">🧩</div>
-                    <h5>逻辑漏洞 <span class="badge badge-level level-high">高级</span></h5>
+                    <h5>逻辑漏洞</h5>
                     <p>包含水平/垂直越权、并发漏洞、支付篡改、短信轰炸、任意密码重置、未授权访问等逻辑漏洞演示。</p>
                     <a href="logic/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -136,9 +128,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-xss text-white">📜</div>
-                    <h5>XSS跨站脚本 <span class="badge badge-level level-medium">中级</span></h5>
+                    <h5>XSS跨站脚本</h5>
                     <p>演示反射型、存储型、DOM型XSS及常见绕过技术。</p>
                     <a href="xss/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -146,9 +137,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-auth text-white">🔐</div>
-                    <h5>身份认证漏洞 <span class="badge badge-level level-medium">中级</span></h5>
+                    <h5>身份认证漏洞</h5>
                     <p>演示弱密码、未授权访问、越权操作、JWT攻击等认证安全问题。</p>
                     <a href="auth/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -156,9 +146,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-upload text-white">📁</div>
-                    <h5>文件上传漏洞 <span class="badge badge-level level-high">高级</span></h5>
+                    <h5>文件上传漏洞</h5>
                     <p>演示不安全的文件上传功能如何导致服务器入侵。</p>
                     <a href="upload/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -166,9 +155,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-rce text-white">⚡</div>
-                    <h5>命令/代码执行 <span class="badge badge-level level-high">高级</span></h5>
+                    <h5>命令/代码执行</h5>
                     <p>演示系统命令执行、PHP代码执行及常见绕过技术。</p>
                     <a href="rce/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -176,9 +164,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-sqli text-white">💉</div>
-                    <h5>SQL注入漏洞 <span class="badge badge-level level-high">高级</span></h5>
+                    <h5>SQL注入漏洞</h5>
                     <p>演示过滤的SQL查询如何泄露或修改数据库信息。</p>
                     <a href="sqli/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -186,9 +173,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-lfi text-white">📂</div>
-                    <h5>文件包含漏洞 <span class="badge badge-level level-medium">中级</span></h5>
+                    <h5>文件包含漏洞</h5>
                     <p>演示本地文件包含、远程文件包含及PHP伪协议利用。</p>
                     <a href="lfi/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -196,9 +182,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-xxe text-white">📄</div>
-                    <h5>XXE漏洞 <span class="badge badge-level level-high">高级</span></h5>
+                    <h5>XXE漏洞</h5>
                     <p>演示XML外部实体注入、Blind XXE及内网攻击。</p>
                     <a href="xxe/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -206,9 +191,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-ssrf text-white">🌐</div>
-                    <h5>SSRF漏洞 <span class="badge badge-level level-high">高级</span></h5>
+                    <h5>SSRF漏洞</h5>
                     <p>演示服务端请求伪造漏洞及利用技术。</p>
                     <a href="ssrf/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -216,9 +200,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-csrf text-white">🔄</div>
-                    <h5>CSRF漏洞 <span class="badge badge-level level-medium">中级</span></h5>
+                    <h5>CSRF漏洞</h5>
                     <p>演示跨站请求伪造漏洞及防护技术。</p>
                     <a href="csrf/" class="btn btn-outline-primary">进入演练</a>
                 </div>
@@ -226,9 +209,8 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-unserialize text-white">📦</div>
-                    <h5>PHP反序列化 <span class="badge badge-level level-high">高级</span></h5>
+                    <h5>PHP反序列化</h5>
                     <p>演示PHP反序列化漏洞及利用技术。</p>
                     <a href="unserialize/" class="btn btn-outline-primary">进入演练</a>
                 </div>
