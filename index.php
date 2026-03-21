@@ -36,7 +36,7 @@
             background: white;
             border-radius: 18px;
             padding: 35px;
-            margin-bottom: 35px;
+            margin-bottom: 50px;
             box-shadow: 0 10px 35px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
