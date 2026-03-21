@@ -4,25 +4,7 @@ $module_name = 'XXE RCE';
 $module_icon = '💻';
 $module_desc = '利用XXE漏洞执行系统命令。';
 
-// 漏洞代码
-$result = '';
-$error = '';
 
-if (isset($_POST['xml'])) {
-    $xml = $_POST['xml'];
-    
-    // 漏洞：使用simplexml_load_string解析XML，没有禁用外部实体
-    try {
-        $simplexml = simplexml_load_string($xml);
-        if ($simplexml) {
-            $result = 'XML解析成功：' . htmlspecialchars(print_r($simplexml, true));
-        } else {
-            $error = 'XML解析失败';
-        }
-    } catch (Exception $e) {
-        $error = '解析错误：' . $e->getMessage();
-    }
-}
 
 // 页面内容
 $content = '<div class="card">
@@ -88,38 +70,20 @@ $content = '<div class="card">
 
             <div class="card mb-3">
                 <div class="card-header">
-                    <h6>💻 实际测试</h6>
+                    <h6>🎯 靶场测试</h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" class="mb-3">
-                        <div class="mb-3">
-                            <label for="xml" class="form-label">XML内容</label>
-                            <textarea name="xml" id="xml" class="form-control" rows="8" placeholder="输入XML内容">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE root [
-    &lt;!ENTITY xxe SYSTEM "expect://whoami"&gt;
-]&gt;
-&lt;root&gt;
-    &lt;name&gt;&amp;xxe;&lt;/name&gt;
-&lt;/root&gt;</textarea>
-                        </div>
-                        <button type="submit" class="btn btn-danger">提交</button>
-                    </form>
+                    <div class="text-center py-5">
+                        <h5 class="mb-4">XXE RCE 靶场</h5>
+                        <p class="mb-5">点击下方按钮跳转到XXE RCE靶场进行实际测试</p>
+                        <a href="http://127.0.0.1:81" target="_blank" class="btn btn-success btn-lg">
+                            <i class="fas fa-play-circle mr-2"></i>前往靶场
+                        </a>
+                    </div>
 
                     ';
 
-if ($error) {
-    $content .= '<div class="alert alert-danger">
-                        <strong>错误：</strong>
-                        <p>' . htmlspecialchars($error) . '</p>
-                    </div>';
-}
 
-if ($result) {
-    $content .= '<div class="alert alert-secondary">
-                        <strong>解析结果：</strong>
-                        <pre class="mb-0 mt-2"><code>' . htmlspecialchars($result) . '</code></pre>
-                    </div>';
-}
 
 $content .= '                </div>
             </div>
