@@ -105,11 +105,11 @@
             </div>
         </div>
         <div class="row">
-            <?php foreach ($vulns as $vuln): ?>
+            <?php $index = 1; foreach ($vulns as $vuln): ?>
             <div class="col-lg-6">
                 <div class="vuln-item">
                     <h5>
-                        <?= $vuln['name'] ?>
+                        <?= $index ?>. <?= $vuln['name'] ?>
                         <?php 
                         $level_class = 'level-' . $vuln['level'];
                         $level_text = $vuln['level'] == 'low' ? '初级' : ($vuln['level'] == 'medium' ? '中级' : '高级');
@@ -120,7 +120,7 @@
                     <a href="<?= $vuln['file'] ?>" class="btn btn-outline-primary btn-sm">开始演练</a>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <?php $index++; endforeach; ?>
         </div>
 
         <div class="footer">

@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <h2>🔐 AES加密登录</h2>
+        <h2>3. 🔐 AES加密登录</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
             密码使用AES加密传输，但密钥硬编码在前端，攻击者可以获取密钥后进行加密爆破。<br>

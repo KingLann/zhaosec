@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <h2>🔐 JWT弱密钥漏洞</h2>
+        <h2>6. 🔐 JWT弱密钥漏洞</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
             JWT使用弱密钥进行签名，攻击者可以破解密钥后伪造任意token。<br>

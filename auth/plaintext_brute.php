@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <h2>🔐 明文传输登录</h2>
+        <h2>1. 🔐 明文传输登录</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
             密码以明文形式传输，无验证码和频率限制，可使用Burp Suite等工具进行暴力破解。<br>

@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <h2>🔐 账户枚举</h2>
+        <h2>4. 🔐 账户枚举</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
             根据不同的错误信息可以判断用户是否存在，从而枚举出系统中的有效用户名。<br>

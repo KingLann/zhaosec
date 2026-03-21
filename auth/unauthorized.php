@@ -56,7 +56,7 @@ $secret_data = '这是敏感数据，只有管理员才能访问';
 <body>
     <div class="container">
         <div class="card">
-            <h2>🔓 未授权访问漏洞</h2>
+            <h2>5. 🔓 未授权访问漏洞</h2>
             <div class="info">
                 <strong>漏洞说明：</strong><br>
                 本页面存在未授权访问漏洞，攻击者无需登录即可访问敏感数据。<br>

@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <h2>🔐 Base64编码登录</h2>
+        <h2>2. 🔐 Base64编码登录</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
             密码使用Base64编码传输，虽然不是明文，但编码不是加密，可解码后进行暴力破解。<br>
