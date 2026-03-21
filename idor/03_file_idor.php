@@ -33,90 +33,17 @@ if (isset($_GET['id'])) {
     }
 }
 
-// 页面内容
-$content = <<<'EOT'
-<div class="card">
-        <div class="card-header">
-            <h5 class="mb-0">📁 文件下载IDOR</h5>
-        </div>
-        <div class="card-body">
-            <div class="alert alert-danger">
-                <strong>💡 漏洞说明：</strong><br>
-                本场景演示文件下载的IDOR漏洞。<br>
-                服务器直接使用用户提供的文件ID查询文件信息，没有进行任何访问控制检查，攻击者可以通过修改URL中的文件ID参数下载其他用户的文件。
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h6>🔍 漏洞代码</h6>
-                </div>
-                <div class="card-body">
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_GET['id'])) {
-    $file_id = $_GET['id'];
-    
-    // 漏洞：直接使用用户提供的ID，没有进行访问控制检查
-    foreach ($files as $f) {
-        if ($f['id'] == $file_id) {
-            $file = $f;
-            break;
-        }
-    }
-    
-    if (!$file) {
-        $error = '文件不存在';
-    }
-}</code></pre>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h6>🎯 攻击演示</h6>
-                </div>
-                <div class="card-body">
-                    <p class="mb-3">本场景演示文件下载的IDOR漏洞，尝试以下攻击：</p>
-
-                    <h5 class="mb-2">1. 下载自己的文件</h5>
-                    <p>点击以下链接下载文件1：</p>
-                    <a href="?id=1" class="btn btn-primary">下载文件1</a>
-
-                    <h5 class="mb-2 mt-4">2. 下载其他用户的文件</h5>
-                    <p>尝试修改URL中的id参数，下载其他用户的文件：</p>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">URL</span>
-                        <input type="text" class="form-control" value="http://localhost/zhaosec/idor/03_file_idor.php?id=3">
-                        <button class="btn btn-danger" onclick="window.location.href='?id=3'">访问</button>
-                    </div>
-
-                    <h5 class="mb-2 mt-4">3. 尝试下载不存在的文件</h5>
-                    <a href="?id=999" class="btn btn-warning">访问不存在的文件</a>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h6>💻 实际测试</h6>
-                </div>
-                <div class="card-body">
-                    <form method="GET" class="mb-3">
-                        <div class="mb-3">
-                            <label for="file_id" class="form-label">文件ID</label>
-                            <input type="number" name="id" id="file_id" class="form-control" placeholder="输入文件ID" value="1">
-                        </div>
-                        <button type="submit" class="btn btn-danger">查看文件信息</button>
-                    </form>
-
-                    ';
-
+// 构建结果部分
+$result_html = '';
 if ($error) {
-    $content .= '<div class="alert alert-danger">
+    $result_html = '<div class="alert alert-danger">
                         <strong>错误：</strong>
                         <p>' . htmlspecialchars($error) . '</p>
                     </div>';
 }
 
 if ($file) {
-    $content .= '<div class="card">
+    $result_html = '<div class="card">
                         <div class="card-header">
                             <h6>文件信息</h6>
                         </div>
@@ -154,7 +81,80 @@ if ($file) {
                     </div>';
 }
 
-$content .= '                </div>
+// 页面内容
+$content = '<div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">📁 文件下载IDOR</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <strong>💡 漏洞说明：</strong><br>
+                本场景演示文件下载的IDOR漏洞。<br>
+                服务器直接使用用户提供的文件ID查询文件信息，没有进行任何访问控制检查，攻击者可以通过修改URL中的文件ID参数下载其他用户的文件。
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>🔍 漏洞代码</h6>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_GET[&#39;id&#39;])) {
+    $file_id = $_GET[&#39;id&#39;];
+    
+    // 漏洞：直接使用用户提供的ID，没有进行访问控制检查
+    foreach ($files as $f) {
+        if ($f[&#39;id&#39;] == $file_id) {
+            $file = $f;
+            break;
+        }
+    }
+    
+    if (!$file) {
+        $error = &#39;文件不存在&#39;;
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>🎯 攻击演示</h6>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">本场景演示文件下载的IDOR漏洞，尝试以下攻击：</p>
+
+                    <h5 class="mb-2">1. 下载自己的文件</h5>
+                    <p>点击以下链接下载文件1：</p>
+                    <a href="?id=1" class="btn btn-primary">下载文件1</a>
+
+                    <h5 class="mb-2 mt-4">2. 下载其他用户的文件</h5>
+                    <p>尝试修改URL中的id参数，下载其他用户的文件：</p>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">URL</span>
+                        <input type="text" class="form-control" value="http://localhost/zhaosec/idor/03_file_idor.php?id=3">
+                        <button class="btn btn-danger" onclick="window.location.href=&#39;?id=3&#39;">访问</button>
+                    </div>
+
+                    <h5 class="mb-2 mt-4">3. 尝试下载不存在的文件</h5>
+                    <a href="?id=999" class="btn btn-warning">访问不存在的文件</a>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>💻 实际测试</h6>
+                </div>
+                <div class="card-body">
+                    <form method="GET" class="mb-3">
+                        <div class="mb-3">
+                            <label for="file_id" class="form-label">文件ID</label>
+                            <input type="number" name="id" id="file_id" class="form-control" placeholder="输入文件ID" value="1">
+                        </div>
+                        <button type="submit" class="btn btn-danger">查看文件信息</button>
+                    </form>
+
+                    ' . $result_html . '
+                </div>
             </div>
 
             <div class="card">
