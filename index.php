@@ -47,6 +47,15 @@
     // ----- 常见Web安全漏洞数据集 (名称, 描述, 图标, 风险等级, 学习链接)
     const vulnerabilities = [
         {
+            name: "身份认证漏洞 (Auth)",
+            description: "包括弱密码、暴力破解、会话管理缺陷、凭证存储不安全等认证相关漏洞，可能导致未授权访问。",
+            icon: "fas fa-user-lock",
+            severity: "high",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/authentication",
+            linkText: "认证安全指南"
+        },
+        {
             name: "SQL 注入 (SQLi)",
             description: "攻击者通过插入恶意SQL语句，绕过认证、窃取数据库敏感信息或执行破坏性操作，是Web最危险的漏洞之一。",
             icon: "fas fa-database",
@@ -63,6 +72,15 @@
             severityLabel: "高危",
             link: "https://portswigger.net/web-security/cross-site-scripting",
             linkText: "XSS攻防指南"
+        },
+        {
+            name: "逻辑漏洞 (Logic)",
+            description: "包括业务逻辑缺陷、越权访问、条件竞争、支付逻辑漏洞等，通常源于代码逻辑设计不当。",
+            icon: "fas fa-brain",
+            severity: "medium",
+            severityLabel: "中危",
+            link: "https://portswigger.net/web-security/logic-flaws",
+            linkText: "逻辑漏洞分析"
         },
         {
             name: "跨站请求伪造 (CSRF)",
@@ -90,6 +108,15 @@
             severityLabel: "高危",
             link: "https://portswigger.net/web-security/xxe",
             linkText: "XXE攻击与防御"
+        },
+        {
+            name: "文件包含漏洞 (LFI)",
+            description: "包括本地文件包含和远程文件包含，攻击者可通过构造特殊路径读取服务器文件或执行远程代码。",
+            icon: "fas fa-file-invoice",
+            severity: "high",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/file-path-traversal",
+            linkText: "文件包含漏洞"
         },
         {
             name: "不安全直接对象引用 (IDOR)",
@@ -172,7 +199,7 @@
         if (!filteredVulns.length) {
             grid.innerHTML = `
                 <div class="no-results">
-                    <i class="fas fa-shield-hog"></i>
+                    <i class="fas fa-shield-alt"></i>
                     <h3>😕 未找到相关漏洞</h3>
                     <p>试试其他关键词，例如 “注入”、“XSS”、“反序列化” 或 “SSRF”</p>
                     <button id="resetSearchBtn" style="margin-top:12px; background:#2c7da0; border:none; color:white; padding:8px 22px; border-radius:40px; cursor:pointer; font-weight:500;">清除搜索</button>
