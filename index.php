@@ -117,7 +117,7 @@
             count: 4
         },
         {
-            name: "文件包含漏洞 (LFI)",
+            name: "文件包含漏洞 (LFI/RFI)",
             description: "包括本地文件包含和远程文件包含，攻击者可通过构造特殊路径读取服务器文件或执行远程代码。",
             icon: "fas fa-file-invoice",
             severity: "high",

@@ -92,7 +92,11 @@
 <body>
     <div class="hero-section">
         <div class="container">
-            <a href="../index.php" class="back-link">← 返回首页</a>
+            <?php if (isset($content)): ?>
+            <a href="index.php" class="back-link">← 返回模块首页</a>
+            <?php else: ?>
+            <a href="../index.php" class="back-link">← 返回靶场首页</a>
+            <?php endif; ?>
             <div class="module-icon"><?= $module_icon ?></div>
             <h1><?= $module_name ?></h1>
             <p><?= $module_desc ?></p>
@@ -100,12 +104,16 @@
     </div>
 
     <div class="container">
+        <?php if (isset($content)): ?>
+            <?= $content ?>
+        <?php else: ?>
         <div class="row">
             <div class="col-12">
                 <h4 class="mb-4">漏洞场景列表</h4>
             </div>
         </div>
         <div class="row">
+            <?php if (isset($vulns) && is_array($vulns)): ?>
             <?php $index = 1; foreach ($vulns as $vuln): ?>
             <div class="col-lg-6">
                 <div class="vuln-item">
@@ -122,7 +130,15 @@
                 </div>
             </div>
             <?php $index++; endforeach; ?>
+            <?php else: ?>
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <strong>提示：</strong>当前模块没有配置漏洞场景
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
+        <?php endif; ?>
 
         <div class="footer">
             <p>⚠️ 本靶场仅供安全学习和研究使用，请勿用于非法用途</p>
