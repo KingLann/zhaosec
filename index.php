@@ -35,8 +35,8 @@
         .vuln-card {
             background: white;
             border-radius: 18px;
-            padding: 40px;
-            margin-bottom: 40px;
+            padding: 45px;
+            margin-bottom: 55px;
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             border: none;
@@ -45,6 +45,7 @@
         .row {
             margin-left: -25px;
             margin-right: -25px;
+            margin-bottom: 30px;
         }
         .col-lg-4,
         .col-md-6 {
