@@ -63,34 +63,34 @@ $content = '<div class="card">
                 </div>
                 <div class="card-body">
                     <h5 class="mb-2">文件上传代码：</h5>
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES['file'])) {
-    $file = $_FILES['file'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES["file"])) {
+    $file = $_FILES["file"];
     
     // 仅验证文件扩展名是否为图片
-    $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
-    $file_ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $allowed_ext = ["jpg", "jpeg", "png", "gif"];
+    $file_ext = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
     
     if (!in_array($file_ext, $allowed_ext)) {
-        $message = '仅允许上传图片文件！';
+        $message = "仅允许上传图片文件！";
     } else {
-        $upload_dir = 'uploads/';
+        $upload_dir = "uploads/";
         if (!file_exists($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file['name']);
+        $target_file = $upload_dir . basename($file["name"]);
         
-        if (move_uploaded_file($file['tmp_name'], $target_file)) {
-            $message = '文件上传成功！';
+        if (move_uploaded_file($file["tmp_name"], $target_file)) {
+            $message = "文件上传成功！";
         } else {
-            $message = '文件上传失败！';
+            $message = "文件上传失败！";
         }
     }
 }</code></pre>
                     
                     <h5 class="mb-2 mt-4">文件包含代码：</h5>
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_GET['file'])) {
-    $file = $_GET['file'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_GET["file"])) {
+    $file = $_GET["file"];
     // 漏洞：直接包含用户指定的文件，没有过滤
     include($file);
 }</code></pre>

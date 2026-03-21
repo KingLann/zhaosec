@@ -69,22 +69,22 @@ function validateFile() {
 &lt;/script&gt;</code></pre>
                     
                     <h5 class="mb-2 mt-4">后端代码：</h5>
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES['file'])) {
-    $file = $_FILES['file'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES["file"])) {
+    $file = $_FILES["file"];
     
     // 漏洞：仅在前端进行验证，后端没有验证
-    $upload_dir = 'uploads/';
+    $upload_dir = "uploads/";
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
     
-    $target_file = $upload_dir . basename($file['name']);
+    $target_file = $upload_dir . basename($file["name"]);
     
     // 直接移动文件，没有任何验证
-    if (move_uploaded_file($file['tmp_name'], $target_file)) {
-        echo '文件上传成功！';
+    if (move_uploaded_file($file["tmp_name"], $target_file)) {
+        echo "文件上传成功！";
     } else {
-        echo '文件上传失败！';
+        echo "文件上传失败！";
     }
 }</code></pre>
                 </div>
