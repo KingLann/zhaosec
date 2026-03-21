@@ -165,6 +165,16 @@
             link: "unserialize/index.php",
             linkText: "进入演练",
             count: 4
+        },
+        {
+            name: "HTTP协议基础漏洞",
+            description: "包括HTTP请求走私、HTTP/2漏洞、请求头注入、Cookie安全等基于HTTP协议的安全问题。",
+            icon: "fas fa-exchange-alt",
+            severity: "medium",
+            severityLabel: "中危",
+            link: "http/index.php",
+            linkText: "进入演练",
+            count: 0
         }
     ];
 
