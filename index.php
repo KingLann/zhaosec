@@ -3,250 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web安全漏洞靶场 - Zhaosec</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .hero-section {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 100px 0;
-            margin-bottom: 80px;
-            text-align: center;
-        }
-        .hero-section h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 25px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-        }
-        .hero-section p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .vuln-card {
-            background: white;
-            border-radius: 16px;
-            padding: 35px 35px 25px;
-            margin-bottom: 50px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        .vuln-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-            border-radius: 16px 16px 0 0;
-        }
-        .vuln-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            border-color: rgba(102, 126, 234, 0.3);
-        }
-        .row {
-            margin-left: -30px;
-            margin-right: -30px;
-        }
-        .col-lg-4,
-        .col-md-6,
-        .col-sm-12 {
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-        .footer {
-            text-align: center;
-            padding: 60px 0;
-            color: #666;
-            margin-top: 100px;
-            background: white;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-        .vuln-card .icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin-bottom: 25px;
-            background: var(--primary-gradient);
-            color: white;
-            position: relative;
-            z-index: 1;
-        }
-        .vuln-card h5 {
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.3rem;
-        }
-        .vuln-card p {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .vuln-card .btn {
-            border-radius: 25px;
-            padding: 10px 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            background: var(--primary-gradient);
-            border: none;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        .vuln-card .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        .footer a {
-            color: #667eea;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .footer a:hover {
-            color: #764ba2;
-            text-decoration: underline;
-        }
-
-    </style>
+    <title>Web安全漏洞演示导航页</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="hero-section">
-        <div class="container">
-            <h1>🛡️ Web安全漏洞靶场</h1>
-            <p>Zhaosec Vulnerability Range - 学习Web安全，掌握漏洞原理</p>
-        </div>
-    </div>
+    <header>
+        <h1>Web安全漏洞演示导航页</h1>
+        <p>本页面仅用于安全学习，禁止用于非法用途</p>
+    </header>
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-logic text-white">🧩</div>
-                    <h5>逻辑漏洞</h5>
-                    <p>包含水平/垂直越权、并发漏洞、支付篡改、短信轰炸、任意密码重置、未授权访问等逻辑漏洞演示。</p>
-                    <a href="logic/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-xss text-white">📜</div>
-                    <h5>XSS跨站脚本</h5>
-                    <p>演示反射型、存储型、DOM型XSS及常见绕过技术。</p>
-                    <a href="xss/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-auth text-white">🔐</div>
-                    <h5>身份认证漏洞</h5>
-                    <p>演示弱密码、未授权访问、越权操作、JWT攻击等认证安全问题。</p>
-                    <a href="auth/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-upload text-white">📁</div>
-                    <h5>文件上传漏洞</h5>
-                    <p>演示不安全的文件上传功能如何导致服务器入侵。</p>
-                    <a href="upload/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-rce text-white">⚡</div>
-                    <h5>命令/代码执行</h5>
-                    <p>演示系统命令执行、PHP代码执行及常见绕过技术。</p>
-                    <a href="rce/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-sqli text-white">💉</div>
-                    <h5>SQL注入漏洞</h5>
-                    <p>演示过滤的SQL查询如何泄露或修改数据库信息。</p>
-                    <a href="sqli/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-lfi text-white">📂</div>
-                    <h5>文件包含漏洞</h5>
-                    <p>演示本地文件包含、远程文件包含及PHP伪协议利用。</p>
-                    <a href="lfi/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-xxe text-white">📄</div>
-                    <h5>XXE漏洞</h5>
-                    <p>演示XML外部实体注入、Blind XXE及内网攻击。</p>
-                    <a href="xxe/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-ssrf text-white">🌐</div>
-                    <h5>SSRF漏洞</h5>
-                    <p>演示服务端请求伪造漏洞及利用技术。</p>
-                    <a href="ssrf/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-csrf text-white">🔄</div>
-                    <h5>CSRF漏洞</h5>
-                    <p>演示跨站请求伪造漏洞及防护技术。</p>
-                    <a href="csrf/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="vuln-card">
-                    <div class="icon icon-unserialize text-white">📦</div>
-                    <h5>PHP反序列化</h5>
-                    <p>演示PHP反序列化漏洞及利用技术。</p>
-                    <a href="unserialize/" class="btn btn-outline-primary">进入演练</a>
-                </div>
+        <!-- SQL注入漏洞 -->
+        <div class="vulnerability-card">
+            <h2 class="card-title">SQL注入 (SQL Injection)</h2>
+            <p class="card-desc">通过在输入框中插入SQL语句，绕过验证或获取/篡改数据库数据，是最常见的Web安全漏洞之一。</p>
+            <a href="./sql-injection.html" class="btn">演示入口</a>
+            <a href="https://owasp.org/www-community/attacks/SQL_Injection" target="_blank" class="btn">官方文档</a>
+            <div class="defense-tips">
+                <strong>防御建议：</strong><br>
+                1. 使用预编译语句（Prepared Statement）<br>
+                2. 实施输入验证和过滤<br>
+                3. 最小权限原则配置数据库账号<br>
+                4. 使用ORM框架减少手动SQL编写
             </div>
         </div>
 
-        <div class="footer">
-            <p>⚠️ 本靶场仅供安全学习和研究使用，请勿用于非法用途</p>
-            <p>Zhaosec Web Security Lab &copy; 2024</p>
+        <!-- XSS跨站脚本漏洞 -->
+        <div class="vulnerability-card">
+            <h2 class="card-title">XSS跨站脚本 (Cross-Site Scripting)</h2>
+            <p class="card-desc">攻击者注入恶意JavaScript代码，当用户访问页面时执行，可窃取Cookie、伪造操作、钓鱼等。</p>
+            <a href="./xss-demo.html" class="btn">演示入口</a>
+            <a href="https://owasp.org/www-community/attacks/xss/" target="_blank" class="btn">官方文档</a>
+            <div class="defense-tips">
+                <strong>防御建议：</strong><br>
+                1. 对输出内容进行HTML实体编码<br>
+                2. 使用CSP（内容安全策略）<br>
+                3. 设置Cookie的HttpOnly属性<br>
+                4. 输入验证和白名单过滤
+            </div>
+        </div>
+
+        <!-- CSRF跨站请求伪造 -->
+        <div class="vulnerability-card">
+            <h2 class="card-title">CSRF跨站请求伪造</h2>
+            <p class="card-desc">利用用户已登录的身份，诱导用户点击恶意链接或访问恶意页面，执行非本意的操作（如转账、改密码）。</p>
+            <a href="./csrf-demo.html" class="btn">演示入口</a>
+            <a href="https://owasp.org/www-community/attacks/csrf" target="_blank" class="btn">官方文档</a>
+            <div class="defense-tips">
+                <strong>防御建议：</strong><br>
+                1. 使用CSRF Token验证<br>
+                2. 验证Referer/Origin请求头<br>
+                3. 重要操作增加二次验证<br>
+                4. 设置SameSite Cookie属性
+            </div>
+        </div>
+
+        <!-- 文件上传漏洞 -->
+        <div class="vulnerability-card">
+            <h2 class="card-title">文件上传漏洞</h2>
+            <p class="card-desc">未对上传文件的类型、大小、内容进行严格验证，导致攻击者上传恶意脚本文件并执行。</p>
+            <a href="./file-upload.html" class="btn">演示入口</a>
+            <a href="https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload" target="_blank" class="btn">官方文档</a>
+            <div class="defense-tips">
+                <strong>防御建议：</strong><br>
+                1. 验证文件类型（后缀+MIME+内容）<br>
+                2. 上传文件重命名，存储在非Web访问目录<br>
+                3. 限制文件大小和上传频率<br>
+                4. 使用单独的域名存储上传文件
+            </div>
+        </div>
+
+        <!-- 弱口令/暴力破解 -->
+        <div class="vulnerability-card">
+            <h2 class="card-title">弱口令/暴力破解</h2>
+            <p class="card-desc">用户使用简单密码（如123456、admin），或系统未限制登录尝试次数，导致账号被破解。</p>
+            <a href="./weak-password.html" class="btn">演示入口</a>
+            <a href="https://owasp.org/www-community/attacks/Brute_force_attack" target="_blank" class="btn">官方文档</a>
+            <div class="defense-tips">
+                <strong>防御建议：</strong><br>
+                1. 强制密码复杂度要求<br>
+                2. 限制登录失败次数（如5次后锁定）<br>
+                3. 使用验证码/短信验证<br>
+                4. 实施账号异常登录检测
+            </div>
+        </div>
+
+        <!-- 路径遍历漏洞 -->
+        <div class="vulnerability-card">
+            <h2 class="card-title">路径遍历 (Path Traversal)</h2>
+            <p class="card-desc">通过输入特殊路径（如../），绕过访问限制，读取服务器上的敏感文件（如/etc/passwd、config.php）。</p>
+            <a href="./path-traversal.html" class="btn">演示入口</a>
+            <a href="https://owasp.org/www-community/attacks/Path_Traversal" target="_blank" class="btn">官方文档</a>
+            <div class="defense-tips">
+                <strong>防御建议：</strong><br>
+                1. 验证和规范化用户输入的路径<br>
+                2. 将访问限制在指定目录（白名单）<br>
+                3. 避免使用用户输入直接拼接文件路径<br>
+                4. 配置服务器禁止目录遍历
+            </div>
         </div>
     </div>
 
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <footer>
+        <p>© 2026 Web安全学习导航页 | 仅用于安全研究与学习</p>
+    </footer>
 </body>
 </html>
