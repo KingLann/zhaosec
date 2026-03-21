@@ -5,6 +5,8 @@ $module_desc = 'SQL注入（SQL Injection）是Web应用中最常见的高危漏
 $vulns = [
     ['name' => '数据库初始化', 'desc' => '初始化SQL注入测试所需的数据库表和模拟数据', 'file' => 'init_db.php', 'level' => 'info'],
     ['name' => 'SQL注入基础', 'desc' => '最基本的SQL注入场景，通过UNION、OR等操作获取数据', 'file' => '01_basic_injection.php', 'level' => 'low'],
+    ['name' => '联合查询注入', 'desc' => '使用UNION关键字合并查询结果，获取敏感信息', 'file' => '06_union_injection.php', 'level' => 'medium'],
+    ['name' => '万能密码注入', 'desc' => '绕过登录验证的SQL注入攻击', 'file' => '07_magic_quotes.php', 'level' => 'low'],
     ['name' => '报错注入', 'desc' => '利用数据库错误信息获取敏感数据', 'file' => '02_error_injection.php', 'level' => 'medium'],
     ['name' => '布尔盲注', 'desc' => '通过页面返回的布尔值判断数据库信息', 'file' => '03_boolean_blind.php', 'level' => 'medium'],
     ['name' => '时间盲注', 'desc' => '通过响应时间差异判断数据库信息', 'file' => '04_time_blind.php', 'level' => 'high'],
