@@ -116,12 +116,12 @@ a:2:{s:4:"user";s:4:"test";s:4:"data";s:11:"normal data";}
 
 // 构造恶意对象
 $object = new TestSession();
-$object->cmd = "echo 'Session反序列化攻击成功！'";
+$object->cmd = "echo &#39;Session反序列化攻击成功！&#39;";
 $serialized = serialize($object);
 
 // 构造Session数据
 // 注意：这里使用|分隔符
-$session_data = 'user|' . $serialized;
+$session_data = &#39;user|&#39; . $serialized;
 
 // 将数据写入Session文件</code></pre>
                 </div>
