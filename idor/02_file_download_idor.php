@@ -130,8 +130,8 @@ $content .= '                </div>
                 </div>
                 <div class="card-body">
                     <pre class="bg-dark text-light p-3 rounded"><code>// 危险的文件下载代码
-if (isset($_GET[&#39;file&#39;])) {
-    $file = $_GET[&#39;file&#39;];
+if (isset($_GET["file"])) {
+    $file = $_GET["file"];
     
     // 漏洞：直接使用用户输入作为文件路径
     // 没有任何路径验证和过滤
@@ -140,7 +140,7 @@ if (isset($_GET[&#39;file&#39;])) {
         $file_name = basename($file);
         $file_content = file_get_contents($file);
     } else {
-        $error = &#39;文件不存在！&#39;;
+        $error = "文件不存在！";
     }
 }</code></pre>
                 </div>
@@ -162,32 +162,32 @@ if (isset($_GET[&#39;file&#39;])) {
 
                     <h5 class="mb-3 mt-4">修复后的代码</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>// 安全的文件下载代码
-if (isset($_GET[&#39;file_id&#39;])) {
-    $file_id = $_GET[&#39;file_id&#39;];
+if (isset($_GET["file_id"])) {
+    $file_id = $_GET["file_id"];
     
     // 白名单映射
     $allowed_files = [
-        1 => &#39;docs/readme.md&#39;,
-        2 => &#39;docs/manual.pdf&#39;,
-        3 => &#39;docs/example.txt&#39;
+        1 => "docs/readme.md",
+        2 => "docs/manual.pdf",
+        3 => "docs/example.txt"
     ];
     
     if (isset($allowed_files[$file_id])) {
         $file = $allowed_files[$file_id];
-        $file_path = realpath(&#39;./files/&#39; . $file);
+        $file_path = realpath("./files/" . $file);
         
         // 验证文件路径是否在允许的目录内
-        $base_dir = realpath(&#39;./files/&#39;);
+        $base_dir = realpath("./files/");
         if (strpos($file_path, $base_dir) === 0 && file_exists($file_path)) {
             // 安全地输出文件
             $file_name = basename($file_path);
-            header(&#39;Content-Disposition: attachment; filename="&#39; . $file_name . &#39;"&#39;);
+            header("Content-Disposition: attachment; filename=\"" . $file_name . "\"");
             readfile($file_path);
             exit;
         }
     }
     
-    $error = &#39;无效的文件请求！&#39;;
+    $error = "无效的文件请求！";
 }</code></pre>
                 </div>
             </div>
