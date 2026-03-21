@@ -2,110 +2,278 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web安全漏洞演示导航页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Web安全漏洞导航 | 漏洞学习与防御指南</title>
+    <!-- Font Awesome 6 (免费图标库) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 本地样式文件 -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Web安全漏洞演示导航页</h1>
-        <p>本页面仅用于安全学习，禁止用于非法用途</p>
-    </header>
-
-    <div class="container">
-        <!-- SQL注入漏洞 -->
-        <div class="vulnerability-card">
-            <h2 class="card-title">SQL注入 (SQL Injection)</h2>
-            <p class="card-desc">通过在输入框中插入SQL语句，绕过验证或获取/篡改数据库数据，是最常见的Web安全漏洞之一。</p>
-            <a href="./sql-injection.html" class="btn">演示入口</a>
-            <a href="https://owasp.org/www-community/attacks/SQL_Injection" target="_blank" class="btn">官方文档</a>
-            <div class="defense-tips">
-                <strong>防御建议：</strong><br>
-                1. 使用预编译语句（Prepared Statement）<br>
-                2. 实施输入验证和过滤<br>
-                3. 最小权限原则配置数据库账号<br>
-                4. 使用ORM框架减少手动SQL编写
-            </div>
-        </div>
-
-        <!-- XSS跨站脚本漏洞 -->
-        <div class="vulnerability-card">
-            <h2 class="card-title">XSS跨站脚本 (Cross-Site Scripting)</h2>
-            <p class="card-desc">攻击者注入恶意JavaScript代码，当用户访问页面时执行，可窃取Cookie、伪造操作、钓鱼等。</p>
-            <a href="./xss-demo.html" class="btn">演示入口</a>
-            <a href="https://owasp.org/www-community/attacks/xss/" target="_blank" class="btn">官方文档</a>
-            <div class="defense-tips">
-                <strong>防御建议：</strong><br>
-                1. 对输出内容进行HTML实体编码<br>
-                2. 使用CSP（内容安全策略）<br>
-                3. 设置Cookie的HttpOnly属性<br>
-                4. 输入验证和白名单过滤
-            </div>
-        </div>
-
-        <!-- CSRF跨站请求伪造 -->
-        <div class="vulnerability-card">
-            <h2 class="card-title">CSRF跨站请求伪造</h2>
-            <p class="card-desc">利用用户已登录的身份，诱导用户点击恶意链接或访问恶意页面，执行非本意的操作（如转账、改密码）。</p>
-            <a href="./csrf-demo.html" class="btn">演示入口</a>
-            <a href="https://owasp.org/www-community/attacks/csrf" target="_blank" class="btn">官方文档</a>
-            <div class="defense-tips">
-                <strong>防御建议：</strong><br>
-                1. 使用CSRF Token验证<br>
-                2. 验证Referer/Origin请求头<br>
-                3. 重要操作增加二次验证<br>
-                4. 设置SameSite Cookie属性
-            </div>
-        </div>
-
-        <!-- 文件上传漏洞 -->
-        <div class="vulnerability-card">
-            <h2 class="card-title">文件上传漏洞</h2>
-            <p class="card-desc">未对上传文件的类型、大小、内容进行严格验证，导致攻击者上传恶意脚本文件并执行。</p>
-            <a href="./file-upload.html" class="btn">演示入口</a>
-            <a href="https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload" target="_blank" class="btn">官方文档</a>
-            <div class="defense-tips">
-                <strong>防御建议：</strong><br>
-                1. 验证文件类型（后缀+MIME+内容）<br>
-                2. 上传文件重命名，存储在非Web访问目录<br>
-                3. 限制文件大小和上传频率<br>
-                4. 使用单独的域名存储上传文件
-            </div>
-        </div>
-
-        <!-- 弱口令/暴力破解 -->
-        <div class="vulnerability-card">
-            <h2 class="card-title">弱口令/暴力破解</h2>
-            <p class="card-desc">用户使用简单密码（如123456、admin），或系统未限制登录尝试次数，导致账号被破解。</p>
-            <a href="./weak-password.html" class="btn">演示入口</a>
-            <a href="https://owasp.org/www-community/attacks/Brute_force_attack" target="_blank" class="btn">官方文档</a>
-            <div class="defense-tips">
-                <strong>防御建议：</strong><br>
-                1. 强制密码复杂度要求<br>
-                2. 限制登录失败次数（如5次后锁定）<br>
-                3. 使用验证码/短信验证<br>
-                4. 实施账号异常登录检测
-            </div>
-        </div>
-
-        <!-- 路径遍历漏洞 -->
-        <div class="vulnerability-card">
-            <h2 class="card-title">路径遍历 (Path Traversal)</h2>
-            <p class="card-desc">通过输入特殊路径（如../），绕过访问限制，读取服务器上的敏感文件（如/etc/passwd、config.php）。</p>
-            <a href="./path-traversal.html" class="btn">演示入口</a>
-            <a href="https://owasp.org/www-community/attacks/Path_Traversal" target="_blank" class="btn">官方文档</a>
-            <div class="defense-tips">
-                <strong>防御建议：</strong><br>
-                1. 验证和规范化用户输入的路径<br>
-                2. 将访问限制在指定目录（白名单）<br>
-                3. 避免使用用户输入直接拼接文件路径<br>
-                4. 配置服务器禁止目录遍历
-            </div>
+<div class="container">
+    <div class="header">
+        <h1>
+            <i class="fas fa-shield-hog"></i> 
+            Web安全漏洞导航
+        </h1>
+        <div class="subhead">OWASP Top 10 & 关键风险 · 学习 · 防御 · 渗透测试指南</div>
+        <div class="description">
+            <i class="fas fa-book-open"></i> 精选常见Web安全漏洞，提供权威学习资源（PortSwigger / OWASP）
         </div>
     </div>
 
-    <footer>
-        <p>© 2026 Web安全学习导航页 | 仅用于安全研究与学习</p>
-    </footer>
+    <div class="controls">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="按漏洞名称或描述搜索... 例如：注入、XSS、SSRF">
+        </div>
+        <div class="stats" id="statsInfo">
+            <i class="fas fa-database"></i> 共 <span id="totalCount">0</span> 个漏洞
+        </div>
+    </div>
+
+    <div class="grid" id="vulnGrid">
+        <!-- 卡片由js动态渲染，保证过滤性能与一致性 -->
+        <div class="no-results" style="display: none;">加载中...</div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-graduation-cap"></i> 安全学习导航 · 数据基于 OWASP 及 PortSwigger Web Security Academy  · 
+        <a href="#" target="_blank" rel="noopener noreferrer">了解最新漏洞动态</a>  |  教育用途，链接均为官方权威资源
+    </div>
+</div>
+
+<script>
+    // ----- 常见Web安全漏洞数据集 (名称, 描述, 图标, 风险等级, 学习链接)
+    const vulnerabilities = [
+        {
+            name: "SQL 注入 (SQLi)",
+            description: "攻击者通过插入恶意SQL语句，绕过认证、窃取数据库敏感信息或执行破坏性操作，是Web最危险的漏洞之一。",
+            icon: "fas fa-database",
+            severity: "critical",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/sql-injection",
+            linkText: "深入SQL注入"
+        },
+        {
+            name: "跨站脚本 (XSS)",
+            description: "恶意脚本注入到可信网站，盗取Cookie、会话令牌或执行未授权操作，分为反射型、存储型与DOM型。",
+            icon: "fas fa-code",
+            severity: "high",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/cross-site-scripting",
+            linkText: "XSS攻防指南"
+        },
+        {
+            name: "跨站请求伪造 (CSRF)",
+            description: "诱使已认证用户执行非本意的状态更改请求，如修改密码、转账等，利用受害者身份发起恶意请求。",
+            icon: "fas fa-user-secret",
+            severity: "medium",
+            severityLabel: "中危",
+            link: "https://portswigger.net/web-security/csrf",
+            linkText: "CSRF深度剖析"
+        },
+        {
+            name: "服务端请求伪造 (SSRF)",
+            description: "攻击者通过服务器端发起任意请求，可绕过防火墙访问内网服务、云元数据或执行端口扫描。",
+            icon: "fas fa-server",
+            severity: "high",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/ssrf",
+            linkText: "SSRF漏洞详解"
+        },
+        {
+            name: "XML外部实体注入 (XXE)",
+            description: "利用XML解析器对外部实体的处理，读取本地文件、进行内网探测或导致拒绝服务攻击。",
+            icon: "fas fa-file-code",
+            severity: "high",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/xxe",
+            linkText: "XXE攻击与防御"
+        },
+        {
+            name: "不安全直接对象引用 (IDOR)",
+            description: "通过修改对象ID（如URL参数）访问未授权的数据，属于访问控制失效的典型场景。",
+            icon: "fas fa-lock-open",
+            severity: "medium",
+            severityLabel: "中危",
+            link: "https://portswigger.net/web-security/access-control/idor",
+            linkText: "IDOR漏洞案例"
+        },
+        {
+            name: "恶意文件上传漏洞",
+            description: "允许上传危险文件类型（webshell、木马），导致服务器被控制、网站被篡改或数据泄露。",
+            icon: "fas fa-upload",
+            severity: "critical",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/file-upload",
+            linkText: "文件上传安全"
+        },
+        {
+            name: "命令注入 (Command Injection)",
+            description: "在系统命令中注入恶意参数，可远程执行操作系统命令，完全控制服务器。",
+            icon: "fas fa-terminal",
+            severity: "critical",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/os-command-injection",
+            linkText: "命令注入实战"
+        },
+        {
+            name: "安全配置错误",
+            description: "默认账号、目录列表、错误信息详细、不安全的HTTP头等，为攻击者提供可乘之机。",
+            icon: "fas fa-cogs",
+            severity: "medium",
+            severityLabel: "中危",
+            link: "https://portswigger.net/web-security/configuration",
+            linkText: "安全加固指南"
+        },
+        {
+            name: "敏感数据暴露",
+            description: "未加密传输或存储信用卡、密码、个人身份信息，违反合规并导致隐私泄露。",
+            icon: "fas fa-eye-slash",
+            severity: "high",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/cryptographic",
+            linkText: "加密与数据保护"
+        },
+        {
+            name: "不安全的反序列化",
+            description: "反序列化不可信数据可导致远程代码执行、权限提升或重放攻击，危害极大。",
+            icon: "fas fa-box-open",
+            severity: "high",
+            severityLabel: "高危",
+            link: "https://portswigger.net/web-security/deserialization",
+            linkText: "反序列化漏洞"
+        },
+        {
+            name: "开放重定向 (Open Redirect)",
+            description: "未校验的跳转参数，可被用于钓鱼攻击、绕过同源策略或配合其他漏洞。",
+            icon: "fas fa-external-link-alt",
+            severity: "medium",
+            severityLabel: "中危",
+            link: "https://portswigger.net/web-security/dom-based/open-redirect",
+            linkText: "重定向漏洞详解"
+        }
+    ];
+
+    // 辅助函数: 根据severity返回对应badge样式类
+    function getSeverityClass(severity) {
+        if (severity === 'critical') return 'critical';
+        if (severity === 'high') return 'high';
+        return 'medium';
+    }
+
+    // 渲染卡片 (根据过滤后的漏洞数组)
+    function renderCards(filteredVulns) {
+        const grid = document.getElementById('vulnGrid');
+        const totalSpan = document.getElementById('totalCount');
+        const statsInfo = document.getElementById('statsInfo');
+        
+        if (!filteredVulns.length) {
+            grid.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-shield-hog"></i>
+                    <h3>😕 未找到相关漏洞</h3>
+                    <p>试试其他关键词，例如 “注入”、“XSS”、“反序列化” 或 “SSRF”</p>
+                    <button id="resetSearchBtn" style="margin-top:12px; background:#2c7da0; border:none; color:white; padding:8px 22px; border-radius:40px; cursor:pointer; font-weight:500;">清除搜索</button>
+                </div>
+            `;
+            totalSpan.innerText = '0';
+            statsInfo.style.opacity = '0.8';
+            const resetBtn = document.getElementById('resetSearchBtn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) searchInput.value = '';
+                    filterAndRender();
+                });
+            }
+            return;
+        }
+        
+        // 正常渲染卡片
+        const cardsHTML = filteredVulns.map(vul => {
+            const severityClass = getSeverityClass(vul.severity);
+            // 确保链接安全：target="_blank" + rel
+            return `
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="${vul.icon}"></i>
+                            </div>
+                            <div class="badge ${severityClass}">${vul.severityLabel}</div>
+                        </div>
+                        <div class="card-title">${escapeHtml(vul.name)}</div>
+                        <div class="card-desc">${escapeHtml(vul.description)}</div>
+                        <a href="${vul.link}" class="card-link" target="_blank" rel="noopener noreferrer">
+                            ${escapeHtml(vul.linkText)} <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        grid.innerHTML = cardsHTML;
+        totalSpan.innerText = filteredVulns.length;
+        statsInfo.style.opacity = '1';
+    }
+    
+    // 简单的防XSS辅助函数 (避免动态内容注入)
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // 过滤逻辑：根据搜索框文本（不区分大小写，匹配名称和描述）
+    function filterAndRender() {
+        const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
+        let filtered = vulnerabilities;
+        if (searchTerm !== '') {
+            filtered = vulnerabilities.filter(vul => 
+                vul.name.toLowerCase().includes(searchTerm) || 
+                vul.description.toLowerCase().includes(searchTerm)
+            );
+        }
+        renderCards(filtered);
+    }
+    
+    // 添加搜索监听 & 初始化页面
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', filterAndRender);
+        }
+        // 初始化渲染全部漏洞
+        renderCards(vulnerabilities);
+        
+        // 附加功能：给清除搜索一个优雅的外联（已有无结果中的重置按钮，但额外加一个键盘支持）
+        // 增加ESC清空搜索框的小交互
+        if (searchInput) {
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    searchInput.value = '';
+                    filterAndRender();
+                    e.preventDefault();
+                }
+            });
+        }
+        
+        // 动态显示漏洞总数悬停说明（可选）
+        const statsSpan = document.getElementById('totalCount');
+        if (statsSpan) {
+            const tooltip = document.createElement('span');
+            tooltip.style.cursor = 'help';
+            tooltip.title = `涵盖 OWASP Top 10 及其他关键漏洞，点击卡片链接获得专业教程`;
+        }
+    });
+</script>
 </body>
 </html>
