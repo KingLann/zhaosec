@@ -77,8 +77,8 @@ $content = '<div class="card">
 }
 
 // 漏洞：file_exists等函数会解析phar://协议
-if (isset($_GET["file"])) {
-    $file = $_GET["file"];
+if (isset($_GET[&#39;file&#39;])) {
+    $file = $_GET[&#39;file&#39;];
     if (file_exists($file)) { // 这里会触发Phar反序列化
         $output = "文件存在！";
     }
@@ -197,8 +197,8 @@ $content .= '                </div>
 
                     <h5 class="mb-3 mt-4">修复后的代码</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>// 修复1：过滤phar://协议
-if (isset($_GET["file"])) {
-    $file = $_GET["file"];
+if (isset($_GET[&#39;file&#39;])) {
+    $file = $_GET[&#39;file&#39;];
     if (strpos($file, "phar://") !== false) {
         die("非法文件路径");
     }
@@ -209,8 +209,8 @@ if (isset($_GET["file"])) {
 
 // 修复2：使用白名单
 $allowed_files = ["test.txt", "config.php"];
-if (isset($_GET["file"])) {
-    $file = $_GET["file"];
+if (isset($_GET[&#39;file&#39;])) {
+    $file = $_GET[&#39;file&#39;];
     if (in_array($file, $allowed_files)) {
         if (file_exists($file)) {
             $output = "文件存在！";

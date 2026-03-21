@@ -151,8 +151,8 @@ $session_data = 'user|' . $serialized;
                     </ol>
 
                     <h5 class="mb-2 mt-4">3. Session文件</h5>
-                    <p>当前Session ID：<code>" . session_id() . "</code></p>
-                    <p>Session文件路径：<code>./sessions/sess_" . session_id() . "</code></p>
+                    <p>当前Session ID：<code>' . session_id() . '</code></p>
+                    <p>Session文件路径：<code>./sessions/sess_' . session_id() . '</code></p>
                 </div>
             </div>
 
@@ -208,7 +208,7 @@ $content .= '                </div>
 session.serialize_handler = php
 
 // 或在脚本中设置
-ini_set('session.serialize_handler', 'php');
+ini_set(&#39;session.serialize_handler&#39;, &#39;php&#39;);
 
 // 验证Session数据
 function validate_session_data($data) {

@@ -90,8 +90,8 @@ $content = '<div class="card">
 }
 
 // 漏洞：直接反序列化用户输入
-if (isset($_GET["data"])) {
-    $data = $_GET["data"];
+if (isset($_GET[&#39;data&#39;])) {
+    $data = $_GET[&#39;data&#39;];
     $object = unserialize($data); // 这里可能执行恶意代码
 }</code></pre>
                 </div>
