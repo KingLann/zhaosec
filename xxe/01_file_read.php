@@ -154,23 +154,6 @@ $content = '<div class="card">
                         </div>
                         <button type="submit" class="btn btn-danger">提交</button>
                     </form>
-                    
-                    <div class="card mt-4">
-                        <div class="card-header">
-                            <h6>🎯 Flag挑战</h6>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-3">尝试读取服务器上的flag文件：</p>
-                            <form method="POST" class="mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text">Flag路径</span>
-                                    <input type="text" name="xml" class="form-control" value="&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;&lt;!DOCTYPE root [&lt;!ENTITY file SYSTEM \"file:///d:/phpstudy_pro/WWW/zhaosec/xxe/flag.txt\"&gt;]&gt;&lt;root&gt;&lt;name&gt;&amp;file;&lt;/name&gt;&lt;/root&gt;">
-                                    <button type="submit" class="btn btn-success">读取Flag</button>
-                                </div>
-                            </form>
-                            <p class="text-muted">提示：尝试使用不同的文件路径格式来读取flag文件</p>
-                        </div>
-                    </div>
 
                     ';
 
