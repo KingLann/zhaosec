@@ -71,7 +71,7 @@ $secret_data = '这是敏感数据，只有管理员才能访问';
             </div>
             
             <br>
-            <a href="../index.php" class="back-link">← 返回首页</a>
+            <a href="index.php" class="back-link">← 返回身份认证首页</a>
         </div>
     </div>
 </body>

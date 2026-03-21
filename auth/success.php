@@ -74,8 +74,8 @@ $username = $_SESSION['username'] ?? 'Unknown';
             <strong>欢迎，<?php echo htmlspecialchars($username); ?>！</strong>
         </div>
         <div>
-            <a href="../index.php" class="back-link">← 返回首页</a>
-            <a href="logout.php" class="logout-btn">退出登录</a>
+            <a href="index.php" class="back-link">← 返回身份认证首页</a>
+            <a href="logout.php?redirect=01_plaintext_brute.php" class="logout-btn">退出登录</a>
         </div>
     </div>
 </body>

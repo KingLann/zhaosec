@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn">登录</button>
         </form>
-        <a href="../index.php" class="back-link">← 返回首页</a>
+        <a href="index.php" class="back-link">← 返回身份认证首页</a>
     </div>
     <script>
         const secretKey = 'mysecretkey123';

@@ -139,7 +139,8 @@ $payload = json_decode(base64_decode(strtr($parts[1], '-_', '+/')), true);
             </div>
             
             <br>
-            <a href="../index.php" class="back-link">← 返回首页</a>
+            <a href="index.php" class="back-link">← 返回身份认证首页</a>
+            <a href="logout.php?redirect=06_jwt_weak_key.php" style="margin-left: 20px; color: #dc3545; text-decoration: none; font-weight: 600;">退出登录</a>
         </div>
     </div>
 </body>
