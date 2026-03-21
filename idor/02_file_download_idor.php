@@ -89,10 +89,10 @@ $content = '<div class="card">
                     </div>
 
                     <script>
-                        document.getElementById('downloadBtn').addEventListener('click', function() {
-                            var filePath = document.getElementById('filePath').value;
+                        document.getElementById("downloadBtn").addEventListener("click", function() {
+                            var filePath = document.getElementById("filePath").value;
                             if (filePath) {
-                                window.location.href = '?file=' + encodeURIComponent(filePath);
+                                window.location.href = "?file=" + encodeURIComponent(filePath);
                             }
                         });
                     </script>
