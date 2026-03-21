@@ -1,0 +1,7 @@
+ZHAOSEC{SSRF_BYPASS_SUCCESS_2026}
+
+Congratulations! You have successfully bypassed the SSRF restrictions and read the flag file.
+
+This demonstrates that even with basic SSRF protections in place, attackers can still find ways to bypass them.
+
+Remember to always implement comprehensive SSRF defenses in your applications.

