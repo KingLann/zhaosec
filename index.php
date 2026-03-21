@@ -18,91 +18,115 @@
         .hero-section {
             background: var(--primary-gradient);
             color: white;
-            padding: 80px 0;
-            margin-bottom: 60px;
+            padding: 100px 0;
+            margin-bottom: 80px;
             text-align: center;
         }
         .hero-section h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
         }
         .hero-section p {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
         }
         .vuln-card {
             background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(0,0,0,0.05);
             height: 100%;
             position: relative;
+            overflow: hidden;
+        }
+        .vuln-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 16px 16px 0 0;
         }
         .vuln-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            border-color: #667eea;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border-color: rgba(102, 126, 234, 0.3);
         }
         .row {
-            margin-left: -15px;
-            margin-right: -15px;
+            margin-left: -25px;
+            margin-right: -25px;
         }
         .col-lg-3,
         .col-md-4,
         .col-sm-6 {
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 25px;
+            padding-right: 25px;
         }
         .footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 60px 0;
             color: #666;
-            margin-top: 60px;
+            margin-top: 100px;
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
         .vuln-card .icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            margin-bottom: 15px;
-            background: #667eea;
+            font-size: 32px;
+            margin-bottom: 25px;
+            background: var(--primary-gradient);
             color: white;
+            position: relative;
+            z-index: 1;
         }
         .vuln-card h5 {
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin-bottom: 15px;
             color: #333;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
         }
         .vuln-card p {
             color: #666;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            line-height: 1.4;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
         .vuln-card .btn {
-            border-radius: 4px;
-            padding: 6px 20px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            background: #667eea;
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: var(--primary-gradient);
             border: none;
             color: white;
+            transition: all 0.3s ease;
         }
         .vuln-card .btn:hover {
-            background: #5a6fd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
         .footer a {
             color: #667eea;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: #764ba2;
+            text-decoration: underline;
         }
 
     </style>
