@@ -7,8 +7,8 @@ $username = "root";
 $password = "123456";
 $dbname = "zhao";
 
-// 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
+// 先连接到MySQL服务器（不指定数据库）
+$conn = new mysqli($servername, $username, $password);
 
 // 检查连接
 if ($conn->connect_error) {
@@ -16,6 +16,21 @@ if ($conn->connect_error) {
 }
 
 echo "连接成功<br>";
+
+// 创建数据库（如果不存在）
+$create_db_sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+if ($conn->query($create_db_sql) === TRUE) {
+    echo "创建/检查数据库 $dbname 成功<br>";
+} else {
+    echo "创建数据库失败: " . $conn->error . "<br>";
+}
+
+// 选择数据库
+if (!$conn->select_db($dbname)) {
+    die("选择数据库失败: " . $conn->error);
+}
+
+echo "选择数据库 $dbname 成功<br>";
 
 // 创建users表
 $create_users_sql = "CREATE TABLE IF NOT EXISTS users (
