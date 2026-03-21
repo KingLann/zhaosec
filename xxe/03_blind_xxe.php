@@ -69,105 +69,21 @@ $content = <<<'EOT'
                     <div class="mb-4">
                         <h5 class="mb-3">🔄 盲XXE利用流程</h5>
                         <div class="bg-light p-3 rounded border">
-                            <div class="flowchart">
-                                <div class="flow-step">
-                                    <div class="flow-box attacker">攻击者</div>
-                                    <div class="flow-arrow">→</div>
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-label">发送包含外部实体的XML</div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-arrow">↻</div>
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-label">解析XML，触发外部实体</div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-arrow">→</div>
-                                    <div class="flow-box evil">恶意服务器</div>
-                                    <div class="flow-label">请求evil.dtd文件</div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-box evil">恶意服务器</div>
-                                    <div class="flow-arrow">←</div>
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-label">返回evil.dtd内容</div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-arrow">↻</div>
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-label">处理DTD，读取本地文件</div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-box server">目标服务器</div>
-                                    <div class="flow-arrow">→</div>
-                                    <div class="flow-box evil">恶意服务器</div>
-                                    <div class="flow-label">发送文件内容到恶意服务器</div>
-                                </div>
-                                <div class="flow-step">
-                                    <div class="flow-box evil">恶意服务器</div>
-                                    <div class="flow-arrow">←</div>
-                                    <div class="flow-box attacker">攻击者</div>
-                                    <div class="flow-label">攻击者获取文件内容</div>
-                                </div>
+                            <script src="../assets/js/mermaid.min.js"></script>
+                            <div class="mermaid">
+                                sequenceDiagram
+                                    participant Attacker as 攻击者
+                                    participant Server as 目标服务器
+                                    participant Evil as 恶意服务器
+                                    
+                                    Attacker->>Server: 发送包含外部实体的XML
+                                    Server->>Server: 解析XML，触发外部实体
+                                    Server->>Evil: 请求evil.dtd文件
+                                    Evil-->>Server: 返回evil.dtd内容
+                                    Server->>Server: 处理DTD，读取本地文件
+                                    Server->>Evil: 发送文件内容到恶意服务器
+                                    Evil-->>Attacker: 攻击者获取文件内容
                             </div>
-                            <style>
-                                .flowchart {
-                                    font-family: Arial, sans-serif;
-                                }
-                                .flow-step {
-                                    display: flex;
-                                    align-items: center;
-                                    margin-bottom: 15px;
-                                    flex-wrap: wrap;
-                                }
-                                .flow-box {
-                                    padding: 10px 15px;
-                                    border-radius: 5px;
-                                    font-weight: bold;
-                                    min-width: 120px;
-                                    text-align: center;
-                                }
-                                .flow-box.attacker {
-                                    background-color: #ffcccc;
-                                    border: 1px solid #ff9999;
-                                }
-                                .flow-box.server {
-                                    background-color: #cce5ff;
-                                    border: 1px solid #99ccff;
-                                }
-                                .flow-box.evil {
-                                    background-color: #ffcc99;
-                                    border: 1px solid #ff9966;
-                                }
-                                .flow-arrow {
-                                    margin: 0 10px;
-                                    font-size: 18px;
-                                    font-weight: bold;
-                                }
-                                .flow-label {
-                                    margin-left: 10px;
-                                    flex: 1;
-                                    min-width: 200px;
-                                    font-size: 14px;
-                                }
-                                @media (max-width: 768px) {
-                                    .flow-step {
-                                        flex-direction: column;
-                                        align-items: flex-start;
-                                    }
-                                    .flow-arrow {
-                                        transform: rotate(90deg);
-                                        margin: 5px 0;
-                                    }
-                                    .flow-label {
-                                        margin-left: 0;
-                                        margin-top: 5px;
-                                    }
-                                }
-                            </style>
                         </div>
                     </div>
 
