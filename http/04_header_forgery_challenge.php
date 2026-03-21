@@ -28,63 +28,63 @@ $success = false;
 // 处理挑战
 switch ($level) {
     case 0:
-        // 第1关：添加User-Agent头
+        // 第1关：User-Agent头
         if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'zhaowendao') !== false) {
             $_SESSION['challenge_level'] = 1;
-            $message = '🎉 第1关通过！User-Agent头验证成功';
+            $message = '🎉 第1关通过！浏览器标识验证成功\n\nUser-Agent头用于标识客户端类型和版本信息，服务器可以根据这些信息提供不同的内容。';
             $success = true;
         } else {
-            $message = '👋 欢迎来到HTTP头伪造挑战！\n第1关：请添加User-Agent头，值包含 "zhaowendao"';
+            $message = '👋 欢迎来到HTTP头伪造挑战！\n\n第1关：请修改浏览器标识信息，在标识中包含 "zhaowendao"\n\n提示：这个头字段用于告诉服务器你使用的是什么浏览器和操作系统。';
         }
         break;
         
     case 1:
-        // 第2关：添加Referer头
+        // 第2关：Referer头
         if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'https://zhaosec.com') {
             $_SESSION['challenge_level'] = 2;
-            $message = '🎉 第2关通过！Referer头验证成功';
+            $message = '🎉 第2关通过！来源页面验证成功\n\nReferer头用于告诉服务器请求来自哪个页面，常用于跟踪用户来源和防止CSRF攻击。';
             $success = true;
         } else {
-            $message = '🔍 第2关：请添加Referer头，值为 "https://zhaosec.com"';
+            $message = '🔍 第2关：请设置请求的来源页面为 "https://zhaosec.com"\n\n提示：这个头字段记录了用户是从哪个页面链接过来的，服务器可以根据这个信息进行访问控制。';
         }
         break;
         
     case 2:
-        // 第3关：添加X-Forwarded-For头
+        // 第3关：X-Forwarded-For头
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] === '127.0.0.1') {
             $_SESSION['challenge_level'] = 3;
-            $message = '🎉 第3关通过！X-Forwarded-For头验证成功';
+            $message = '🎉 第3关通过！客户端IP验证成功\n\nX-Forwarded-For头用于在代理服务器环境中传递真实的客户端IP地址。';
             $success = true;
         } else {
-            $message = '🌐 第3关：请添加X-Forwarded-For头，值为 "127.0.0.1"';
+            $message = '🌐 第3关：请设置真实的客户端IP地址为 "127.0.0.1"\n\n提示：当请求通过代理服务器时，这个头字段可以帮助服务器识别原始的客户端IP地址。';
         }
         break;
         
     case 3:
-        // 第4关：添加Custom-Authorization头
+        // 第4关：Custom-Authorization头
         if (isset($_SERVER['HTTP_CUSTOM_AUTHORIZATION']) && $_SERVER['HTTP_CUSTOM_AUTHORIZATION'] === 'Bearer zhao_wen_dao') {
             $_SESSION['challenge_level'] = 4;
-            $message = '🎉 第4关通过！Custom-Authorization头验证成功';
+            $message = '🎉 第4关通过！认证信息验证成功\n\nAuthorization头用于在HTTP请求中传递认证凭证，如Bearer令牌、Basic认证等。';
             $success = true;
         } else {
-            $message = '🔐 第4关：请添加Custom-Authorization头，值为 "Bearer zhao_wen_dao"';
+            $message = '🔐 第4关：请提供认证凭证，格式为 "Bearer zhao_wen_dao"\n\n提示：这个头字段用于向服务器证明你的身份，常见于API调用和需要认证的服务。';
         }
         break;
         
     case 4:
-        // 第5关：添加X-Admin-Key头
+        // 第5关：X-Admin-Key头
         if (isset($_SERVER['HTTP_X_ADMIN_KEY']) && $_SERVER['HTTP_X_ADMIN_KEY'] === 'zhao_secret_key') {
             $_SESSION['challenge_level'] = 5;
-            $message = '🎉 第5关通过！X-Admin-Key头验证成功';
+            $message = '🎉 第5关通过！管理密钥验证成功\n\nX-前缀的头字段通常是自定义头，用于传递应用程序特定的信息。';
             $success = true;
         } else {
-            $message = '👑 第5关：请添加X-Admin-Key头，值为 "zhao_secret_key"';
+            $message = '👑 第5关：请提供管理访问密钥 "zhao_secret_key"\n\n提示：以X-开头的头字段通常是自定义的，用于传递特定应用的配置或认证信息。';
         }
         break;
         
     case 5:
         // 完成挑战
-        $message = '🏆 恭喜完成所有挑战！\n\nFlag: ' . $_SESSION['flag'] . '\n\n你已经成功掌握了HTTP头伪造技术！';
+        $message = '🏆 恭喜完成所有挑战！\n\nFlag: ' . $_SESSION['flag'] . '\n\n你已经成功掌握了HTTP头伪造技术！\n\n通过这个挑战，你学习了：\n- User-Agent：浏览器标识\n- Referer：来源页面\n- X-Forwarded-For：客户端IP\n- Authorization：认证凭证\n- 自定义头字段\n\n记住：HTTP头可以被轻易伪造，不要仅依赖HTTP头进行安全验证！';
         $success = true;
         break;
 }
@@ -97,7 +97,8 @@ $content = '<div class="card">
         <div class="card-body">
             <div class="alert alert-info">
                 <strong>💡 挑战说明：</strong><br>
-                本挑战要求你通过伪造HTTP请求头字段来完成各个关卡，最终获取flag。<br>
+                本挑战要求你通过理解和伪造HTTP请求头字段来完成各个关卡，最终获取flag。<br>
+                每个关卡都会介绍一个HTTP头字段的作用，帮助你理解它们的含义和用途。<br>
                 你可以使用浏览器开发者工具、Burp Suite或其他工具来修改请求头。
             </div>
 
@@ -171,12 +172,14 @@ $content .= '</code></pre>
 
                     <h5 class="mb-3 mt-4">常见的可伪造头</h5>
                     <ul>
-                        <li><code>User-Agent</code> - 浏览器标识</li>
-                        <li><code>Referer</code> - 来源页面</li>
-                        <li><code>X-Forwarded-For</code> - 客户端IP</li>
-                        <li><code>X-Real-IP</code> - 真实IP</li>
-                        <li><code>Authorization</code> - 认证信息</li>
-                        <li><code>Origin</code> - 请求来源</li>
+                        <li><code>User-Agent</code> - 浏览器标识和操作系统信息</li>
+                        <li><code>Referer</code> - 请求来源页面URL</li>
+                        <li><code>X-Forwarded-For</code> - 客户端真实IP地址</li>
+                        <li><code>X-Real-IP</code> - 真实客户端IP</li>
+                        <li><code>Authorization</code> - 认证凭证</li>
+                        <li><code>Origin</code> - 请求来源域名</li>
+                        <li><code>X-CSRF-Token</code> - 跨站请求伪造令牌</li>
+                        <li><code>Accept</code> - 客户端可接受的内容类型</li>
                     </ul>
                 </div>
             </div>
@@ -193,6 +196,8 @@ $content .= '</code></pre>
                         <li><strong>验证请求来源</strong> - 使用CSRF令牌和SameSite Cookie</li>
                         <li><strong>限制允许的头字段</strong> - 只接受必要的HTTP头</li>
                         <li><strong>使用安全框架</strong> - 利用框架的安全特性</li>
+                        <li><strong>实施多因素认证</strong> - 结合多种验证方式</li>
+                        <li><strong>监控异常请求</strong> - 检测可疑的HTTP头模式</li>
                     </ol>
 
                     <div class="mt-4 text-center">
