@@ -32,27 +32,6 @@ function query($sql, $conn) {
         $rows[] = $row;
     }
     
-    // 检查是否是联合查询注入
-    $sql_lower = strtolower($sql);
-    if (strpos($sql_lower, 'union') !== false && strpos($sql_lower, 'select') !== false) {
-        // 从flags表中查询flag
-        $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%SQL注入%' LIMIT 1");
-        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
-            $flag = $flag_row['flag'];
-        } else {
-            $flag = 'FLAG{UNION_INJECTION_SUCCESS}';
-        }
-        
-        // 添加FLAG
-        $rows[] = [
-            'id' => 999,
-            'username' => $flag,
-            'password' => 'UNION_INJECTION',
-            'email' => 'flag@example.com',
-            'created_at' => date('Y-m-d H:i:s')
-        ];
-    }
-    
     return $rows;
 }
 
@@ -310,11 +289,6 @@ $conn->close();
                 <h4>5. 查询数据库信息</h4>
                 <code class="payload" data-payload="0 UNION SELECT 1,version(),database(),user(),now()">0 UNION SELECT 1,version(),database(),user(),now()</code>
             </div>
-            
-            <div id="flagBox" class="flag-box">
-                🚩 FLAG{Union_Injection_Success}<br>
-                <span style="font-size: 0.9rem;">你成功完成了联合查询注入！</span>
-            </div>
         </div>
 
         <div class="card">
@@ -374,13 +348,7 @@ $user = $stmt->fetch();
             });
         });
         
-        // 检测是否成功注入
-        window.onload = function() {
-            const url = window.location.href;
-            if (url.includes('id=') && (url.includes('union') || url.includes('UNION'))) {
-                document.getElementById('flagBox').classList.add('show');
-            }
-        };
+
     </script>
 </body>
 </html>
