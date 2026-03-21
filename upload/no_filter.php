@@ -1,6 +1,6 @@
 <?php
 // 无过滤文件上传漏洞
-$module_name = '无过滤文件上传';
+$module_name = '01. 无过滤文件上传';
 $module_icon = '📁';
 $module_desc = '完全没有任何过滤的文件上传漏洞，攻击者可以上传任意类型的文件。';
 
@@ -47,22 +47,22 @@ $content = '<div class="card">
                     <h6>🔍 漏洞代码</h6>
                 </div>
                 <div class="card-body">
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES[\'file\'])) {
-    $file = $_FILES[\'file\'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES['file'])) {
+    $file = $_FILES['file'];
     
     // 漏洞：完全没有任何过滤
-    $upload_dir = \'uploads/\';
+    $upload_dir = 'uploads/';
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
     
-    $target_file = $upload_dir . basename($file[\'name\']);
+    $target_file = $upload_dir . basename($file['name']);
     
     // 直接移动文件，没有任何验证
-    if (move_uploaded_file($file[\'tmp_name\'], $target_file)) {
-        echo \'文件上传成功！\';
+    if (move_uploaded_file($file['tmp_name'], $target_file)) {
+        echo '文件上传成功！';
     } else {
-        echo \'文件上传失败！\';
+        echo '文件上传失败！';
     }
 }</code></pre>
                 </div>

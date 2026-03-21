@@ -1,6 +1,6 @@
 <?php
 // MIME类型绕过漏洞
-$module_name = 'MIME类型绕过';
+$module_name = '03. MIME类型绕过';
 $module_icon = '🔍';
 $module_desc = '仅验证Content-Type请求头，可通过修改请求头绕过验证。';
 
@@ -51,25 +51,25 @@ $content = '<div class="card">
                     <h6>🔍 漏洞代码</h6>
                 </div>
                 <div class="card-body">
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES[\'file\'])) {
-    $file = $_FILES[\'file\'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES['file'])) {
+    $file = $_FILES['file'];
     
     // 漏洞：仅验证Content-Type，可被绕过
-    $allowed_mime = [\'image/jpeg\', \'image/png\', \'image/gif\'];
-    if (!in_array($file[\'type\'], $allowed_mime)) {
-        $message = \'仅允许上传图片文件！\';
+    $allowed_mime = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!in_array($file['type'], $allowed_mime)) {
+        $message = '仅允许上传图片文件！';
     } else {
-        $upload_dir = \'uploads/\';
+        $upload_dir = 'uploads/';
         if (!file_exists($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file[\'name\']);
+        $target_file = $upload_dir . basename($file['name']);
         
-        if (move_uploaded_file($file[\'tmp_name\'], $target_file)) {
-            $message = \'文件上传成功！\';
+        if (move_uploaded_file($file['tmp_name'], $target_file)) {
+            $message = '文件上传成功！';
         } else {
-            $message = \'文件上传失败！\';
+            $message = '文件上传失败！';
         }
     }
 }</code></pre>

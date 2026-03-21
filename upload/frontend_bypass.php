@@ -1,6 +1,6 @@
 <?php
 // 前端验证绕过漏洞
-$module_name = '前端验证绕过';
+$module_name = '02. 前端验证绕过';
 $module_icon = '🔒';
 $module_desc = '仅在前端使用JavaScript验证文件类型，可通过禁用JS或直接发送请求绕过。';
 
@@ -50,17 +50,17 @@ $content = '<div class="card">
                     <h5 class="mb-2">前端验证代码：</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>&lt;script&gt;
 function validateFile() {
-    var fileInput = document.getElementById(\'file\');
+    var fileInput = document.getElementById('file');
     var file = fileInput.files[0];
-    var allowedTypes = [\'image/jpeg\', \'image/png\', \'image/gif\'];
+    var allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
     
     if (!file) {
-        alert(\'请选择文件\');
+        alert('请选择文件');
         return false;
     }
     
     if (!allowedTypes.includes(file.type)) {
-        alert(\'仅允许上传图片文件\');
+        alert('仅允许上传图片文件');
         return false;
     }
     
@@ -69,22 +69,22 @@ function validateFile() {
 &lt;/script&gt;</code></pre>
                     
                     <h5 class="mb-2 mt-4">后端代码：</h5>
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES[\'file\'])) {
-    $file = $_FILES[\'file\'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES['file'])) {
+    $file = $_FILES['file'];
     
     // 漏洞：仅在前端进行验证，后端没有验证
-    $upload_dir = \'uploads/\';
+    $upload_dir = 'uploads/';
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
     
-    $target_file = $upload_dir . basename($file[\'name\']);
+    $target_file = $upload_dir . basename($file['name']);
     
     // 直接移动文件，没有任何验证
-    if (move_uploaded_file($file[\'tmp_name\'], $target_file)) {
-        echo \'文件上传成功！\';
+    if (move_uploaded_file($file['tmp_name'], $target_file)) {
+        echo '文件上传成功！';
     } else {
-        echo \'文件上传失败！\';
+        echo '文件上传失败！';
     }
 }</code></pre>
                 </div>

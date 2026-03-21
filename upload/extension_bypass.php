@@ -1,6 +1,6 @@
 <?php
 // 扩展名绕过漏洞
-$module_name = '扩展名绕过';
+$module_name = '04. 扩展名绕过';
 $module_icon = '🔓';
 $module_desc = '使用黑名单方式验证文件扩展名，由于黑名单不完整，可通过特殊扩展名绕过。';
 
@@ -53,27 +53,27 @@ $content = '<div class="card">
                     <h6>🔍 漏洞代码</h6>
                 </div>
                 <div class="card-body">
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES[\'file\'])) {
-    $file = $_FILES[\'file\'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_FILES['file'])) {
+    $file = $_FILES['file'];
     
     // 漏洞：使用黑名单方式，且黑名单不完整
-    $blacklist = [\'php\', \'php3\', \'php4\', \'php5\', \'phtml\', \'asp\', \'aspx\', \'jsp\'];
-    $file_ext = strtolower(pathinfo($file[\'name\'], PATHINFO_EXTENSION));
+    $blacklist = ['php', 'php3', 'php4', 'php5', 'phtml', 'asp', 'aspx', 'jsp'];
+    $file_ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     
     if (in_array($file_ext, $blacklist)) {
-        $message = \'禁止上传该类型文件！\';
+        $message = '禁止上传该类型文件！';
     } else {
-        $upload_dir = \'uploads/\';
+        $upload_dir = 'uploads/';
         if (!file_exists($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file[\'name\']);
+        $target_file = $upload_dir . basename($file['name']);
         
-        if (move_uploaded_file($file[\'tmp_name\'], $target_file)) {
-            $message = \'文件上传成功！\';
+        if (move_uploaded_file($file['tmp_name'], $target_file)) {
+            $message = '文件上传成功！';
         } else {
-            $message = \'文件上传失败！\';
+            $message = '文件上传失败！';
         }
     }
 }</code></pre>

