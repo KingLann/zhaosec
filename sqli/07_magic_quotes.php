@@ -234,10 +234,6 @@ $conn->close();
                     <p>用户ID：<?php echo htmlspecialchars($user_info['id']); ?></p>
                     <p>邮箱：<?php echo htmlspecialchars($user_info['email']); ?></p>
                 </div>
-                <div class="flag-box show">
-                    🚩 FLAG{Magic_Quotes_Success}<br>
-                    <span style="font-size: 0.9rem;">你成功完成了万能密码注入！</span>
-                </div>
                 <?php endif; ?>
             </div>
         </div>

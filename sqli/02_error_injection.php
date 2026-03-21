@@ -39,23 +39,6 @@ function initDatabase($conn) {
 
 // 模拟数据库查询函数
 function query($sql, $conn) {
-    // 检查是否包含报错注入特征
-    $sql_lower = strtolower($sql);
-    if (strpos($sql_lower, 'extractvalue') !== false || 
-        strpos($sql_lower, 'updatexml') !== false || 
-        strpos($sql_lower, 'floor') !== false || 
-        strpos($sql_lower, 'exp') !== false) {
-        // 从flags表中查询flag
-        $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%报错%' LIMIT 1");
-        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
-            $flag = $flag_row['flag'];
-        } else {
-            $flag = 'FLAG{Error_Injection_Success}';
-        }
-        // 模拟报错信息
-        throw new Exception('XPATH syntax error: ' . $flag);
-    }
-    
     // 执行查询
     $result = $conn->query($sql);
     
@@ -318,11 +301,6 @@ $conn->close();
                 <h4>4. exp() 函数（溢出）</h4>
                 <code onclick="setId('1 AND exp(~(select * from (select user())a))')">1 AND exp(~(select * from (select user())a))</code>
             </div>
-            
-            <div id="flagBox" class="flag-box">
-                🚩 FLAG{Error_Injection_Success}<br>
-                <span style="font-size: 0.9rem;">你成功完成了报错注入！</span>
-            </div>
         </div>
 
         <div class="card">
@@ -343,14 +321,6 @@ $conn->close();
         function setId(payload) {
             document.querySelector('input[name="id"]').value = payload;
         }
-        
-        // 检测是否成功注入
-        window.onload = function() {
-            const errorEl = document.querySelector('.error-box');
-            if (errorEl && errorEl.innerHTML.includes('FLAG{')) {
-                document.getElementById('flagBox').classList.add('show');
-            }
-        };
     </script>
 </body>
 </html>

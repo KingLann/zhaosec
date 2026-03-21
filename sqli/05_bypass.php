@@ -53,25 +53,7 @@ function waf($input) {
 
 // 模拟数据库查询函数
 function query($sql, $conn) {
-    // 检查是否包含注入特征
-    $sql_lower = strtolower($sql);
-    if (strpos($sql_lower, 'union') !== false || 
-        strpos($sql_lower, 'select') !== false ||
-        strpos($sql_lower, 'and') !== false ||
-        strpos($sql_lower, 'or') !== false) {
-        // 从flags表中查询flag
-        $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%绕过%' LIMIT 1");
-        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
-            $flag = $flag_row['flag'];
-        } else {
-            $flag = 'FLAG{SQL_Bypass_Success}';
-        }
-        return [
-            ['id' => 999, 'username' => $flag, 'password' => 'SQL_BYPASS', 'email' => 'flag@example.com']
-        ];
-    }
-    
-    // 执行正常查询
+    // 执行查询
     $result = $conn->query($sql);
     
     if (!$result) {
@@ -362,11 +344,6 @@ $conn->close();
                     <li><strong>语句构造：</strong>改变SQL语句的结构</li>
                 </ul>
             </div>
-            
-            <div id="flagBox" class="flag-box">
-                🚩 FLAG{SQL_Bypass_Techniques_Mastered}<br>
-                <span style="font-size: 0.9rem;">你成功绕过了WAF防护！</span>
-            </div>
         </div>
 
         <div class="card">
@@ -387,18 +364,6 @@ $conn->close();
         function setId(payload) {
             document.querySelector('input[name="id"]').value = payload;
         }
-        
-        // 检测是否成功注入
-        window.onload = function() {
-            const url = window.location.href;
-            if (url.includes('id=') && 
-                (url.includes('UNION') || url.includes('union') ||
-                 url.includes('SELECT') || url.includes('select') ||
-                 url.includes('AND') || url.includes('and') ||
-                 url.includes('OR') || url.includes('or'))) {
-                document.getElementById('flagBox').classList.add('show');
-            }
-        };
     </script>
 </body>
 </html>

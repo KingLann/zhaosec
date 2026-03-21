@@ -39,40 +39,7 @@ function initDatabase($conn) {
 
 // 模拟数据库查询函数
 function query($sql, $conn) {
-    // 检查是否包含布尔注入特征
-    $sql_lower = strtolower($sql);
-    if (strpos($sql_lower, 'and') !== false || strpos($sql_lower, 'or') !== false) {
-        // 模拟布尔注入的行为
-        if (strpos($sql_lower, 'and 1=1') !== false || 
-            strpos($sql_lower, 'or 1=1') !== false ||
-            strpos($sql_lower, 'substr') !== false ||
-            strpos($sql_lower, 'ascii') !== false) {
-            // 返回所有用户数据表示条件为真
-            $result = $conn->query("SELECT * FROM users");
-            $rows = [];
-            while ($row = $result->fetch_assoc()) {
-                $rows[] = $row;
-            }
-            
-            // 从flags表中查询flag
-            $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%布尔%' LIMIT 1");
-            if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
-                $rows[] = [
-                    'id' => 999,
-                    'username' => $flag_row['flag'],
-                    'password' => 'BOOLEAN_BLIND',
-                    'email' => 'flag@example.com'
-                ];
-            }
-            
-            return $rows;
-        } elseif (strpos($sql_lower, 'and 1=2') !== false || 
-                  strpos($sql_lower, 'or 1=2') !== false) {
-            return []; // 返回空表示条件为假
-        }
-    }
-    
-    // 执行正常查询
+    // 执行查询
     $result = $conn->query($sql);
     
     if (!$result) {
@@ -318,11 +285,6 @@ $conn->close();
                 <p><strong>步骤4：</strong>使用 <code>1 AND LENGTH((SELECT username FROM users LIMIT 1)) > 3</code> 猜解用户名长度</p>
                 <p><strong>步骤5：</strong>使用 <code>1 AND SUBSTRING((SELECT username FROM users LIMIT 1),1,1) = 'a'</code> 逐字符猜解</p>
             </div>
-            
-            <div id="flagBox" class="flag-box">
-                🚩 FLAG{Boolean_Blind_Injection_Success}<br>
-                <span style="font-size: 0.9rem;">你成功完成了布尔盲注！</span>
-            </div>
         </div>
 
         <div class="card">
@@ -343,16 +305,6 @@ $conn->close();
         function setId(payload) {
             document.querySelector('input[name="id"]').value = payload;
         }
-        
-        // 检测是否成功注入
-        window.onload = function() {
-            const url = window.location.href;
-            if (url.includes('id=') && 
-                (url.includes('AND') || url.includes('OR') || 
-                 url.includes('substr') || url.includes('ASCII'))) {
-                document.getElementById('flagBox').classList.add('show');
-            }
-        };
     </script>
 </body>
 </html>

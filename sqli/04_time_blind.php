@@ -46,24 +46,9 @@ function query($sql, $conn) {
         strpos($sql_lower, 'waitfor') !== false) {
         // 模拟延迟
         usleep(2000000); // 2秒延迟
-        
-        // 从flags表中查询flag
-        $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%时间%' LIMIT 1");
-        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
-            return [
-                [
-                    'id' => 999,
-                    'username' => $flag_row['flag'],
-                    'password' => 'TIME_BLIND',
-                    'email' => 'flag@example.com'
-                ]
-            ];
-        }
-        
-        return [];
     }
     
-    // 执行正常查询
+    // 执行查询
     $result = $conn->query($sql);
     
     if (!$result) {
@@ -341,11 +326,6 @@ $execution_time = ($end_time - $start_time) * 1000; // 毫秒
                 <p><strong>步骤3：</strong>使用 <code>1 AND IF(LENGTH((SELECT username FROM users LIMIT 1)) > 3, SLEEP(5), 0)</code> 猜解长度</p>
                 <p><strong>步骤4：</strong>使用 <code>1 AND IF(SUBSTRING((SELECT username FROM users LIMIT 1),1,1) = 'a', SLEEP(5), 0)</code> 逐字符猜解</p>
             </div>
-            
-            <div id="flagBox" class="flag-box">
-                🚩 FLAG{Time_Blind_Injection_Success}<br>
-                <span style="font-size: 0.9rem;">你成功完成了时间盲注！</span>
-            </div>
         </div>
 
         <div class="card">
@@ -366,17 +346,6 @@ $execution_time = ($end_time - $start_time) * 1000; // 毫秒
         function setId(payload) {
             document.querySelector('input[name="id"]').value = payload;
         }
-        
-        // 检测是否成功注入
-        window.onload = function() {
-            const url = window.location.href;
-            if (url.includes('id=') && 
-                (url.includes('SLEEP') || url.includes('sleep') ||
-                 url.includes('BENCHMARK') || url.includes('benchmark') ||
-                 url.includes('WAITFOR') || url.includes('waitfor'))) {
-                document.getElementById('flagBox').classList.add('show');
-            }
-        };
     </script>
 </body>
 </html>

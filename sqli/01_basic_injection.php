@@ -53,32 +53,6 @@ function query($sql, $conn) {
         $rows[] = $row;
     }
     
-    // 检查是否是注入查询
-    $sql_lower = strtolower($sql);
-    if (strpos($sql_lower, 'union') !== false || strpos($sql_lower, 'or') !== false || strpos($sql_lower, 'and') !== false) {
-        // 从flags表中查询flag
-        $flag_result = $conn->query("SELECT flag FROM flags LIMIT 1");
-        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
-            $flag = $flag_row['flag'];
-        } else {
-            $flag = 'FLAG{SQL_INJECTION_SUCCESS}';
-        }
-        
-        // 添加FLAG
-        $rows[] = [
-            'id' => 999,
-            'username' => $flag,
-            'password' => 'SQL_INJECTION',
-            'email' => 'flag@example.com'
-        ];
-        $rows[] = [
-            'id' => 1000,
-            'username' => '数据库信息',
-            'password' => 'version: ' . $conn->server_info,
-            'email' => 'database: zhao'
-        ];
-    }
-    
     return $rows;
 }
 
@@ -334,11 +308,6 @@ $conn->close();
                 <h4>4. 时间注入</h4>
                 <code onclick="setId('1 AND SLEEP(5)')">1 AND SLEEP(5)</code>
             </div>
-            
-            <div id="flagBox" class="flag-box">
-                🚩 FLAG{Basic_SQL_Injection_Success}<br>
-                <span style="font-size: 0.9rem;">你成功完成了SQL注入！</span>
-            </div>
         </div>
 
         <div class="card">
@@ -428,17 +397,6 @@ $user = $stmt->fetch();
         function setId(payload) {
             document.querySelector('input[name="id"]').value = payload;
         }
-        
-        // 检测是否成功注入
-        window.onload = function() {
-            const url = window.location.href;
-            if (url.includes('id=') && 
-                (url.includes('OR') || url.includes('UNION') || 
-                 url.includes('AND') || url.includes('--') || 
-                 url.includes('#'))) {
-                document.getElementById('flagBox').classList.add('show');
-            }
-        };
     </script>
 </body>
 </html>
