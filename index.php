@@ -38,7 +38,7 @@
             background: white;
             border-radius: 16px;
             padding: 40px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
@@ -62,14 +62,14 @@
             border-color: rgba(102, 126, 234, 0.3);
         }
         .row {
-            margin-left: -25px;
-            margin-right: -25px;
+            margin-left: -30px;
+            margin-right: -30px;
         }
         .col-lg-3,
         .col-md-4,
         .col-sm-6 {
-            padding-left: 25px;
-            padding-right: 25px;
+            padding-left: 30px;
+            padding-right: 30px;
         }
         .footer {
             text-align: center;
