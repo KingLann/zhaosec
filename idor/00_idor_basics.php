@@ -158,6 +158,5 @@ $query = "SELECT * FROM users WHERE id = $user_id";</code></pre>
     </div>
 EOT;
 
-// 包含模板
 include '../template/module_template.php';
 ?>

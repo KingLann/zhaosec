@@ -199,6 +199,5 @@ if (isset($_GET["id"])) {
         </div>
     </div>';
 
-// 包含模板
 include '../template/module_template.php';
 ?>
