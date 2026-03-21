@@ -53,6 +53,18 @@ function query($sql, $conn) {
             while ($row = $result->fetch_assoc()) {
                 $rows[] = $row;
             }
+            
+            // 从flags表中查询flag
+            $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%布尔%' LIMIT 1");
+            if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
+                $rows[] = [
+                    'id' => 999,
+                    'username' => $flag_row['flag'],
+                    'password' => 'BOOLEAN_BLIND',
+                    'email' => 'flag@example.com'
+                ];
+            }
+            
             return $rows;
         } elseif (strpos($sql_lower, 'and 1=2') !== false || 
                   strpos($sql_lower, 'or 1=2') !== false) {

@@ -46,6 +46,20 @@ function query($sql, $conn) {
         strpos($sql_lower, 'waitfor') !== false) {
         // 模拟延迟
         usleep(2000000); // 2秒延迟
+        
+        // 从flags表中查询flag
+        $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%时间%' LIMIT 1");
+        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
+            return [
+                [
+                    'id' => 999,
+                    'username' => $flag_row['flag'],
+                    'password' => 'TIME_BLIND',
+                    'email' => 'flag@example.com'
+                ]
+            ];
+        }
+        
         return [];
     }
     

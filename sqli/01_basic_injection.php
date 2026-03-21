@@ -56,10 +56,18 @@ function query($sql, $conn) {
     // 检查是否是注入查询
     $sql_lower = strtolower($sql);
     if (strpos($sql_lower, 'union') !== false || strpos($sql_lower, 'or') !== false || strpos($sql_lower, 'and') !== false) {
+        // 从flags表中查询flag
+        $flag_result = $conn->query("SELECT flag FROM flags LIMIT 1");
+        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
+            $flag = $flag_row['flag'];
+        } else {
+            $flag = 'FLAG{SQL_INJECTION_SUCCESS}';
+        }
+        
         // 添加FLAG
         $rows[] = [
             'id' => 999,
-            'username' => 'FLAG{SQL_INJECTION_SUCCESS}',
+            'username' => $flag,
             'password' => 'SQL_INJECTION',
             'email' => 'flag@example.com'
         ];

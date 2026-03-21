@@ -45,8 +45,15 @@ function query($sql, $conn) {
         strpos($sql_lower, 'updatexml') !== false || 
         strpos($sql_lower, 'floor') !== false || 
         strpos($sql_lower, 'exp') !== false) {
+        // 从flags表中查询flag
+        $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%报错%' LIMIT 1");
+        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
+            $flag = $flag_row['flag'];
+        } else {
+            $flag = 'FLAG{Error_Injection_Success}';
+        }
         // 模拟报错信息
-        throw new Exception('XPATH syntax error: FLAG{Error_Injection_Success}');
+        throw new Exception('XPATH syntax error: ' . $flag);
     }
     
     // 执行查询

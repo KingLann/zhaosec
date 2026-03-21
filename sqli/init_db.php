@@ -87,6 +87,34 @@ if ($conn->query($insert_products_sql) === TRUE) {
     echo "插入产品数据失败: " . $conn->error . "<br>";
 }
 
+// 创建flags表（用于SQL注入测试）
+$create_flags_sql = "CREATE TABLE IF NOT EXISTS flags (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    flag VARCHAR(100) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
+if ($conn->query($create_flags_sql) === TRUE) {
+    echo "创建flags表成功<br>";
+} else {
+    echo "创建flags表失败: " . $conn->error . "<br>";
+}
+
+// 插入flag数据
+$insert_flags_sql = "INSERT IGNORE INTO flags (flag, description) VALUES
+('FLAG{SQL_INJECTION_MASTER}', 'SQL注入测试flag'),
+('FLAG{ERROR_INJECTION_SUCCESS}', '报错注入测试flag'),
+('FLAG{BOOLEAN_BLIND_SUCCESS}', '布尔盲注测试flag'),
+('FLAG{TIME_BLIND_SUCCESS}', '时间盲注测试flag'),
+('FLAG{SQL_BYPASS_SUCCESS}', 'SQL注入绕过测试flag')";
+
+if ($conn->query($insert_flags_sql) === TRUE) {
+    echo "插入flag数据成功<br>";
+} else {
+    echo "插入flag数据失败: " . $conn->error . "<br>";
+}
+
 // 关闭连接
 $conn->close();
 

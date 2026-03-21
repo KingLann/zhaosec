@@ -59,8 +59,15 @@ function query($sql, $conn) {
         strpos($sql_lower, 'select') !== false ||
         strpos($sql_lower, 'and') !== false ||
         strpos($sql_lower, 'or') !== false) {
+        // 从flags表中查询flag
+        $flag_result = $conn->query("SELECT flag FROM flags WHERE description LIKE '%绕过%' LIMIT 1");
+        if ($flag_result && $flag_row = $flag_result->fetch_assoc()) {
+            $flag = $flag_row['flag'];
+        } else {
+            $flag = 'FLAG{SQL_Bypass_Success}';
+        }
         return [
-            ['id' => 999, 'username' => 'FLAG{SQL_Bypass_Success}', 'password' => 'SQL_BYPASS', 'email' => 'flag@example.com']
+            ['id' => 999, 'username' => $flag, 'password' => 'SQL_BYPASS', 'email' => 'flag@example.com']
         ];
     }
     
