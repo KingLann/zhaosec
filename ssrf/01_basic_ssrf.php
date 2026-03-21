@@ -17,6 +17,7 @@ if (isset($_GET['url'])) {
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // 跟随重定向
         
         $result = curl_exec($ch);
         
@@ -74,17 +75,17 @@ $content = '<div class="card">
                     <ol>
                         <li>访问外部网站：</li>
                         <ul>
-                            <li><code>http://localhost/zhaosec/ssrf/basic_ssrf.php?url=https://www.example.com</code></li>
+                            <li><code>http://localhost/zhaosec/ssrf/01_basic_ssrf.php?url=https://www.example.com</code></li>
                         </ul>
                         <li>访问内部资源：</li>
                         <ul>
-                            <li><code>http://localhost/zhaosec/ssrf/basic_ssrf.php?url=http://127.0.0.1</code></li>
-                            <li><code>http://localhost/zhaosec/ssrf/basic_ssrf.php?url=http://localhost</code></li>
+                            <li><code>http://localhost/zhaosec/ssrf/01_basic_ssrf.php?url=http://127.0.0.1</code></li>
+                            <li><code>http://localhost/zhaosec/ssrf/01_basic_ssrf.php?url=http://localhost</code></li>
                         </ul>
                         <li>访问内部服务：</li>
                         <ul>
-                            <li><code>http://localhost/zhaosec/ssrf/basic_ssrf.php?url=http://127.0.0.1:3306</code> - MySQL服务</li>
-                            <li><code>http://localhost/zhaosec/ssrf/basic_ssrf.php?url=http://127.0.0.1:6379</code> - Redis服务</li>
+                            <li><code>http://localhost/zhaosec/ssrf/01_basic_ssrf.php?url=http://127.0.0.1:3306</code> - MySQL服务</li>
+                            <li><code>http://localhost/zhaosec/ssrf/01_basic_ssrf.php?url=http://127.0.0.1:6379</code> - Redis服务</li>
                         </ul>
                     </ol>
                 </div>
