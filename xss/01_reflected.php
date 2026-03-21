@@ -186,11 +186,27 @@ $search = $_GET['search'] ?? '';
             document.querySelector('input[name="search"]').value = payload;
         }
         
-        // 检测是否触发了XSS（通过检查URL中是否包含成功标志）
-        if (window.location.href.includes('search=') && 
-            (window.location.href.includes('%3Cscript%3E') || 
-             window.location.href.includes('<script>'))) {
-            document.getElementById('flagBox').classList.add('show');
+        // 检测是否触发了XSS（检查URL中的多种XSS特征）
+        const url = window.location.href;
+        if (url.includes('search=')) {
+            const searchParam = decodeURIComponent(url.split('search=')[1].split('&')[0]);
+            const xssPatterns = [
+                /<script[^>]*>/i,
+                /<img[^>]+onerror=/i,
+                /<svg[^>]+onload=/i,
+                /<body[^>]+onload=/i,
+                /<iframe[^>]+src=javascript:/i,
+                /javascript:/i,
+                /onerror=/i,
+                /onload=/i,
+                /onclick=/i,
+                /onmouseover=/i
+            ];
+            
+            const hasXSS = xssPatterns.some(pattern => pattern.test(searchParam));
+            if (hasXSS) {
+                document.getElementById('flagBox').classList.add('show');
+            }
         }
     </script>
 </body>

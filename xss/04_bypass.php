@@ -212,21 +212,21 @@ if ($filter_level === 'weak') {
             <div class="filter-box">
                 <h4>当前过滤规则：</h4>
                 <?php if ($filter_level === 'weak'): ?>
-                <div class="code-block">// 弱过滤 - 只替换小写script标签
+                <div class="code-block"><?php echo htmlspecialchars('// 弱过滤 - 只替换小写script标签
 function weakFilter($str) {
-    $str = str_replace('<script>', '', $str);
-    $str = str_replace('</script>', '', $str);
+    $str = str_replace("<script>", "", $str);
+    $str = str_replace("</script>", "", $str);
     return $str;
-}</div>
+}'); ?></div>
                 <?php else: ?>
-                <div class="code-block">// 中等过滤 - 正则替换script标签和部分事件
+                <div class="code-block"><?php echo htmlspecialchars('// 中等过滤 - 正则替换script标签和部分事件
 function mediumFilter($str) {
-    $str = preg_replace('/<script.*?>/i', '', $str);
-    $str = preg_replace('/<\/script>/i', '', $str);
-    $str = str_replace('onerror', '', $str);
-    $str = str_replace('onload', '', $str);
+    $str = preg_replace("/<script.*?>/i", "", $str);
+    $str = preg_replace("/<\/script>/i", "", $str);
+    $str = str_replace("onerror", "", $str);
+    $str = str_replace("onload", "", $str);
     return $str;
-}</div>
+}'); ?></div>
                 <?php endif; ?>
             </div>
         </div>
