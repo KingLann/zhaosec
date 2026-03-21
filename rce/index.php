@@ -1,12 +1,11 @@
 <?php
-$module_name = '命令/代码执行';
-$module_icon = '⚡';
-$module_desc = '命令执行和代码执行是最危险的漏洞类型，可直接获取服务器控制权。';
+$module_name = '命令/代码执行漏洞';
+$module_icon = '💻';
+$module_desc = '远程命令执行(RCE)和代码执行漏洞允许攻击者在服务器上执行任意命令或代码，是最危险的漏洞类型之一。';
 $vulns = [
-    ['name' => '命令注入', 'desc' => '系统命令拼接执行', 'file' => 'command_injection.php', 'level' => 'high'],
-    ['name' => '代码注入', 'desc' => '动态代码执行', 'file' => 'code_injection.php', 'level' => 'high'],
-    ['name' => 'Eval注入', 'desc' => 'eval函数使用不当', 'file' => 'eval_injection.php', 'level' => 'high'],
-    ['name' => '反引号执行', 'desc' => '反引号命令执行', 'file' => 'backtick_exec.php', 'level' => 'high'],
+    ['name' => '命令执行漏洞', 'desc' => '通过系统命令执行函数导致的命令注入', 'file' => 'command_exec.php', 'level' => 'high'],
+    ['name' => '代码执行漏洞', 'desc' => '通过代码执行函数导致的代码注入', 'file' => 'code_exec.php', 'level' => 'high'],
+    ['name' => '绕过技巧', 'desc' => '常见WAF绕过和过滤绕过方法', 'file' => 'bypass.php', 'level' => 'high'],
 ];
 include '../template/module_template.php';
 ?>

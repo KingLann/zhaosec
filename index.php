@@ -61,7 +61,7 @@
             description: "攻击者通过插入恶意SQL语句，绕过认证、窃取数据库敏感信息或执行破坏性操作，是Web最危险的漏洞之一。",
             icon: "fas fa-database",
             severity: "critical",
-            severityLabel: "高危",
+            severityLabel: "严重",
             link: "sqli/index.php",
             linkText: "进入演练",
             count: 8
@@ -84,7 +84,7 @@
             severityLabel: "中危",
             link: "logic/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 8
         },
         {
             name: "跨站请求伪造 (CSRF)",
@@ -141,7 +141,7 @@
             description: "允许上传危险文件类型（webshell、木马），导致服务器被控制、网站被篡改或数据泄露。",
             icon: "fas fa-upload",
             severity: "critical",
-            severityLabel: "高危",
+            severityLabel: "严重",
             link: "upload/index.php",
             linkText: "进入演练",
             count: 4
@@ -151,30 +151,10 @@
             description: "在系统命令中注入恶意参数，可远程执行操作系统命令，完全控制服务器。",
             icon: "fas fa-terminal",
             severity: "critical",
-            severityLabel: "高危",
+            severityLabel: "严重",
             link: "rce/index.php",
             linkText: "进入演练",
             count: 4
-        },
-        {
-            name: "安全配置错误",
-            description: "默认账号、目录列表、错误信息详细、不安全的HTTP头等，为攻击者提供可乘之机。",
-            icon: "fas fa-cogs",
-            severity: "medium",
-            severityLabel: "中危",
-            link: "https://portswigger.net/web-security/configuration",
-            linkText: "安全加固指南",
-            count: 0
-        },
-        {
-            name: "敏感数据暴露",
-            description: "未加密传输或存储信用卡、密码、个人身份信息，违反合规并导致隐私泄露。",
-            icon: "fas fa-eye-slash",
-            severity: "high",
-            severityLabel: "高危",
-            link: "https://portswigger.net/web-security/cryptographic",
-            linkText: "加密与数据保护",
-            count: 0
         },
         {
             name: "不安全的反序列化",
@@ -185,16 +165,6 @@
             link: "unserialize/index.php",
             linkText: "进入演练",
             count: 4
-        },
-        {
-            name: "开放重定向 (Open Redirect)",
-            description: "未校验的跳转参数，可被用于钓鱼攻击、绕过同源策略或配合其他漏洞。",
-            icon: "fas fa-external-link-alt",
-            severity: "medium",
-            severityLabel: "中危",
-            link: "https://portswigger.net/web-security/dom-based/open-redirect",
-            linkText: "重定向漏洞详解",
-            count: 0
         }
     ];
 
