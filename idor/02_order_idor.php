@@ -164,18 +164,18 @@ $content .= '                </div>
 
                     <h5 class="mb-3 mt-4">修复后的代码</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>// 修复后的代码
-if (isset($_GET['id'])) {
-    $order_id = $_GET['id'];
+if (isset($_GET["id"])) {
+    $order_id = $_GET["id"];
     
     // 获取当前登录用户的ID
-    $current_user_id = $_SESSION['user_id'];
+    $current_user_id = $_SESSION["user_id"];
     
     // 查找订单并检查权限
     foreach ($orders as $o) {
-        if ($o['id'] == $order_id) {
+        if ($o["id"] == $order_id) {
             // 检查当前用户是否有权限访问该订单
-            if ($o['user_id'] != $current_user_id) {
-                die('Access denied');
+            if ($o["user_id"] != $current_user_id) {
+                die("Access denied");
             }
             $order = $o;
             break;
@@ -183,7 +183,7 @@ if (isset($_GET['id'])) {
     }
     
     if (!$order) {
-        $error = '订单不存在';
+        $error = "订单不存在";
     }
 }</code></pre>
                 </div>

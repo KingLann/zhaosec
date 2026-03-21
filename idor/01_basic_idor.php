@@ -163,27 +163,27 @@ $content .= '                </div>
 
                     <h5 class="mb-3 mt-4">修复后的代码</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>// 修复后的代码
-if (isset($_GET['id'])) {
-    $user_id = $_GET['id'];
+if (isset($_GET["id"])) {
+    $user_id = $_GET["id"];
     
     // 获取当前登录用户的ID
-    $current_user_id = $_SESSION['user_id'];
+    $current_user_id = $_SESSION["user_id"];
     
     // 检查当前用户是否有权限访问该用户的信息
     // 这里简化处理，只允许用户访问自己的信息
     if ($user_id != $current_user_id) {
-        die('Access denied');
+        die("Access denied");
     }
     
     foreach ($users as $u) {
-        if ($u['id'] == $user_id) {
+        if ($u["id"] == $user_id) {
             $user = $u;
             break;
         }
     }
     
     if (!$user) {
-        $error = '用户不存在';
+        $error = "用户不存在";
     }
 }</code></pre>
                 </div>

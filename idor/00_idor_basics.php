@@ -139,16 +139,16 @@ https://example.com/files/download?id=102</code></pre>
 
                     <h5 class="mb-3 mt-4">PHP中的防御代码示例</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>// 不好的做法：直接使用用户提供的ID
-$user_id = $_GET['id'];
+$user_id = $_GET["id"];
 $query = "SELECT * FROM users WHERE id = $user_id";
 
 // 好的做法：实施访问控制检查
-$user_id = $_GET['id'];
-$current_user_id = $_SESSION['user_id'];
+$user_id = $_GET["id"];
+$current_user_id = $_SESSION["user_id"];
 
 // 检查用户是否有权限访问该资源
 if ($user_id != $current_user_id && !is_admin()) {
-    die('Access denied');
+    die("Access denied");
 }
 
 $query = "SELECT * FROM users WHERE id = $user_id";</code></pre>

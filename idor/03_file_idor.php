@@ -172,18 +172,18 @@ $content .= '                </div>
 
                     <h5 class="mb-3 mt-4">修复后的代码</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>// 修复后的代码
-if (isset($_GET['id'])) {
-    $file_id = $_GET['id'];
+if (isset($_GET["id"])) {
+    $file_id = $_GET["id"];
     
     // 获取当前登录用户的ID
-    $current_user_id = $_SESSION['user_id'];
+    $current_user_id = $_SESSION["user_id"];
     
     // 查找文件并检查权限
     foreach ($files as $f) {
-        if ($f['id'] == $file_id) {
+        if ($f["id"] == $file_id) {
             // 检查当前用户是否有权限下载该文件
-            if ($f['user_id'] != $current_user_id) {
-                die('Access denied');
+            if ($f["user_id"] != $current_user_id) {
+                die("Access denied");
             }
             $file = $f;
             break;
@@ -191,7 +191,7 @@ if (isset($_GET['id'])) {
     }
     
     if (!$file) {
-        $error = '文件不存在';
+        $error = "文件不存在";
     }
 }</code></pre>
                 </div>
