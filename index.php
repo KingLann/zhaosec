@@ -18,38 +18,44 @@
         .hero-section {
             background: var(--primary-gradient);
             color: white;
-            padding: 60px 0;
-            margin-bottom: 40px;
+            padding: 80px 0;
+            margin-bottom: 60px;
             text-align: center;
         }
         .hero-section h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         .hero-section p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
         }
         .vuln-card {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
+            border-radius: 18px;
+            padding: 40px;
+            margin-bottom: 40px;
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             border: none;
             height: 100%;
         }
         .row {
-            margin-left: -15px;
-            margin-right: -15px;
+            margin-left: -25px;
+            margin-right: -25px;
         }
         .col-lg-4,
         .col-md-6 {
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+            margin-top: 60px;
         }
         .vuln-card:hover {
             transform: translateY(-5px);
@@ -91,12 +97,6 @@
         .icon-ssrf { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
         .icon-csrf { background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); }
         .icon-unserialize { background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); }
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            color: #666;
-            margin-top: 40px;
-        }
         .footer a {
             color: #667eea;
             text-decoration: none;
