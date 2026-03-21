@@ -40,12 +40,12 @@ switch ($level) {
         
     case 1:
         // 第2关：添加Referer头
-        if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'https://example.com') {
+        if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'https://zhaosec.com') {
             $_SESSION['challenge_level'] = 2;
             $message = '🎉 第2关通过！Referer头验证成功';
             $success = true;
         } else {
-            $message = '🔍 第2关：请添加Referer头，值为 "https://example.com"';
+            $message = '🔍 第2关：请添加Referer头，值为 "https://zhaosec.com"';
         }
         break;
         
@@ -62,23 +62,23 @@ switch ($level) {
         
     case 3:
         // 第4关：添加Custom-Authorization头
-        if (isset($_SERVER['HTTP_CUSTOM_AUTHORIZATION']) && $_SERVER['HTTP_CUSTOM_AUTHORIZATION'] === 'Bearer secret_token_123') {
+        if (isset($_SERVER['HTTP_CUSTOM_AUTHORIZATION']) && $_SERVER['HTTP_CUSTOM_AUTHORIZATION'] === 'Bearer zhao_wen_dao') {
             $_SESSION['challenge_level'] = 4;
             $message = '🎉 第4关通过！Custom-Authorization头验证成功';
             $success = true;
         } else {
-            $message = '🔐 第4关：请添加Custom-Authorization头，值为 "Bearer secret_token_123"';
+            $message = '🔐 第4关：请添加Custom-Authorization头，值为 "Bearer zhao_wen_dao"';
         }
         break;
         
     case 4:
         // 第5关：添加X-Admin-Key头
-        if (isset($_SERVER['HTTP_X_ADMIN_KEY']) && $_SERVER['HTTP_X_ADMIN_KEY'] === 'admin_secret_key') {
+        if (isset($_SERVER['HTTP_X_ADMIN_KEY']) && $_SERVER['HTTP_X_ADMIN_KEY'] === 'zhao_secret_key') {
             $_SESSION['challenge_level'] = 5;
             $message = '🎉 第5关通过！X-Admin-Key头验证成功';
             $success = true;
         } else {
-            $message = '👑 第5关：请添加X-Admin-Key头，值为 "admin_secret_key"';
+            $message = '👑 第5关：请添加X-Admin-Key头，值为 "zhao_secret_key"';
         }
         break;
         
@@ -149,10 +149,10 @@ $content .= '</code></pre>
                     <h5 class="mb-3 mt-4">cURL示例</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>curl -X GET "http://localhost/zhaosec/http/04_header_forgery_challenge.php" \
   -H "User-Agent: Mozilla/5.0 zhaowendao" \
-  -H "Referer: https://example.com" \
+  -H "Referer: https://zhaosec.com" \
   -H "X-Forwarded-For: 127.0.0.1" \
-  -H "Custom-Authorization: Bearer secret_token_123" \
-  -H "X-Admin-Key: admin_secret_key"</code></pre>
+  -H "Custom-Authorization: Bearer zhao_wen_dao" \
+  -H "X-Admin-Key: zhao_secret_key"</code></pre>
                 </div>
             </div>
 
