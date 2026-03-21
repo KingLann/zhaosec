@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: plaintext_brute.php');
+    header('Location: 01_plaintext_brute.php');
     exit;
 }
 $username = $_SESSION['username'] ?? 'Unknown';
