@@ -1,12 +1,42 @@
 <?php
 // SQL注入绕过场景
-// 模拟数据库操作
+// 使用真实MySQL数据库
 
-// 模拟用户数据
-$users = [
-    ['id' => 1, 'username' => 'admin', 'password' => 'admin123', 'email' => 'admin@example.com'],
-    ['id' => 2, 'username' => 'user1', 'password' => 'password1', 'email' => 'user1@example.com'],
-];
+// 数据库连接信息
+$servername = "127.0.0.1";
+$username = "root";
+$password = "123456";
+$dbname = "zhao";
+
+// 创建连接
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// 检查连接
+if ($conn->connect_error) {
+    die("连接失败: " . $conn->connect_error);
+}
+
+// 初始化数据库表和数据
+function initDatabase($conn) {
+    // 创建users表
+    $create_users_sql = "CREATE TABLE IF NOT EXISTS users (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(30) NOT NULL,
+        password VARCHAR(30) NOT NULL,
+        email VARCHAR(50) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+    $conn->query($create_users_sql);
+    
+    // 插入模拟数据
+    $insert_users_sql = "INSERT IGNORE INTO users (username, password, email) VALUES
+    ('admin', 'admin123', 'admin@example.com'),
+    ('user1', 'password1', 'user1@example.com')";
+    $conn->query($insert_users_sql);
+}
+
+// 初始化数据库
+initDatabase($conn);
 
 // 简单的WAF过滤（可被绕过）
 function waf($input) {
@@ -23,45 +53,47 @@ function waf($input) {
 }
 
 // 模拟数据库查询函数
-function query($sql) {
-    global $users;
-    
-    // 简单的SQL解析（仅用于演示）
-    $sql = strtolower($sql);
-    
+function query($sql, $conn) {
     // 检查是否包含注入特征
-    if (strpos($sql, 'union') !== false || 
-        strpos($sql, 'select') !== false ||
-        strpos($sql, 'and') !== false ||
-        strpos($sql, 'or') !== false) {
+    $sql_lower = strtolower($sql);
+    if (strpos($sql_lower, 'union') !== false || 
+        strpos($sql_lower, 'select') !== false ||
+        strpos($sql_lower, 'and') !== false ||
+        strpos($sql_lower, 'or') !== false) {
         return [
             ['id' => 999, 'username' => 'FLAG{SQL_Bypass_Success}', 'password' => 'SQL_BYPASS', 'email' => 'flag@example.com']
         ];
     }
     
-    // 正常查询
-    if (strpos($sql, 'where id=') !== false) {
-        $id = intval(substr($sql, strpos($sql, 'id=') + 3));
-        foreach ($users as $user) {
-            if ($user['id'] == $id) {
-                return [$user];
-            }
-        }
+    // 执行正常查询
+    $result = $conn->query($sql);
+    
+    if (!$result) {
+        return [];
     }
-    return [];
+    
+    $rows = [];
+    while ($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+    
+    return $rows;
 }
 
 $id = $_GET['id'] ?? 1;
 $filtered_id = waf($id);
 $results = [];
 
-// 执行查询（存在SQL注入漏洞，可被绕过）
+// 执行查询（存在SQL注入漏洞，WAF可被绕过）
 $sql = "SELECT * FROM users WHERE id=$filtered_id";
 try {
-    $results = query($sql);
+    $results = query($sql, $conn);
 } catch (Exception $e) {
     // 不显示错误信息
 }
+
+// 关闭连接
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
