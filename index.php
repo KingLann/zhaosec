@@ -18,7 +18,7 @@
         </h1>
         <div class="subhead">OWASP Top 10 & 关键风险 · 学习 · 防御 · 渗透测试指南</div>
         <div class="description">
-            <i class="fas fa-book-open"></i> 精选常见Web安全漏洞，提供权威学习资源（PortSwigger / OWASP）
+            <i class="fas fa-book-open"></i> 精选常见Web安全漏洞，提供权威学习资源
         </div>
     </div>
 
