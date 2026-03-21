@@ -34,34 +34,29 @@
         }
         .vuln-card {
             background: white;
-            border-radius: 18px;
-            padding: 35px;
-            margin-bottom: 50px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
             height: 100%;
             position: relative;
-            overflow: hidden;
         }
-        .vuln-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-            border-radius: 18px 18px 0 0;
+        .vuln-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border-color: #667eea;
         }
         .row {
-            margin-left: -20px;
-            margin-right: -20px;
+            margin-left: -15px;
+            margin-right: -15px;
         }
-        .col-lg-4,
-        .col-md-6 {
-            padding-left: 20px;
-            padding-right: 20px;
+        .col-lg-3,
+        .col-md-4,
+        .col-sm-6 {
+            padding-left: 15px;
+            padding-right: 15px;
         }
         .footer {
             text-align: center;
@@ -69,49 +64,42 @@
             color: #666;
             margin-top: 60px;
         }
-        .vuln-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 45px rgba(0,0,0,0.15);
-            border-color: rgba(102, 126, 234, 0.3);
-        }
         .vuln-card .icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
+            font-size: 20px;
+            margin-bottom: 15px;
+            background: #667eea;
+            color: white;
         }
         .vuln-card h5 {
             font-weight: 600;
             margin-bottom: 10px;
             color: #333;
+            font-size: 1.1rem;
         }
         .vuln-card p {
             color: #666;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             margin-bottom: 15px;
+            line-height: 1.4;
         }
         .vuln-card .btn {
-            border-radius: 25px;
-            padding: 8px 25px;
+            border-radius: 4px;
+            padding: 6px 20px;
             font-weight: 500;
+            font-size: 0.85rem;
+            background: #667eea;
+            border: none;
+            color: white;
         }
-        .icon-auth { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .icon-xss { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .icon-logic { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .icon-upload { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
-        .icon-rce { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-        .icon-sqli { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
-        .icon-lfi { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
-        .icon-xxe { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
-        .icon-ssrf { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
-        .icon-csrf { background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); }
-        .icon-unserialize { background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); }
+        .vuln-card .btn:hover {
+            background: #5a6fd8;
+        }
         .footer a {
             color: #667eea;
             text-decoration: none;
@@ -136,101 +124,112 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
-                    <div class="icon icon-auth text-white">🔐</div>
-                    <h5>身份认证漏洞 <span class="badge badge-level level-medium">中级</span></h5>
-                    <p>包含弱密码、暴力破解、认证绕过、会话管理等身份认证相关漏洞场景。</p>
-                    <a href="auth/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="vuln-card">
-                    <div class="icon icon-xss text-white">📜</div>
-                    <h5>XSS跨站脚本 <span class="badge badge-level level-medium">中级</span></h5>
-                    <p>反射型XSS、存储型XSS、DOM型XSS等多种跨站脚本攻击场景。</p>
-                    <a href="xss/" class="btn btn-outline-primary">进入演练</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-logic text-white">🧩</div>
                     <h5>逻辑漏洞 <span class="badge badge-level level-high">高级</span></h5>
-                    <p>越权访问、条件竞争、业务逻辑缺陷等逻辑层面的安全漏洞。</p>
+                    <p>包含水平/垂直越权、并发漏洞、支付篡改、短信轰炸、任意密码重置、未授权访问等逻辑漏洞演示。</p>
                     <a href="logic/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
+                    <div class="icon icon-xss text-white">📜</div>
+                    <h5>XSS跨站脚本 <span class="badge badge-level level-medium">中级</span></h5>
+                    <p>演示反射型、存储型、DOM型XSS及常见绕过技术。</p>
+                    <a href="xss/" class="btn btn-outline-primary">进入演练</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
+                    <div class="icon icon-auth text-white">🔐</div>
+                    <h5>身份认证漏洞 <span class="badge badge-level level-medium">中级</span></h5>
+                    <p>演示弱密码、未授权访问、越权操作、JWT攻击等认证安全问题。</p>
+                    <a href="auth/" class="btn btn-outline-primary">进入演练</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-upload text-white">📁</div>
                     <h5>文件上传漏洞 <span class="badge badge-level level-high">高级</span></h5>
-                    <p>绕过前端验证、MIME类型验证、扩展名验证等文件上传攻击场景。</p>
+                    <p>演示不安全的文件上传功能如何导致服务器入侵。</p>
                     <a href="upload/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-rce text-white">⚡</div>
                     <h5>命令/代码执行 <span class="badge badge-level level-high">高级</span></h5>
-                    <p>远程命令执行(RCE)、代码注入、eval注入等高危漏洞场景。</p>
+                    <p>演示系统命令执行、PHP代码执行及常见绕过技术。</p>
                     <a href="rce/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-sqli text-white">💉</div>
                     <h5>SQL注入漏洞 <span class="badge badge-level level-high">高级</span></h5>
-                    <p>联合注入、报错注入、盲注、二次注入等数据库攻击技术。</p>
+                    <p>演示过滤的SQL查询如何泄露或修改数据库信息。</p>
                     <a href="sqli/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-lfi text-white">📂</div>
                     <h5>文件包含漏洞 <span class="badge badge-level level-medium">中级</span></h5>
-                    <p>本地文件包含(LFI)、远程文件包含(RFI)、伪协议利用等场景。</p>
+                    <p>演示本地文件包含、远程文件包含及PHP伪协议利用。</p>
                     <a href="lfi/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-xxe text-white">📄</div>
                     <h5>XXE漏洞 <span class="badge badge-level level-high">高级</span></h5>
-                    <p>XML外部实体注入，包含文件读取、SSRF、RCE等利用场景。</p>
+                    <p>演示XML外部实体注入、Blind XXE及内网攻击。</p>
                     <a href="xxe/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-ssrf text-white">🌐</div>
                     <h5>SSRF漏洞 <span class="badge badge-level level-high">高级</span></h5>
-                    <p>服务端请求伪造，内网探测、云元数据获取、协议利用等场景。</p>
+                    <p>演示服务端请求伪造漏洞及利用技术。</p>
                     <a href="ssrf/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-csrf text-white">🔄</div>
                     <h5>CSRF漏洞 <span class="badge badge-level level-medium">中级</span></h5>
-                    <p>跨站请求伪造，包含GET/POST型CSRF、JSONP劫持等场景。</p>
+                    <p>演示跨站请求伪造漏洞及防护技术。</p>
                     <a href="csrf/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="vuln-card">
+                    <div class="badge bg-success text-white position-absolute top-3 right-3" style="font-size: 0.7rem; padding: 4px 10px;">可用</div>
                     <div class="icon icon-unserialize text-white">📦</div>
                     <h5>PHP反序列化 <span class="badge badge-level level-high">高级</span></h5>
-                    <p>PHP对象注入、POP链构造、phar反序列化等高级利用技术。</p>
+                    <p>演示PHP反序列化漏洞及利用技术。</p>
                     <a href="unserialize/" class="btn btn-outline-primary">进入演练</a>
                 </div>
             </div>
