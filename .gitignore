@@ -51,8 +51,11 @@ node_modules/
 # 编译输出
 dist/
 build/
+# 排除assets目录下的min文件（靶场需要）
 *.min.js
 *.min.css
+!assets/**/*.min.js
+!assets/**/*.min.css
 
 # 备份文件
 *.bak

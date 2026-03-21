@@ -1,0 +1,12 @@
+<?php
+$module_name = 'SSRF漏洞';
+$module_icon = '🌐';
+$module_desc = '服务端请求伪造(SSRF)允许攻击者以服务器为跳板访问内部资源。';
+$vulns = [
+    ['name' => '基础SSRF', 'desc' => 'URL参数可控', 'file' => 'basic_ssrf.php', 'level' => 'medium'],
+    ['name' => '内网探测', 'desc' => '探测内网服务和端口', 'file' => 'internal_scan.php', 'level' => 'high'],
+    ['name' => '云元数据', 'desc' => '获取云服务器凭证', 'file' => 'cloud_metadata.php', 'level' => 'high'],
+    ['name' => '协议利用', 'desc' => '利用各种协议', 'file' => 'protocol_ssrf.php', 'level' => 'high'],
+];
+include '../template/module_template.php';
+?>
