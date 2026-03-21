@@ -3,6 +3,7 @@ $module_name = 'XXE漏洞';
 $module_icon = '📄';
 $module_desc = 'XML外部实体注入(XXE)是一种针对XML解析器的攻击，可导致文件读取、SSRF等。';
 $vulns = [
+    ['name' => 'XML基础与XXE原理', 'desc' => '学习XML基础知识和XXE漏洞原理', 'file' => '00_xml_basics.php', 'level' => 'low'],
     ['name' => '文件读取', 'desc' => '读取服务器本地文件', 'file' => '01_file_read.php', 'level' => 'low'],
     ['name' => 'SSRF利用', 'desc' => '通过XXE进行SSRF', 'file' => '02_xxe_ssrf.php', 'level' => 'low'],
     ['name' => '盲XXE', 'desc' => '无回显的XXE利用', 'file' => '03_blind_xxe.php', 'level' => 'medium'],
