@@ -334,6 +334,68 @@ $conn->close();
         </div>
 
         <div class="card">
+            <h3>📚 SQL基础命令</h3>
+            <div class="info-section">
+                <strong>常见SQL增删改查命令：</strong>
+            </div>
+            <div class="sql-code">
+-- 1. 查询数据（SELECT）
+SELECT * FROM users;  -- 查询所有用户
+SELECT id, username FROM users WHERE id > 5;  -- 带条件查询
+
+-- 2. 插入数据（INSERT）
+INSERT INTO users (username, password, email) VALUES ('newuser', 'pass123', 'new@example.com');
+
+-- 3. 更新数据（UPDATE）
+UPDATE users SET password = 'newpass' WHERE id = 1;
+
+-- 4. 删除数据（DELETE）
+DELETE FROM users WHERE id = 2;
+
+-- 5. 创建表（CREATE TABLE）
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL
+);
+
+-- 6. 删除表（DROP TABLE）
+DROP TABLE users;
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🗃️ MySQL元数据库</h3>
+            <div class="info-section">
+                <strong>MySQL系统数据库：</strong><br>
+                <ul>
+                    <li><code>information_schema</code> - 存储数据库结构信息</li>
+                    <li><code>mysql</code> - 存储MySQL系统信息</li>
+                    <li><code>performance_schema</code> - 存储性能数据</li>
+                    <li><code>sys</code> - 系统视图</li>
+                </ul>
+            </div>
+            <div class="sql-code">
+-- 关键元数据表查询
+
+-- 1. 查询所有数据库
+SELECT schema_name FROM information_schema.schemata;
+
+-- 2. 查询当前数据库的所有表
+SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE();
+
+-- 3. 查询表的列信息
+SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'users';
+
+-- 4. 查询MySQL版本
+SELECT version();
+
+-- 5. 查询用户权限
+SELECT user, host FROM mysql.user;
+            </div>
+        </div>
+
+        <div class="card">
             <h3>🛡️ 防御方法</h3>
             <div class="info-section">
                 1. <strong>参数化查询：</strong>使用预处理语句和绑定参数<br>
