@@ -64,7 +64,7 @@
             severityLabel: "高危",
             link: "sqli/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 8
         },
         {
             name: "跨站脚本 (XSS)",
@@ -74,7 +74,7 @@
             severityLabel: "高危",
             link: "xss/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 5
         },
         {
             name: "逻辑漏洞 (Logic)",
