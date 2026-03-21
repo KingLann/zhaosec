@@ -13,6 +13,8 @@ if (isset($_POST['xml'])) {
     
     // 漏洞：使用simplexml_load_string解析XML，没有禁用外部实体
     try {
+        // 确保启用外部实体解析
+        libxml_disable_entity_loader(false);
         $simplexml = simplexml_load_string($xml);
         if ($simplexml) {
             $result = 'XML解析成功，但无回显结果';
@@ -25,7 +27,8 @@ if (isset($_POST['xml'])) {
 }
 
 // 页面内容
-$content = '<div class="card">
+$content = <<<'EOT'
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🕵️ 盲XXE</h5>
         </div>
@@ -109,7 +112,8 @@ $content = '<div class="card">
                         <button type="submit" class="btn btn-danger">提交</button>
                     </form>
 
-                    ';
+                    
+EOT;
 
 if ($error) {
     $content .= '<div class="alert alert-danger">
@@ -126,7 +130,8 @@ if ($result) {
                     </div>';
 }
 
-$content .= '                </div>
+$content .= <<<'EOT'
+                </div>
             </div>
 
             <div class="card">
@@ -145,7 +150,8 @@ $content .= '                </div>
                 </div>
             </div>
         </div>
-    </div>';
+    </div>
+EOT;
 
 // 包含模板
 include '../template/module_template.php';
