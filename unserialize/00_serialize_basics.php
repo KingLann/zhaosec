@@ -94,14 +94,157 @@ echo $unserialized->greet(); // 同样输出: Hello, my name is John</code></pre
                         </div>
                     </div>
 
-                    <h5 class="mb-3">魔术方法</h5>
-                    <p>PHP提供了一些特殊的方法，在对象序列化和反序列化过程中会被自动调用：</p>
-                    <ul>
-                        <li><code>__sleep()</code> - 序列化前调用</li>
-                        <li><code>__wakeup()</code> - 反序列化后调用</li>
-                        <li><code>__destruct()</code> - 对象销毁时调用</li>
-                        <li><code>__toString()</code> - 对象被当作字符串时调用</li>
-                    </ul>
+                    <h5 class="mb-3">PHP魔术方法</h5>
+                    <p>PHP提供了一系列特殊的魔术方法，这些方法在特定情况下会被自动调用：</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>魔术方法</th>
+                                    <th>触发时机</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>__construct()</code></td>
+                                    <td>创建对象时</td>
+                                    <td>构造函数，初始化对象属性</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__destruct()</code></td>
+                                    <td>对象销毁时</td>
+                                    <td>析构函数，清理资源</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__sleep()</code></td>
+                                    <td>序列化前</td>
+                                    <td>返回需要序列化的属性数组</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__wakeup()</code></td>
+                                    <td>反序列化后</td>
+                                    <td>恢复对象状态</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__toString()</code></td>
+                                    <td>对象被当作字符串时</td>
+                                    <td>返回对象的字符串表示</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__call()</code></td>
+                                    <td>调用不存在的方法时</td>
+                                    <td>处理方法调用</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__callStatic()</code></td>
+                                    <td>调用不存在的静态方法时</td>
+                                    <td>处理静态方法调用</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__get()</code></td>
+                                    <td>获取不存在的属性时</td>
+                                    <td>处理属性读取</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__set()</code></td>
+                                    <td>设置不存在的属性时</td>
+                                    <td>处理属性写入</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__isset()</code></td>
+                                    <td>使用isset()检查不存在的属性时</td>
+                                    <td>处理属性存在性检查</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__unset()</code></td>
+                                    <td>使用unset()删除不存在的属性时</td>
+                                    <td>处理属性删除</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__invoke()</code></td>
+                                    <td>将对象当作函数调用时</td>
+                                    <td>处理对象函数调用</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__set_state()</code></td>
+                                    <td>使用var_export()导出类时</td>
+                                    <td>处理类导出</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__clone()</code></td>
+                                    <td>克隆对象时</td>
+                                    <td>处理对象克隆</td>
+                                </tr>
+                                <tr>
+                                    <td><code>__debugInfo()</code></td>
+                                    <td>使用var_dump()打印对象时</td>
+                                    <td>控制调试信息输出</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5 class="mb-3 mt-4">魔术方法示例</h5>
+                    <pre class="bg-dark text-light p-3 rounded"><code>class MagicDemo {
+    private $data = [];
+    
+    public function __construct() {
+        echo "__construct() called\n";
+    }
+    
+    public function __destruct() {
+        echo "__destruct() called\n";
+    }
+    
+    public function __sleep() {
+        echo "__sleep() called\n";
+        return ['data']; // 只序列化data属性
+    }
+    
+    public function __wakeup() {
+        echo "__wakeup() called\n";
+        // 恢复对象状态
+    }
+    
+    public function __toString() {
+        return "MagicDemo object";
+    }
+    
+    public function __call($name, $arguments) {
+        echo "__call() called for method: $name\n";
+    }
+    
+    public function __get($name) {
+        echo "__get() called for property: $name\n";
+        return $this->data[$name] ?? null;
+    }
+    
+    public function __set($name, $value) {
+        echo "__set() called for property: $name\n";
+        $this->data[$name] = $value;
+    }
+    
+    public function __invoke() {
+        echo "__invoke() called\n";
+        return "Object called as function";
+    }
+}
+
+// 测试魔术方法
+$obj = new MagicDemo(); // __construct()
+$obj->nonExistentMethod(); // __call()
+$obj->nonExistentProperty = "value"; // __set()
+echo $obj->nonExistentProperty; // __get()
+echo $obj; // __toString()
+$result = $obj(); // __invoke()
+
+// 序列化和反序列化
+$serialized = serialize($obj); // __sleep()
+echo "Serialized: $serialized\n";
+$unserialized = unserialize($serialized); // __wakeup()
+// 脚本结束时会调用__destruct()</code></pre>
 
                     <h5 class="mb-3 mt-4">序列化格式</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>// 对象序列化格式
