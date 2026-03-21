@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Web安全漏洞导航 | 漏洞学习与防御指南</title>
     <!-- Font Awesome 6 (免费图标库) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
     <!-- 本地样式文件 -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -13,7 +13,7 @@
 <div class="container">
     <div class="header">
         <h1>
-            <i class="fas fa-shield-hog"></i> 
+            <i class="fas fa-shield-alt"></i> 
             Web安全漏洞导航
         </h1>
         <div class="subhead">OWASP Top 10 & 关键风险 · 学习 · 防御 · 渗透测试指南</div>
