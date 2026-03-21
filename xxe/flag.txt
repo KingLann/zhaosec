@@ -1,0 +1,7 @@
+ZHAOSEC{XXE_FILE_READ_SUCCESS_2026}
+
+Congratulations! You have successfully exploited the XXE vulnerability and read the flag file.
+
+This demonstrates that XXE vulnerabilities can be used to read sensitive files on the server.
+
+Remember to always implement proper XML parsing security in your applications.

