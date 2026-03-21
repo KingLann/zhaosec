@@ -36,11 +36,20 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             border: none;
             height: 100%;
+        }
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+        .col-lg-4,
+        .col-md-6 {
+            padding-left: 15px;
+            padding-right: 15px;
         }
         .vuln-card:hover {
             transform: translateY(-5px);
