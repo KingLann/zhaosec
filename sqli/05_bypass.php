@@ -35,8 +35,7 @@ function initDatabase($conn) {
     $conn->query($insert_users_sql);
 }
 
-// 初始化数据库
-initDatabase($conn);
+// 数据库已在init_db.php中初始化
 
 // 简单的WAF过滤（可被绕过）
 function waf($input) {

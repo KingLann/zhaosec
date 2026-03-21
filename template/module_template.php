@@ -66,6 +66,7 @@
         .level-low { background: #d4edda; color: #155724; }
         .level-medium { background: #fff3cd; color: #856404; }
         .level-high { background: #f8d7da; color: #721c24; }
+        .level-info { background: #d1ecf1; color: #0c5460; }
         .back-link {
             color: white;
             text-decoration: none;
@@ -112,7 +113,7 @@
                         <?= $index ?>. <?= $vuln['name'] ?>
                         <?php 
                         $level_class = 'level-' . $vuln['level'];
-                        $level_text = $vuln['level'] == 'low' ? '初级' : ($vuln['level'] == 'medium' ? '中级' : '高级');
+                        $level_text = $vuln['level'] == 'low' ? '初级' : ($vuln['level'] == 'medium' ? '中级' : ($vuln['level'] == 'info' ? '信息' : '高级'));
                         ?>
                         <span class="badge badge-level <?= $level_class ?>"><?= $level_text ?></span>
                     </h5>
