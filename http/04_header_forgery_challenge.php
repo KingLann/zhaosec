@@ -29,12 +29,12 @@ $success = false;
 switch ($level) {
     case 0:
         // 第1关：添加User-Agent头
-        if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Mozilla/5.0') !== false) {
+        if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'zhaowendao') !== false) {
             $_SESSION['challenge_level'] = 1;
             $message = '🎉 第1关通过！User-Agent头验证成功';
             $success = true;
         } else {
-            $message = '👋 欢迎来到HTTP头伪造挑战！\n第1关：请添加User-Agent头，值包含 "Mozilla/5.0"';
+            $message = '👋 欢迎来到HTTP头伪造挑战！\n第1关：请添加User-Agent头，值包含 "zhaowendao"';
         }
         break;
         
@@ -148,7 +148,7 @@ $content .= '</code></pre>
 
                     <h5 class="mb-3 mt-4">cURL示例</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>curl -X GET "http://localhost/zhaosec/http/04_header_forgery_challenge.php" \
-  -H "User-Agent: Mozilla/5.0" \
+  -H "User-Agent: Mozilla/5.0 zhaowendao" \
   -H "Referer: https://example.com" \
   -H "X-Forwarded-For: 127.0.0.1" \
   -H "Custom-Authorization: Bearer secret_token_123" \
