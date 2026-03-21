@@ -44,7 +44,7 @@
 </div>
 
 <script>
-    // ----- 常见Web安全漏洞数据集 (名称, 描述, 图标, 风险等级, 学习链接)
+    // ----- 常见Web安全漏洞数据集 (名称, 描述, 图标, 风险等级, 学习链接, 漏洞场景数量)
     const vulnerabilities = [
         {
             name: "身份认证漏洞 (Auth)",
@@ -52,8 +52,9 @@
             icon: "fas fa-user-lock",
             severity: "high",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/authentication",
-            linkText: "认证安全指南"
+            link: "auth/index.php",
+            linkText: "进入演练",
+            count: 6
         },
         {
             name: "SQL 注入 (SQLi)",
@@ -61,8 +62,9 @@
             icon: "fas fa-database",
             severity: "critical",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/sql-injection",
-            linkText: "深入SQL注入"
+            link: "sqli/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "跨站脚本 (XSS)",
@@ -70,8 +72,9 @@
             icon: "fas fa-code",
             severity: "high",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/cross-site-scripting",
-            linkText: "XSS攻防指南"
+            link: "xss/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "逻辑漏洞 (Logic)",
@@ -79,8 +82,9 @@
             icon: "fas fa-brain",
             severity: "medium",
             severityLabel: "中危",
-            link: "https://portswigger.net/web-security/logic-flaws",
-            linkText: "逻辑漏洞分析"
+            link: "logic/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "跨站请求伪造 (CSRF)",
@@ -88,8 +92,9 @@
             icon: "fas fa-user-secret",
             severity: "medium",
             severityLabel: "中危",
-            link: "https://portswigger.net/web-security/csrf",
-            linkText: "CSRF深度剖析"
+            link: "csrf/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "服务端请求伪造 (SSRF)",
@@ -97,8 +102,9 @@
             icon: "fas fa-server",
             severity: "high",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/ssrf",
-            linkText: "SSRF漏洞详解"
+            link: "ssrf/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "XML外部实体注入 (XXE)",
@@ -106,8 +112,9 @@
             icon: "fas fa-file-code",
             severity: "high",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/xxe",
-            linkText: "XXE攻击与防御"
+            link: "xxe/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "文件包含漏洞 (LFI)",
@@ -115,8 +122,9 @@
             icon: "fas fa-file-invoice",
             severity: "high",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/file-path-traversal",
-            linkText: "文件包含漏洞"
+            link: "lfi/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "不安全直接对象引用 (IDOR)",
@@ -124,8 +132,9 @@
             icon: "fas fa-lock-open",
             severity: "medium",
             severityLabel: "中危",
-            link: "https://portswigger.net/web-security/access-control/idor",
-            linkText: "IDOR漏洞案例"
+            link: "logic/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "恶意文件上传漏洞",
@@ -133,8 +142,9 @@
             icon: "fas fa-upload",
             severity: "critical",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/file-upload",
-            linkText: "文件上传安全"
+            link: "upload/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "命令注入 (Command Injection)",
@@ -142,8 +152,9 @@
             icon: "fas fa-terminal",
             severity: "critical",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/os-command-injection",
-            linkText: "命令注入实战"
+            link: "rce/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "安全配置错误",
@@ -152,7 +163,8 @@
             severity: "medium",
             severityLabel: "中危",
             link: "https://portswigger.net/web-security/configuration",
-            linkText: "安全加固指南"
+            linkText: "安全加固指南",
+            count: 0
         },
         {
             name: "敏感数据暴露",
@@ -161,7 +173,8 @@
             severity: "high",
             severityLabel: "高危",
             link: "https://portswigger.net/web-security/cryptographic",
-            linkText: "加密与数据保护"
+            linkText: "加密与数据保护",
+            count: 0
         },
         {
             name: "不安全的反序列化",
@@ -169,8 +182,9 @@
             icon: "fas fa-box-open",
             severity: "high",
             severityLabel: "高危",
-            link: "https://portswigger.net/web-security/deserialization",
-            linkText: "反序列化漏洞"
+            link: "unserialize/index.php",
+            linkText: "进入演练",
+            count: 4
         },
         {
             name: "开放重定向 (Open Redirect)",
@@ -179,7 +193,8 @@
             severity: "medium",
             severityLabel: "中危",
             link: "https://portswigger.net/web-security/dom-based/open-redirect",
-            linkText: "重定向漏洞详解"
+            linkText: "重定向漏洞详解",
+            count: 0
         }
     ];
 
@@ -222,6 +237,7 @@
         const cardsHTML = filteredVulns.map(vul => {
             const severityClass = getSeverityClass(vul.severity);
             // 确保链接安全：target="_blank" + rel
+            const countBadge = vul.count > 0 ? `<div class="count-badge">${vul.count}个场景</div>` : '';
             return `
                 <div class="card">
                     <div class="card-content">
@@ -230,10 +246,11 @@
                                 <i class="${vul.icon}"></i>
                             </div>
                             <div class="badge ${severityClass}">${vul.severityLabel}</div>
+                            ${countBadge}
                         </div>
                         <div class="card-title">${escapeHtml(vul.name)}</div>
                         <div class="card-desc">${escapeHtml(vul.description)}</div>
-                        <a href="${vul.link}" class="card-link" target="_blank" rel="noopener noreferrer">
+                        <a href="${vul.link}" class="card-link" ${vul.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}>
                             ${escapeHtml(vul.linkText)} <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>

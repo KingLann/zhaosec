@@ -216,6 +216,16 @@ body {
     color: #2a6f8f;
 }
 
+.count-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 40px;
+    background: #d4edda;
+    color: #155724;
+    letter-spacing: 0.3px;
+}
+
 .card-title {
     font-size: 1.45rem;
     font-weight: 700;
