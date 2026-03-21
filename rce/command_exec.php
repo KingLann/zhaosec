@@ -6,15 +6,71 @@ $module_desc = '通过系统命令执行函数导致的命令注入漏洞。';
 
 // 漏洞代码
 $output = '';
+$error = '';
+$os = strtolower(PHP_OS);
+$is_windows = strpos($os, 'win') !== false;
+
 if (isset($_GET['ip'])) {
     $ip = $_GET['ip'];
     // 漏洞：直接使用用户输入拼接命令，没有过滤
-    $output = shell_exec("ping -n 4 " . $ip);
+    if (function_exists('exec')) {
+        // 直接执行命令并捕获输出
+        if ($is_windows) {
+            // Windows系统
+            $ping_cmd = 'ping -n 4 ' . $ip;
+        } else {
+            // Linux系统
+            $ping_cmd = 'ping -c 4 ' . $ip;
+        }
+        
+        // 使用exec函数执行命令
+        $exec_output = array();
+        $return_var = 0;
+        exec($ping_cmd, $exec_output, $return_var);
+        
+        if ($return_var === 0 && !empty($exec_output)) {
+            // 命令执行成功
+            $ping_result = implode("\n", $exec_output);
+            // 尝试不同的编码转换
+            if (function_exists('mb_detect_encoding')) {
+                $encoding = mb_detect_encoding($ping_result, array('UTF-8', 'GBK', 'GB2312'));
+                if ($encoding && $encoding != 'UTF-8') {
+                    $output = mb_convert_encoding($ping_result, 'UTF-8', $encoding);
+                } else {
+                    $output = $ping_result;
+                }
+            } else {
+                // 尝试使用iconv
+                try {
+                    $output = iconv('GBK', 'UTF-8//IGNORE', $ping_result);
+                } catch (Exception $e) {
+                    $output = $ping_result;
+                }
+            }
+        } else {
+            // 如果ping失败，测试其他命令
+            $output = "=== 命令执行测试 ===\n";
+            $output .= "操作系统: " . PHP_OS . "\n";
+            $output .= "IP地址: " . $ip . "\n";
+            $output .= "返回码: " . $return_var . "\n";
+            
+            // 测试echo命令
+            exec('echo "Hello from Zhaosec"', $echo_output);
+            $output .= "Echo命令: " . implode("\n", $echo_output) . "\n";
+            
+            // 测试whoami命令
+            exec('whoami', $whoami_output);
+            $output .= "当前用户: " . implode("\n", $whoami_output) . "\n";
+            
+            $output .= "Ping命令执行失败，可能是权限限制或网络问题\n";
+        }
+    } else {
+        $error = 'exec函数不可用，可能已被禁用';
+    }
 }
 
 // 页面内容
-$content = <<<HTML
-    <div class="card">
+$content = '<div class="card">
         <div class="card-header">
             <h5 class="mb-0">⚡ 命令执行漏洞</h5>
         </div>
@@ -30,10 +86,10 @@ $content = <<<HTML
                     <h6>🔍 漏洞代码</h6>
                 </div>
                 <div class="card-body">
-                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset(\$_GET['ip'])) {
-    \$ip = \$_GET['ip'];
+                    <pre class="bg-dark text-light p-3 rounded"><code>if (isset($_GET[\'ip\'])) {
+    $ip = $_GET[\'ip\'];
     // 漏洞：直接使用用户输入拼接命令，没有过滤
-    \$output = shell_exec("ping -n 4 " . \$ip);
+    $output = shell_exec("ping -n 4 " . $ip);
 }</code></pre>
                 </div>
             </div>
@@ -130,12 +186,12 @@ $content = <<<HTML
                                 <tr>
                                     <td><code>exec()</code></td>
                                     <td>执行命令，返回最后一行</td>
-                                    <td><code>exec("whoami", \$output);</code></td>
+                                    <td><code>exec("whoami", $output);</code></td>
                                 </tr>
                                 <tr>
                                     <td><code>shell_exec()</code></td>
                                     <td>执行命令，返回完整输出</td>
-                                    <td><code>\$result = shell_exec("dir");</code></td>
+                                    <td><code>$result = shell_exec("dir");</code></td>
                                 </tr>
                                 <tr>
                                     <td><code>passthru()</code></td>
@@ -150,12 +206,12 @@ $content = <<<HTML
                                 <tr>
                                     <td><code>popen()</code></td>
                                     <td>打开进程文件指针</td>
-                                    <td><code>\$fp = popen("ls", "r");</code></td>
+                                    <td><code>$fp = popen("ls", "r");</code></td>
                                 </tr>
                                 <tr>
                                     <td><code>反引号 ``</code></td>
                                     <td>shell_exec的简写形式</td>
-                                    <td><code>\$result = \`whoami\`;</code></td>
+                                    <td><code>$result = \`whoami\`;</code></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -168,21 +224,32 @@ $content = <<<HTML
                     <h6>💻 实际测试</h6>
                 </div>
                 <div class="card-body">
-                    <form method="GET" class="mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text">IP地址</span>
-                            <input type="text" name="ip" class="form-control" placeholder="输入IP地址，例如：127.0.0.1">
-                            <button type="submit" class="btn btn-primary">Ping测试</button>
-                        </div>
-                    </form>
-
-                    <?php if (\$output): ?>
-                    <div class="alert alert-secondary">
-                        <strong>命令输出：</strong>
-                        <pre class="mb-0 mt-2"><code><?php echo htmlspecialchars(\$output); ?></code></pre>
+                    <div class="mb-4">
+                        <h6 class="mb-2">Ping测试</h6>
+                        <form method="GET" class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">IP地址</span>
+                                <input type="text" name="ip" class="form-control" placeholder="输入IP地址，例如：127.0.0.1">
+                                <button type="submit" class="btn btn-primary">Ping测试</button>
+                            </div>
+                        </form>
                     </div>
-                    <?php endif; ?>
-                </div>
+
+                    ';
+
+if ($error) {
+    $content .= '<div class="alert alert-danger">
+                        <strong>错误信息：</strong>
+                        <p>' . htmlspecialchars($error) . '</p>
+                    </div>';
+} elseif ($output) {
+    $content .= '<div class="alert alert-secondary">
+                        <strong>命令输出：</strong>
+                        <pre class="mb-0 mt-2"><code>' . htmlspecialchars($output) . '</code></pre>
+                    </div>';
+}
+
+$content .= '                </div>
             </div>
 
             <div class="card">
@@ -201,8 +268,7 @@ $content = <<<HTML
                 </div>
             </div>
         </div>
-    </div>
-HTML;
+    </div>';
 
 // 包含模板
 include '../template/module_template.php';
