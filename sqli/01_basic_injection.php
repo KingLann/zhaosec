@@ -339,28 +339,28 @@ $conn->close();
                 <strong>常见SQL增删改查命令：</strong>
             </div>
             <div class="sql-code">
--- 1. 查询数据（SELECT）
-SELECT * FROM users;  -- 查询所有用户
-SELECT id, username FROM users WHERE id > 5;  -- 带条件查询
-
--- 2. 插入数据（INSERT）
-INSERT INTO users (username, password, email) VALUES ('newuser', 'pass123', 'new@example.com');
-
--- 3. 更新数据（UPDATE）
-UPDATE users SET password = 'newpass' WHERE id = 1;
-
--- 4. 删除数据（DELETE）
-DELETE FROM users WHERE id = 2;
-
--- 5. 创建表（CREATE TABLE）
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL
-);
-
--- 6. 删除表（DROP TABLE）
-DROP TABLE users;
+-- 1. 查询数据（SELECT）<br>
+SELECT * FROM users;  -- 查询所有用户<br>
+SELECT id, username FROM users WHERE id > 5;  -- 带条件查询<br>
+<br>
+-- 2. 插入数据（INSERT）<br>
+INSERT INTO users (username, password, email) VALUES ('newuser', 'pass123', 'new@example.com');<br>
+<br>
+-- 3. 更新数据（UPDATE）<br>
+UPDATE users SET password = 'newpass' WHERE id = 1;<br>
+<br>
+-- 4. 删除数据（DELETE）<br>
+DELETE FROM users WHERE id = 2;<br>
+<br>
+-- 5. 创建表（CREATE TABLE）<br>
+CREATE TABLE users (<br>
+    id INT AUTO_INCREMENT PRIMARY KEY,<br>
+    username VARCHAR(50) NOT NULL,<br>
+    password VARCHAR(50) NOT NULL<br>
+);<br>
+<br>
+-- 6. 删除表（DROP TABLE）<br>
+DROP TABLE users;<br>
             </div>
         </div>
 
@@ -376,22 +376,22 @@ DROP TABLE users;
                 </ul>
             </div>
             <div class="sql-code">
--- 关键元数据表查询
-
--- 1. 查询所有数据库
-SELECT schema_name FROM information_schema.schemata;
-
--- 2. 查询当前数据库的所有表
-SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE();
-
--- 3. 查询表的列信息
+-- 关键元数据表查询<br>
+<br>
+-- 1. 查询所有数据库<br>
+SELECT schema_name FROM information_schema.schemata;<br>
+<br>
+-- 2. 查询当前数据库的所有表<br>
+SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE();<br>
+<br>
+-- 3. 查询表的列信息<br>
 SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'users';
-
--- 4. 查询MySQL版本
-SELECT version();
-
--- 5. 查询用户权限
-SELECT user, host FROM mysql.user;
+<br>
+-- 4. 查询MySQL版本<br>
+SELECT version();<br>
+<br>
+-- 5. 查询用户权限<br>
+SELECT user, host FROM mysql.user;<br>
             </div>
         </div>
 
