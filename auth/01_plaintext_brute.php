@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($users[$username]) && $users[$username] === $password) {
         $_SESSION['logged_in'] = true;
         $_SESSION['username'] = $username;
+        $_SESSION['flag'] = 'FLAG{Plaintext_Password_Brute_Force_Success}';
+        $_SESSION['vuln_name'] = '明文传输密码爆破';
         header('Location: success.php');
         exit;
     } else {

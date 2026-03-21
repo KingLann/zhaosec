@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($users[$username] === $encrypted_input) {
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $username;
+            $_SESSION['flag'] = 'FLAG{AES_Encryption_Client_Side_Bypass}';
+            $_SESSION['vuln_name'] = '前端AES加密爆破';
             header('Location: success.php');
             exit;
         }

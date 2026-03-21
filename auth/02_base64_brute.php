@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($users[$username]) && $users[$username] === base64_encode($password)) {
         $_SESSION['logged_in'] = true;
         $_SESSION['username'] = $username;
+        $_SESSION['flag'] = 'FLAG{Base64_Encoding_Bypass_Success}';
+        $_SESSION['vuln_name'] = 'Base64编码爆破';
         header('Location: success.php');
         exit;
     } else {
