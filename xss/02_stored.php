@@ -1,25 +1,37 @@
 <?php
-// 存储型XSS漏洞演示
-session_start();
+// 存储型XSS漏洞演示 - 使用文件持久化存储
+$comments_file = __DIR__ . '/data/comments.json';
 
-// 初始化留言数据
-if (!isset($_SESSION['comments'])) {
-    $_SESSION['comments'] = [
+// 确保数据目录存在
+if (!is_dir(__DIR__ . '/data')) {
+    mkdir(__DIR__ . '/data', 0755, true);
+}
+
+// 初始化留言数据（如果不存在）
+if (!file_exists($comments_file)) {
+    $default_comments = [
         ['user' => '管理员', 'content' => '欢迎来到留言板，请大家文明发言！', 'time' => '2024-01-01 10:00'],
         ['user' => '游客A', 'content' => '这个网站真不错！', 'time' => '2024-01-01 11:30'],
     ];
+    file_put_contents($comments_file, json_encode($default_comments, JSON_UNESCAPED_UNICODE));
 }
+
+// 读取留言数据
+$comments = json_decode(file_get_contents($comments_file), true) ?: [];
 
 // 处理新留言
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['content'])) {
     $username = $_POST['username'];
     $content = $_POST['content'];
     
-    $_SESSION['comments'][] = [
+    $comments[] = [
         'user' => $username,
         'content' => $content,
         'time' => date('Y-m-d H:i:s')
     ];
+    
+    // 保存到文件
+    file_put_contents($comments_file, json_encode($comments, JSON_UNESCAPED_UNICODE));
     
     header('Location: 02_stored.php');
     exit;
@@ -27,12 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['c
 
 // 清空留言
 if (isset($_GET['clear'])) {
-    $_SESSION['comments'] = [];
+    file_put_contents($comments_file, json_encode([], JSON_UNESCAPED_UNICODE));
     header('Location: 02_stored.php');
     exit;
 }
-
-$comments = $_SESSION['comments'];
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
