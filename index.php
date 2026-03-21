@@ -34,23 +34,34 @@
         }
         .vuln-card {
             background: white;
-            border-radius: 18px;
-            padding: 45px;
-            margin-bottom: 55px;
-            box-shadow: var(--card-shadow);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
             transition: all 0.3s ease;
-            border: none;
+            border: 1px solid rgba(0,0,0,0.05);
             height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .vuln-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 20px 20px 0 0;
         }
         .row {
-            margin-left: -25px;
-            margin-right: -25px;
-            margin-bottom: 30px;
+            margin-left: -30px;
+            margin-right: -30px;
         }
         .col-lg-4,
         .col-md-6 {
-            padding-left: 25px;
-            padding-right: 25px;
+            padding-left: 30px;
+            padding-right: 30px;
         }
         .footer {
             text-align: center;
@@ -59,18 +70,21 @@
             margin-top: 60px;
         }
         .vuln-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+            border-color: rgba(102, 126, 234, 0.3);
         }
         .vuln-card .icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
         .vuln-card h5 {
             font-weight: 600;
