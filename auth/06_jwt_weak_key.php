@@ -4,12 +4,18 @@ $error = '';
 $token = '';
 $secret_key = 'weak_secret_key_123';
 
-function generateJWT($payload, $secret) {
-    $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+function generateJWT($payload, $secret, $alg = 'HS256') {
+    $header = json_encode(['typ' => 'JWT', 'alg' => $alg]);
     $payload_encoded = base64url_encode(json_encode($payload));
     $header_encoded = base64url_encode($header);
-    $signature = hash_hmac('sha256', $header_encoded . '.' . $payload_encoded, $secret, true);
-    $signature_encoded = base64url_encode($signature);
+    
+    if ($alg === 'none') {
+        $signature_encoded = '';
+    } else {
+        $signature = hash_hmac('sha256', $header_encoded . '.' . $payload_encoded, $secret, true);
+        $signature_encoded = base64url_encode($signature);
+    }
+    
     return $header_encoded . '.' . $payload_encoded . '.' . $signature_encoded;
 }
 
@@ -17,27 +23,17 @@ function base64url_encode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
 
-function verifyJWT($token, $secret) {
-    $parts = explode('.', $token);
-    if (count($parts) !== 3) return false;
-    
-    $header = $parts[0];
-    $payload = $parts[1];
-    $signature = $parts[2];
-    
-    $expected_signature = hash_hmac('sha256', $header . '.' . $payload, $secret, true);
-    $expected_signature_encoded = base64url_encode($expected_signature);
-    
-    return hash_equals($signature, $expected_signature_encoded);
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     
-    if ($username === 'admin') {
+    // 普通用户列表
+    $users = ['user', 'test', 'guest', 'demo'];
+    
+    if (in_array($username, $users)) {
+        // 普通用户登录，生成普通权限token
         $payload = [
-            'user' => 'admin',
-            'role' => 'administrator',
+            'user' => $username,
+            'role' => 'user',
             'exp' => time() + 3600
         ];
         $token = generateJWT($payload, $secret_key);
@@ -46,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: jwt_dashboard.php');
         exit;
     } else {
-        $error = '用户名不存在';
+        $error = '用户名不存在，可用测试账号：user, test, guest, demo';
     }
 }
 ?>
@@ -71,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 500px;
+            max-width: 550px;
             width: 100%;
         }
         .login-container h2 {
@@ -131,6 +127,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 14px;
             color: #2c3e50;
         }
+        .hint {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
         .back-link {
             display: block;
             text-align: center;
@@ -145,22 +150,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>6. 🔐 JWT弱密钥漏洞</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
-            JWT使用弱密钥进行签名，攻击者可以破解密钥后伪造任意token。<br>
+            本系统使用弱密钥进行JWT签名，且存在算法混淆漏洞（alg: none）。<br>
+            普通用户登录后获得低权限token，攻击者可通过破解密钥或alg:none算法伪造admin权限token。<br>
             <br>
-            <strong>测试账号：</strong> admin<br>
-            <br>
-            <strong>利用方式：</strong><br>
-            1. 登录获取JWT token<br>
-            2. 使用工具（如jwt_tool）破解密钥<br>
-            3. 伪造管理员token提升权限
+            <strong>目标：</strong>以普通用户身份登录，然后伪造admin权限token访问管理员功能。
         </div>
+        
+        <div class="hint">
+            <strong>💡 攻击提示：</strong><br>
+            1. 使用普通账号（user/test/guest/demo）登录获取JWT<br>
+            2. 使用工具（如jwt_tool）破解密钥或修改alg为none<br>
+            3. 伪造role为admin的新token<br>
+            4. 替换token访问管理员功能<br>
+            <br>
+            <strong>可用测试账号：</strong> user, test, guest, demo
+        </div>
+        
         <?php if ($error): ?>
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         <form method="POST">
             <div class="form-group">
-                <label for="username">用户名</label>
-                <input type="text" id="username" name="username" value="admin" required>
+                <label for="username">用户名（普通用户）</label>
+                <input type="text" id="username" name="username" placeholder="输入 user, test, guest 或 demo" required>
             </div>
             <button type="submit" class="btn">登录获取JWT</button>
         </form>
