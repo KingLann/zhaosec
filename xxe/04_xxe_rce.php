@@ -34,8 +34,7 @@ function getHostIP() {
     // 默认返回服务器IP
     return $serverIP;
 }
-
-$hostIP = getHostIP();
+$hostIP = gethostbyname(gethostname());
 $targetUrl = "http://{$hostIP}:81";
 
 // 页面内容

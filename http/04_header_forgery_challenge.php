@@ -31,10 +31,11 @@ switch ($level) {
         // 第1关：User-Agent头
         if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'zhaowendao') !== false) {
             $_SESSION['challenge_level'] = 1;
-            $message = '🎉 第1关通过！浏览器标识验证成功\n\nUser-Agent头用于标识客户端类型和版本信息，服务器可以根据这些信息提供不同的内容。';
+            $level = 1;
+            $message = '🎉 第1关通过！浏览器标识验证成功! User-Agent头用于标识客户端类型和版本信息，服务器可以根据这些信息提供不同的内容。';
             $success = true;
         } else {
-            $message = '👋 欢迎来到HTTP头伪造挑战！\n\n第1关：请修改浏览器标识信息，在标识中包含 "zhaowendao"\n\n提示：这个头字段用于告诉服务器你使用的是什么浏览器和操作系统。';
+            $message = '👋 欢迎来到HTTP头伪造挑战！<br>第1关：请修改浏览器标识信息，在标识中包含 "zhaowendao"<br>提示：这个头字段用于告诉服务器你使用的是什么浏览器和操作系统。';
         }
         break;
         
@@ -42,10 +43,11 @@ switch ($level) {
         // 第2关：Referer头
         if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'https://zhaosec.com') {
             $_SESSION['challenge_level'] = 2;
-            $message = '🎉 第2关通过！来源页面验证成功\n\nReferer头用于告诉服务器请求来自哪个页面，常用于跟踪用户来源和防止CSRF攻击。';
+            $level = 2;
+            $message = '🎉 第2关通过！来源页面验证成功! Referer头用于告诉服务器请求来自哪个页面，常用于跟踪用户来源和防止CSRF攻击。';
             $success = true;
         } else {
-            $message = '🔍 第2关：请设置请求的来源页面为 "https://zhaosec.com"\n\n提示：这个头字段记录了用户是从哪个页面链接过来的，服务器可以根据这个信息进行访问控制。';
+            $message = '🔍 第2关：请设置请求的来源页面为 "https://zhaosec.com"<br>提示：这个头字段记录了用户是从哪个页面链接过来的，服务器可以根据这个信息进行访问控制。';
         }
         break;
         
@@ -53,21 +55,23 @@ switch ($level) {
         // 第3关：X-Forwarded-For头
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] === '127.0.0.1') {
             $_SESSION['challenge_level'] = 3;
-            $message = '🎉 第3关通过！客户端IP验证成功\n\nX-Forwarded-For头用于在代理服务器环境中传递真实的客户端IP地址。';
+            $level = 3;
+            $message = '🎉 第3关通过！客户端IP验证成功! X-Forwarded-For头用于在代理服务器环境中传递真实的客户端IP地址。';
             $success = true;
         } else {
-            $message = '🌐 第3关：请设置真实的客户端IP地址为 "127.0.0.1"\n\n提示：当请求通过代理服务器时，这个头字段可以帮助服务器识别原始的客户端IP地址。';
+            $message = '🌐 第3关：请设置真实的客户端IP地址为 "127.0.0.1"<br>提示：当请求通过代理服务器时，这个头字段可以帮助服务器识别原始的客户端IP地址。';
         }
         break;
         
     case 3:
-        // 第4关：Custom-Authorization头
-        if (isset($_SERVER['HTTP_CUSTOM_AUTHORIZATION']) && $_SERVER['HTTP_CUSTOM_AUTHORIZATION'] === 'Bearer zhao_wen_dao') {
+        // 第4关：Authorization头
+        if (isset($_SERVER['HTTP_AUTHORIZATION']) && $_SERVER['HTTP_AUTHORIZATION'] === 'Bearer zhao_wen_dao') {
             $_SESSION['challenge_level'] = 4;
-            $message = '🎉 第4关通过！认证信息验证成功\n\nAuthorization头用于在HTTP请求中传递认证凭证，如Bearer令牌、Basic认证等。';
+            $level = 4;
+            $message = '🎉 第4关通过！认证信息验证成功<br>Authorization头用于在HTTP请求中传递认证凭证，如Bearer令牌、Basic认证等。';
             $success = true;
         } else {
-            $message = '🔐 第4关：请提供认证凭证，格式为 "Bearer zhao_wen_dao"\n\n提示：这个头字段用于向服务器证明你的身份，常见于API调用和需要认证的服务。';
+            $message = '🔐 第4关：请提供认证凭证，格式为 "Bearer zhao_wen_dao"<br>提示：这个头字段用于向服务器证明你的身份，常见于API调用和需要认证的服务。';
         }
         break;
         
@@ -75,19 +79,22 @@ switch ($level) {
         // 第5关：X-Admin-Key头
         if (isset($_SERVER['HTTP_X_ADMIN_KEY']) && $_SERVER['HTTP_X_ADMIN_KEY'] === 'zhao_secret_key') {
             $_SESSION['challenge_level'] = 5;
-            $message = '🎉 第5关通过！管理密钥验证成功\n\nX-前缀的头字段通常是自定义头，用于传递应用程序特定的信息。';
+            $level = 5;
+            $message = '🎉 第5关通过！管理密钥验证成功! X-前缀的头字段通常是自定义头，用于传递应用程序特定的信息，比如X-Admin-Key。';
             $success = true;
         } else {
-            $message = '👑 第5关：请提供管理访问密钥 "zhao_secret_key"\n\n提示：以X-开头的头字段通常是自定义的，用于传递特定应用的配置或认证信息。';
+            $message = '👑 第5关：请提供管理访问密钥 "zhao_secret_key"<br>提示：以X-开头的头字段通常是自定义的，用于传递特定应用的配置或认证信息。';
         }
         break;
         
     case 5:
         // 完成挑战
-        $message = '🏆 恭喜完成所有挑战！\n\nFlag: ' . $_SESSION['flag'] . '\n\n你已经成功掌握了HTTP头伪造技术！\n\n通过这个挑战，你学习了：\n- User-Agent：浏览器标识\n- Referer：来源页面\n- X-Forwarded-For：客户端IP\n- Authorization：认证凭证\n- 自定义头字段\n\n记住：HTTP头可以被轻易伪造，不要仅依赖HTTP头进行安全验证！';
+        $message = '🏆 恭喜完成所有挑战！<br>Flag: ' . $_SESSION['flag'] . '<br>你已经成功掌握了HTTP头伪造技术！<br>通过这个挑战，你学习了：<br>- User-Agent：浏览器标识<br>- Referer：来源页面<br>- X-Forwarded-For：客户端IP<br>- Authorization：认证凭证<br>- 自定义头字段<br>记住：HTTP头可以被轻易伪造，不要仅依赖HTTP头进行安全验证！';
         $success = true;
         break;
 }
+
+$sessionId = session_id();
 
 // 页面内容
 $content = '<div class="card">
@@ -113,7 +120,14 @@ $content = '<div class="card">
                 <div class="card-body">
                     <div class="alert ' . ($success ? 'alert-success' : 'alert-warning') . '">
                         <strong>当前关卡：' . $level . '/5</strong><br>
-                        <pre class="mb-0">' . nl2br($message) . '</pre>
+                        <pre class="mb-0">' . $message . '</pre>
+                    </div>
+
+                    <div class="alert alert-secondary">
+                        <strong>📌 Session信息：</strong><br>
+                        Session ID: <code>' . $sessionId . '</code><br>
+                        Cookie: <code>PHPSESSID=' . $sessionId . '</code><br>
+                        <small class="text-muted">使用cURL时请务必携带此Cookie以保持会话状态</small>
                     </div>
 
                     <div class="mt-4">
@@ -137,28 +151,45 @@ $content .= '</code></pre>
                 </div>
                 <div class="card-body">
                     <h5 class="mb-3">如何伪造HTTP头</h5>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="chrome">
-                            <h6>Chrome开发者工具</h6>
-                            <ol>
-                                <li>打开开发者工具（F12）</li>
-                                <li>切换到 "网络" 标签</li>
-                                <li>刷新页面，找到请求</li>
-                                <li>右键点击请求 → "复制" → "复制为cURL"</li>
-                                <li>在终端中修改cURL命令，添加或修改请求头</li>
-                                <li>执行修改后的命令</li>
-                            </ol>
-                        </div>
-                    </div>';
+                    
+                    <div class="alert alert-warning">
+                        <strong>⚠️ 重要提示：</strong>使用cURL时必须携带Session Cookie，否则会话状态会丢失！
+                    </div>
 
-// 只有通关后才显示cURL示例
-if ($level === 5) {
-    $content .= '                    <h5 class="mb-3 mt-4">cURL示例</h5>
+                    <h6>方法一：使用Burp Suite</h6>
+                    <ol>
+                        <li>配置浏览器代理指向Burp Suite</li>
+                        <li>开启Burp Suite的拦截功能</li>
+                        <li>刷新页面，拦截请求</li>
+                        <li>在请求头中添加或修改需要的头字段</li>
+                        <li>点击 "Forward" 发送修改后的请求</li>
+                    </ol>
+
+                    <h6 class="mt-3">方法二：使用浏览器开发者工具</h6>
+                    <ol>
+                        <li>打开开发者工具（F12）</li>
+                        <li>切换到 "网络" 标签</li>
+                        <li>刷新页面，找到请求</li>
+                        <li>右键点击请求 → "复制" → "复制为cURL"</li>
+                        <li>在终端中修改cURL命令，添加或修改请求头</li>
+                        <li>执行修改后的命令（已自动包含Cookie）</li>
+                    </ol>
+
+                    <h6 class="mt-3">方法三：手动构造cURL命令</h6>
+                    <p>当前关卡cURL命令模板：</p>
                     <pre class="bg-dark text-light p-3 rounded"><code>curl -X GET "http://localhost/zhaosec/http/04_header_forgery_challenge.php" \
+  -H "Cookie: PHPSESSID=' . $sessionId . '" \
+  -H "User-Agent: Mozilla/5.0 zhaowendao"</code></pre>';
+
+// 只有通关后才显示完整cURL示例
+if ($level === 5) {
+    $content .= '                    <h5 class="mb-3 mt-4">完整cURL示例</h5>
+                    <pre class="bg-dark text-light p-3 rounded"><code>curl -X GET "http://localhost/zhaosec/http/04_header_forgery_challenge.php" \
+  -H "Cookie: PHPSESSID=' . $sessionId . '" \
   -H "User-Agent: Mozilla/5.0 zhaowendao" \
   -H "Referer: https://zhaosec.com" \
   -H "X-Forwarded-For: 127.0.0.1" \
-  -H "Custom-Authorization: Bearer zhao_wen_dao" \
+  -H "Authorization: Bearer zhao_wen_dao" \
   -H "X-Admin-Key: zhao_secret_key"</code></pre>';
 }
 
