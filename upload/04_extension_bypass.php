@@ -110,6 +110,18 @@ system($_GET[&#39;cmd&#39;]);
                         <li>上传文件，由于扩展名不在黑名单中，会被成功上传</li>
                         <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/webshell.php5?cmd=whoami</code></li>
                     </ol>
+                    
+                    <h5 class="mb-2 mt-4">方法：上传特殊配置文件</h5>
+                    <ol>
+                        <li>上传特殊配置文件，例如：</li>
+                        <ul>
+                            <li><code>.htaccess</code> - Apache服务器配置文件，可用于修改文件解析规则</li>
+                            <li><code>web.config</code> - IIS服务器配置文件，可用于修改文件处理方式</li>
+                            <li><code>.user.ini</code> - PHP用户级配置文件，可用于执行PHP代码</li>
+                            <li><code>.htpasswd</code> - 基本认证密码文件，可能导致认证绕过</li>
+                        </ul>
+                        <li>配置文件生效后，可通过访问普通文件来执行PHP代码</li>
+                    </ol>
                 </div>
             </div>
 
