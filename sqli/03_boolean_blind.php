@@ -43,8 +43,8 @@ function query($sql, $conn) {
     $result = $conn->query($sql);
     
     if (!$result) {
-        // 捕获数据库错误
-        throw new Exception($conn->error);
+        // 布尔盲注不显示错误信息
+        return [];
     }
     
     $rows = [];
@@ -57,15 +57,10 @@ function query($sql, $conn) {
 
 $id = $_GET['id'] ?? 1;
 $results = [];
-$error = '';
 
 // 执行查询（存在SQL注入漏洞）
 $sql = "SELECT * FROM users WHERE id=$id";
-try {
-    $results = query($sql, $conn);
-} catch (Exception $e) {
-    $error = $e->getMessage();
-}
+$results = query($sql, $conn);
 
 // 关闭连接
 $conn->close();
@@ -262,12 +257,6 @@ $conn->close();
                 <div class="sql-code">
                     <?php echo htmlspecialchars($sql); ?>
                 </div>
-                
-                <?php if (!empty($error)): ?>
-                <div class="error-box">
-                    <strong>错误信息：</strong><?php echo htmlspecialchars($error); ?>
-                </div>
-                <?php endif; ?>
                 
                 <div class="results-box <?php echo !empty($results) ? 'success' : 'failure'; ?>">
                     <?php if (!empty($results)): ?>
