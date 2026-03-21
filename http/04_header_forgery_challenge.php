@@ -102,6 +102,10 @@ $content = '<div class="card">
                 你可以使用浏览器开发者工具、Burp Suite或其他工具来修改请求头。
             </div>
 
+            <div class="mb-4 text-center">
+                <a href="04_header_forgery_challenge.php?reset" class="btn btn-danger">重置挑战</a>
+            </div>
+
             <div class="card mb-3">
                 <div class="card-header">
                     <h6>🚩 挑战状态</h6>
@@ -145,16 +149,20 @@ $content .= '</code></pre>
                                 <li>执行修改后的命令</li>
                             </ol>
                         </div>
-                    </div>
+                    </div>';
 
-                    <h5 class="mb-3 mt-4">cURL示例</h5>
+// 只有通关后才显示cURL示例
+if ($level === 5) {
+    $content .= '                    <h5 class="mb-3 mt-4">cURL示例</h5>
                     <pre class="bg-dark text-light p-3 rounded"><code>curl -X GET "http://localhost/zhaosec/http/04_header_forgery_challenge.php" \
   -H "User-Agent: Mozilla/5.0 zhaowendao" \
   -H "Referer: https://zhaosec.com" \
   -H "X-Forwarded-For: 127.0.0.1" \
   -H "Custom-Authorization: Bearer zhao_wen_dao" \
-  -H "X-Admin-Key: zhao_secret_key"</code></pre>
-                </div>
+  -H "X-Admin-Key: zhao_secret_key"</code></pre>';
+}
+
+$content .= '                </div>
             </div>
 
             <div class="card mb-3">
@@ -199,10 +207,6 @@ $content .= '</code></pre>
                         <li><strong>实施多因素认证</strong> - 结合多种验证方式</li>
                         <li><strong>监控异常请求</strong> - 检测可疑的HTTP头模式</li>
                     </ol>
-
-                    <div class="mt-4 text-center">
-                        <a href="04_header_forgery_challenge.php?reset" class="btn btn-danger">重置挑战</a>
-                    </div>
                 </div>
             </div>
         </div>
