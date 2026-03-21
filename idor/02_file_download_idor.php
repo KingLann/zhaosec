@@ -76,12 +76,52 @@ $content = '<div class="card">
                     <h6>🎯 攻击演示</h6>
                 </div>
                 <div class="card-body">
-                    <p class="mb-3">尝试下载以下文件：</p>
+                    <p class="mb-3">本场景模拟文件下载功能，点击以下文件图标尝试下载：</p>
                     
-                    <div class="btn-group mb-3" role="group">
-                        <a href="?file=../README.md" class="btn btn-primary">下载README.md</a>
-                        <a href="?file=../.git/config" class="btn btn-danger">下载.git/config</a>
-                        <a href="?file=../../../../windows/win.ini" class="btn btn-warning">下载win.ini</a>
+                    <div class="row mb-4">
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <div class="display-4 mb-3">📄</div>
+                                    <h6 class="card-title">README.md</h6>
+                                    <p class="text-muted small">项目说明文件</p>
+                                    <a href="?file=../README.md" class="btn btn-primary mt-2">下载</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <div class="display-4 mb-3">⚙️</div>
+                                    <h6 class="card-title">.git/config</h6>
+                                    <p class="text-muted small">Git配置文件</p>
+                                    <a href="?file=../.git/config" class="btn btn-danger mt-2">下载</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <div class="display-4 mb-3">💻</div>
+                                    <h6 class="card-title">win.ini</h6>
+                                    <p class="text-muted small">Windows配置文件</p>
+                                    <a href="?file=../../../../windows/win.ini" class="btn btn-warning mt-2">下载</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mb-4">
+                        <strong>🔧 攻击方法：</strong>
+                        <ol>
+                            <li>打开浏览器开发者工具（F12）</li>
+                            <li>点击上方的下载按钮</li>
+                            <li>在网络（Network）标签中查看请求</li>
+                            <li>右键点击请求，选择"复制" → "复制请求URL"</li>
+                            <li>修改URL中的 <code>file</code> 参数值，例如：<code>?file=../config.php</code></li>
+                            <li>在浏览器地址栏中粘贴修改后的URL并访问</li>
+                            <li>服务器将直接下载指定的文件</li>
+                        </ol>
                     </div>
 
                     <div class="form-group mb-3">
@@ -107,7 +147,7 @@ $content = '<div class="card">
 
             <div class="card mb-3">
                 <div class="card-header">
-                    <h6>� 漏洞代码</h6>
+                    <h6>💻 漏洞代码</h6>
                 </div>
                 <div class="card-body">
                     <pre class="bg-dark text-light p-3 rounded"><code>// 危险的文件下载代码
