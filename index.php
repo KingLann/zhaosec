@@ -37,8 +37,8 @@
         .vuln-card {
             background: white;
             border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 40px;
+            padding: 35px 35px 25px;
+            margin-bottom: 50px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
@@ -102,7 +102,7 @@
         .vuln-card p {
             color: #666;
             font-size: 1rem;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
         .vuln-card .btn {
