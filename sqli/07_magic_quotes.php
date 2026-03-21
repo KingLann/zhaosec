@@ -229,7 +229,7 @@ $conn->close();
                 
                 <?php if ($login_success): ?>
                 <div class="success-message">
-                    <h4>登录成功！</h4>
+                    <h4>登录成功！flag{Magic_Quotes_Success}</h4>
                     <p>欢迎，<?php echo htmlspecialchars($user_info['username']); ?>！</p>
                     <p>用户ID：<?php echo htmlspecialchars($user_info['id']); ?></p>
                     <p>邮箱：<?php echo htmlspecialchars($user_info['email']); ?></p>

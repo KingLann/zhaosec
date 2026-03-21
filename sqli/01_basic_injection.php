@@ -45,7 +45,8 @@ function query($sql, $conn) {
     $result = $conn->query($sql);
     
     if (!$result) {
-        return [];
+        // 捕获数据库错误
+        throw new Exception($conn->error);
     }
     
     $rows = [];

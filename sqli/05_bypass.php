@@ -57,7 +57,8 @@ function query($sql, $conn) {
     $result = $conn->query($sql);
     
     if (!$result) {
-        return [];
+        // 捕获数据库错误
+        throw new Exception($conn->error);
     }
     
     $rows = [];
@@ -71,13 +72,14 @@ function query($sql, $conn) {
 $id = $_GET['id'] ?? 1;
 $filtered_id = waf($id);
 $results = [];
+$error = '';
 
 // 执行查询（存在SQL注入漏洞，WAF可被绕过）
 $sql = "SELECT * FROM users WHERE id=$filtered_id";
 try {
     $results = query($sql, $conn);
 } catch (Exception $e) {
-    // 不显示错误信息
+    $error = $e->getMessage();
 }
 
 // 关闭连接
@@ -279,6 +281,12 @@ $conn->close();
                 <div class="sql-code">
                     <?php echo htmlspecialchars($sql); ?>
                 </div>
+                
+                <?php if (!empty($error)): ?>
+                <div class="error-box">
+                    <strong>错误信息：</strong><?php echo htmlspecialchars($error); ?>
+                </div>
+                <?php endif; ?>
                 
                 <?php if (!empty($results)): ?>
                 <h4>查询结果：</h4>

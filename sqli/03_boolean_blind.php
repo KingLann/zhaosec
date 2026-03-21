@@ -43,7 +43,8 @@ function query($sql, $conn) {
     $result = $conn->query($sql);
     
     if (!$result) {
-        return [];
+        // 捕获数据库错误
+        throw new Exception($conn->error);
     }
     
     $rows = [];
@@ -56,13 +57,14 @@ function query($sql, $conn) {
 
 $id = $_GET['id'] ?? 1;
 $results = [];
+$error = '';
 
 // 执行查询（存在SQL注入漏洞）
 $sql = "SELECT * FROM users WHERE id=$id";
 try {
     $results = query($sql, $conn);
 } catch (Exception $e) {
-    // 不显示错误信息（盲注场景）
+    $error = $e->getMessage();
 }
 
 // 关闭连接
@@ -204,9 +206,18 @@ $conn->close();
         .back-link {
             display: inline-block;
             margin-top: 20px;
-            color: #fa709a;
+            color: #667eea;
             text-decoration: none;
             font-weight: 600;
+        }
+        .error-box {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
         }
         .blind-demo {
             background: #f0f0f0;
@@ -251,6 +262,12 @@ $conn->close();
                 <div class="sql-code">
                     <?php echo htmlspecialchars($sql); ?>
                 </div>
+                
+                <?php if (!empty($error)): ?>
+                <div class="error-box">
+                    <strong>错误信息：</strong><?php echo htmlspecialchars($error); ?>
+                </div>
+                <?php endif; ?>
                 
                 <div class="results-box <?php echo !empty($results) ? 'success' : 'failure'; ?>">
                     <?php if (!empty($results)): ?>
