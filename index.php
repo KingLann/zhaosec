@@ -38,7 +38,7 @@
             background: white;
             border-radius: 16px;
             padding: 40px;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
@@ -65,9 +65,9 @@
             margin-left: -30px;
             margin-right: -30px;
         }
-        .col-lg-3,
-        .col-md-4,
-        .col-sm-6 {
+        .col-lg-4,
+        .col-md-6,
+        .col-sm-12 {
             padding-left: 30px;
             padding-right: 30px;
         }
@@ -141,7 +141,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-logic text-white">🧩</div>
                     <h5>逻辑漏洞</h5>
@@ -150,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-xss text-white">📜</div>
                     <h5>XSS跨站脚本</h5>
@@ -159,7 +159,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-auth text-white">🔐</div>
                     <h5>身份认证漏洞</h5>
@@ -168,7 +168,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-upload text-white">📁</div>
                     <h5>文件上传漏洞</h5>
@@ -177,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-rce text-white">⚡</div>
                     <h5>命令/代码执行</h5>
@@ -186,7 +186,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-sqli text-white">💉</div>
                     <h5>SQL注入漏洞</h5>
@@ -195,7 +195,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-lfi text-white">📂</div>
                     <h5>文件包含漏洞</h5>
@@ -204,7 +204,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-xxe text-white">📄</div>
                     <h5>XXE漏洞</h5>
@@ -213,7 +213,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-ssrf text-white">🌐</div>
                     <h5>SSRF漏洞</h5>
@@ -222,7 +222,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-csrf text-white">🔄</div>
                     <h5>CSRF漏洞</h5>
@@ -231,7 +231,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="vuln-card">
                     <div class="icon icon-unserialize text-white">📦</div>
                     <h5>PHP反序列化</h5>
