@@ -138,17 +138,17 @@ function validateFile() {
 
                     <script>
                     function validateFile() {
-                        var fileInput = document.getElementById('file');
+                        var fileInput = document.getElementById("file");
                         var file = fileInput.files[0];
-                        var allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                        var allowedTypes = ["image/jpeg", "image/png", "image/gif"];
                         
                         if (!file) {
-                            alert('请选择文件');
+                            alert("请选择文件");
                             return false;
                         }
                         
                         if (!allowedTypes.includes(file.type)) {
-                            alert('仅允许上传图片文件');
+                            alert("仅允许上传图片文件");
                             return false;
                         }
                         
