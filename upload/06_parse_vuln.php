@@ -47,7 +47,7 @@ $content = '<div class="card">
                                 <tr>
                                     <td>Nginx解析漏洞</td>
                                     <td>Nginx</td>
-                                    <td>文件名后加\0或\x20等特殊字符，或使用路径欺骗</td>
+                                    <td>文件名后加&#92;0或&#92;x20等特殊字符，或使用路径欺骗</td>
                                     <td>中</td>
                                 </tr>
                                 <tr>
@@ -89,7 +89,7 @@ $content = '<div class="card">
 
                     <h5 class="mb-3 mt-4">3. Nginx解析漏洞</h5>
                     <ul>
-                        <li><strong>特殊字符：</strong> <code>webshell.php\0.jpg</code> - Nginx会忽略\0后的内容，解析为.php文件</li>
+                        <li><strong>特殊字符：</strong> <code>webshell.php&#92;0.jpg</code> - Nginx会忽略&#92;0后的内容，解析为.php文件</li>
                         <li><strong>路径欺骗：</strong> <code>webshell.jpg/.php</code> - 利用Nginx的路径处理逻辑</li>
                     </ul>
 
@@ -103,7 +103,7 @@ $content = '<div class="card">
                     <h5 class="mb-3 mt-4">5. 文件类型混淆</h5>
                     <p>攻击者在PHP文件前添加图片头等内容，欺骗文件类型检测：</p>
                     <pre class="bg-dark text-light p-3 rounded"><code>\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00\xff\xdb\x00C\x00\x02\x01\x01\x01\x01\x02\x01\x01\x01\x02\x02\x02\x02\x02\x04\x03\x02\x02\x02\x02\x05\x04\x04\x03\x04\x06\x06\x08\x09\x08\x06\x06\x08\x08?&gt;
-&lt;?php system($_GET['cmd']); ?&gt;</code></pre>
+&lt;?php system($_GET[&#39;cmd&#39;]); ?&gt;</code></pre>
                 </div>
             </div>
 
@@ -135,7 +135,7 @@ $content = '<div class="card">
                                 <tr>
                                     <td>Nginx解析漏洞</td>
                                     <td>添加特殊字符或路径欺骗</td>
-                                    <td><code>webshell.php\0.jpg</code></td>
+                                    <td><code>webshell.php&#92;0.jpg</code></td>
                                 </tr>
                                 <tr>
                                     <td>文件类型混淆</td>
