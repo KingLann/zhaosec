@@ -104,7 +104,7 @@
             severityLabel: "高危",
             link: "ssrf/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 5
         },
         {
             name: "XML外部实体注入 (XXE)",
@@ -132,19 +132,19 @@
             icon: "fas fa-lock-open",
             severity: "medium",
             severityLabel: "中危",
-            link: "logic/index.php",
+            link: "idor/index.php",
             linkText: "进入演练",
             count: 4
         },
         {
-            name: "恶意文件上传漏洞",
+            name: "文件上传漏洞",
             description: "允许上传危险文件类型（webshell、木马），导致服务器被控制、网站被篡改或数据泄露。",
             icon: "fas fa-upload",
             severity: "critical",
             severityLabel: "严重",
             link: "upload/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 6
         },
         {
             name: "命令注入 (Command Injection)",
