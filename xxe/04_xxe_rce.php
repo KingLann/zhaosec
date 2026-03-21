@@ -6,6 +6,38 @@ $module_desc = '利用XXE漏洞执行系统命令。';
 
 
 
+// 获取宿主机IP
+function getHostIP() {
+    // 尝试获取服务器IP
+    $serverIP = $_SERVER['SERVER_ADDR'];
+    
+    // 如果是本地环境，返回127.0.0.1
+    if ($serverIP === '127.0.0.1' || $serverIP === '::1') {
+        return '127.0.0.1';
+    }
+    
+    // 尝试获取网关IP（容器环境）
+    $gatewayIP = '';
+    if (file_exists('/proc/net/route')) {
+        $route = file_get_contents('/proc/net/route');
+        preg_match('/^00000000\s+([0-9A-F]{8})/', $route, $matches);
+        if (isset($matches[1])) {
+            $gatewayIP = long2ip(hexdec($matches[1]));
+        }
+    }
+    
+    // 如果获取到网关IP，返回网关IP
+    if (!empty($gatewayIP)) {
+        return $gatewayIP;
+    }
+    
+    // 默认返回服务器IP
+    return $serverIP;
+}
+
+$hostIP = getHostIP();
+$targetUrl = "http://{$hostIP}:81";
+
 // 页面内容
 $content = '<div class="card">
         <div class="card-header">
@@ -76,9 +108,10 @@ $content = '<div class="card">
                     <div class="text-center py-5">
                         <h5 class="mb-4">XXE RCE 靶场</h5>
                         <p class="mb-5">点击下方按钮跳转到XXE RCE靶场进行实际测试</p>
-                        <a href="http://127.0.0.1:81" target="_blank" class="btn btn-success btn-lg">
+                        <a href="' . $targetUrl . '" target="_blank" class="btn btn-success btn-lg">
                             <i class="fas fa-play-circle mr-2"></i>前往靶场
                         </a>
+                        <p class="mt-3 text-muted">靶场地址：' . $targetUrl . '</p>
                     </div>
 
                     ';
