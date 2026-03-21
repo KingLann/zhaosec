@@ -1,0 +1,79 @@
+# 操作系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# 日志文件
+*.log
+logs/
+*.log.*
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+*.temp
+
+# 数据库文件（如果包含敏感数据）
+*.db
+*.sqlite
+*.sqlite3
+
+# 配置文件（可能包含敏感信息）
+config.local.php
+.env.local
+.env.*.local
+
+# 上传文件目录
+uploads/
+public/uploads/
+storage/uploads/
+
+# 缓存目录
+cache/
+runtime/cache/
+storage/cache/
+*.cache
+
+# 依赖目录
+vendor/
+node_modules/
+
+# 编译输出
+dist/
+build/
+*.min.js
+*.min.css
+
+# 备份文件
+*.bak
+*.backup
+*~
+
+# 测试覆盖率报告
+coverage/
+.nyc_output/
+
+# 敏感信息文件
+*.key
+*.pem
+*.crt
+secrets/
+credentials/
+
+# PHP相关
+composer.lock
+vendor/bin/
+
+# Node相关
+package-lock.json
+yarn.lock
