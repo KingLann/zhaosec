@@ -179,6 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             this.submit();
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="../assets/js/crypto-js.min.js"></script>
 </body>
 </html>
