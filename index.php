@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Web安全漏洞导航 | 漏洞学习与防御指南</title>
+    <title>朝闻道-ZhaoSec</title>
     <!-- Font Awesome 6 (免费图标库) -->
     <link rel="stylesheet" href="assets/css/all.min.css">
     <!-- 本地样式文件 -->
@@ -14,7 +14,7 @@
     <div class="header">
         <h1>
             <i class="fas fa-shield-alt"></i> 
-            Web安全漏洞导航
+            ZhaoSec Web安全漏洞导航 · 朝闻道
         </h1>
         <div class="subhead">OWASP Top 10 & 关键风险 · 学习 · 防御 · 渗透测试指南</div>
         <div class="description">
@@ -38,8 +38,8 @@
     </div>
 
     <div class="footer">
-        <i class="fas fa-graduation-cap"></i> 安全学习导航 · 数据基于 OWASP 及 PortSwigger Web Security Academy  · 
-        <a href="#" target="_blank" rel="noopener noreferrer">了解最新漏洞动态</a>  |  教育用途，链接均为官方权威资源
+        <i class="fas fa-graduation-cap"></i> 安全学习导航 · 朝闻道  · 
+        <a href="#" target="_blank" rel="noopener noreferrer">了解最新漏洞动态</a> | 教育用途，仅用于学习和授权测试
     </div>
 </div>
 
@@ -54,7 +54,7 @@
             severityLabel: "高危",
             link: "auth/index.php",
             linkText: "进入演练",
-            count: 6
+            count: 7
         },
         {
             name: "SQL 注入 (SQLi)",
@@ -74,7 +74,7 @@
             severityLabel: "高危",
             link: "xss/index.php",
             linkText: "进入演练",
-            count: 5
+            count: 6
         },
         {
             name: "逻辑漏洞 (Logic)",
@@ -84,7 +84,7 @@
             severityLabel: "中危",
             link: "logic/index.php",
             linkText: "进入演练",
-            count: 8
+            count: 11
         },
         {
             name: "跨站请求伪造 (CSRF)",
@@ -104,7 +104,7 @@
             severityLabel: "高危",
             link: "ssrf/index.php",
             linkText: "进入演练",
-            count: 5
+            count: 6
         },
         {
             name: "XML外部实体注入 (XXE)",
@@ -114,7 +114,7 @@
             severityLabel: "高危",
             link: "xxe/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 5
         },
         {
             name: "文件包含漏洞 (LFI/RFI)",
@@ -124,17 +124,17 @@
             severityLabel: "高危",
             link: "lfi/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 5
         },
         {
-            name: "不安全直接对象引用 (IDOR)",
+            name: "不安全直接对象引用",
             description: "通过修改对象ID（如URL参数）访问未授权的数据，属于访问控制失效的典型场景。",
             icon: "fas fa-lock-open",
             severity: "medium",
             severityLabel: "中危",
             link: "idor/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 3
         },
         {
             name: "文件上传漏洞",
@@ -144,10 +144,10 @@
             severityLabel: "严重",
             link: "upload/index.php",
             linkText: "进入演练",
-            count: 6
+            count: 7
         },
         {
-            name: "命令注入 (Command Injection)",
+            name: "命令/代码注入漏洞",
             description: "在系统命令中注入恶意参数，可远程执行操作系统命令，完全控制服务器。",
             icon: "fas fa-terminal",
             severity: "critical",
@@ -164,7 +164,7 @@
             severityLabel: "高危",
             link: "unserialize/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 2
         },
         {
             name: "HTTP协议基础漏洞",
@@ -184,7 +184,7 @@
             severityLabel: "严重",
             link: "ssti/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 2
         },
         {
             name: "JWT安全漏洞",
@@ -197,14 +197,14 @@
             count: 5
         },
         {
-            name: "综合Web安全实战",
-            description: "综合实战演练：涵盖多种Web安全漏洞的组合利用场景，模拟真实渗透测试环境，提升综合攻防能力。",
+            name: "Web实战 & 专项漏洞",
+            description: "包含多种Web安全漏洞的实战演练，以及专项漏洞练习，涵盖真实攻击场景模拟与深度技术挑战",
             icon: "fas fa-shield-alt",
             severity: "critical",
             severityLabel: "实战",
             link: "weblabs/index.php",
             linkText: "开始实战",
-            count: 3
+            count: 8
         }
     ];
 
@@ -226,7 +226,7 @@
                 <div class="no-results">
                     <i class="fas fa-shield-alt"></i>
                     <h3>😕 未找到相关漏洞</h3>
-                    <p>试试其他关键词，例如 “注入”、“XSS”、“反序列化” 或 “SSRF”</p>
+                    <p>试试其他关键词，例如 "注入"、"XSS"、"反序列化" 或 "SSRF"</p>
                     <button id="resetSearchBtn" style="margin-top:12px; background:#2c7da0; border:none; color:white; padding:8px 22px; border-radius:40px; cursor:pointer; font-weight:500;">清除搜索</button>
                 </div>
             `;

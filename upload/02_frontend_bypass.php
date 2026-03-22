@@ -4,6 +4,13 @@ $module_name = '前端验证绕过';
 $module_icon = '🔒';
 $module_desc = '仅在前端使用JavaScript验证文件类型，可通过禁用JS或直接发送请求绕过。';
 
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid('upload_', true) . '.' . $ext;
+    return $randomName;
+}
+
 // 漏洞代码
 $message = '';
 $uploaded_file = '';
@@ -18,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file['name']);
+        $randomFileName = generateRandomFileName($file['name']);
+        $target_file = $upload_dir . $randomFileName;
         
         // 直接移动文件，没有任何验证
         if (move_uploaded_file($file['tmp_name'], $target_file)) {
@@ -78,7 +86,8 @@ function validateFile() {
         mkdir($upload_dir, 0777, true);
     }
     
-    $target_file = $upload_dir . basename($file["name"]);
+    $randomFileName = generateRandomFileName($file["name"]);
+    $target_file = $upload_dir . $randomFileName;
     
     // 直接移动文件，没有任何验证
     if (move_uploaded_file($file["tmp_name"], $target_file)) {
@@ -86,6 +95,14 @@ function validateFile() {
     } else {
         echo "文件上传失败！";
     }
+}
+
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid("upload_", true) . "." . $ext;
+    return $randomName;
+}
 }</code></pre>
                 </div>
             </div>

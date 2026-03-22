@@ -1,7 +1,7 @@
 <?php
 $module_name = 'PHP实战靶场';
 $module_icon = '🎯';
-$module_desc = '跳转到宿主机另一个容器的10005端口进行实战练习。';
+$module_desc = '跳转到宿主机另一个容器的10002端口进行实战练习。';
 
 $content = <<<'EOT'
 <div class="card">
@@ -48,7 +48,7 @@ $content = <<<'EOT'
 function getLabUrl() {
     var hostname = window.location.hostname;
     var protocol = window.location.protocol;
-    var labUrl = protocol + '//' + hostname + ':10005/';
+    var labUrl = protocol + '//' + hostname + ':10002/';
     document.getElementById('phpLabLink').href = labUrl;
 }
 

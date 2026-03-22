@@ -4,39 +4,6 @@ $module_name = 'XXE RCE';
 $module_icon = '💻';
 $module_desc = '利用XXE漏洞执行系统命令。';
 
-
-
-// 获取宿主机IP
-function getHostIP() {
-    // 尝试获取服务器IP
-    $serverIP = $_SERVER['SERVER_ADDR'];
-    
-    // 如果是本地环境，返回127.0.0.1
-    if ($serverIP === '127.0.0.1' || $serverIP === '::1') {
-        return '127.0.0.1';
-    }
-    
-    // 尝试获取网关IP（容器环境）
-    $gatewayIP = '';
-    if (file_exists('/proc/net/route')) {
-        $route = file_get_contents('/proc/net/route');
-        preg_match('/^00000000\s+([0-9A-F]{8})/', $route, $matches);
-        if (isset($matches[1])) {
-            $gatewayIP = long2ip(hexdec($matches[1]));
-        }
-    }
-    
-    // 如果获取到网关IP，返回网关IP
-    if (!empty($gatewayIP)) {
-        return $gatewayIP;
-    }
-    
-    // 默认返回服务器IP
-    return $serverIP;
-}
-$hostIP = gethostbyname(gethostname());
-$targetUrl = "http://{$hostIP}:10001";
-
 // 页面内容
 $content = '<div class="card">
         <div class="card-header">
@@ -103,21 +70,36 @@ $content = '<div class="card">
                 <div class="card-header">
                     <h6>🎯 靶场测试</h6>
                 </div>
-                <div class="card-body">
-                    <div class="text-center py-5">
-                        <h5 class="mb-4">XXE RCE 靶场</h5>
-                        <p class="mb-5">点击下方按钮跳转到XXE RCE靶场进行实际测试</p>
-                        <a href="' . $targetUrl . '" target="_blank" class="btn btn-success btn-lg">
-                            <i class="fas fa-play-circle mr-2"></i>前往靶场
-                        </a>
-                        <p class="mt-3 text-muted">靶场地址：' . $targetUrl . '</p>
+                <div class="card-body text-center">
+                    <h5 class="mb-3">🔥 XXE RCE Lab</h5>
+                    <p class="mb-3">XXE漏洞远程代码执行靶场环境</p>
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-md-8">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">靶场信息</h6>
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <tr>
+                                            <td class="text-end"><strong>端口：</strong></td>
+                                            <td class="text-start">10001</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-end"><strong>协议：</strong></td>
+                                            <td class="text-start">HTTP</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-end"><strong>靶场地址：</strong></td>
+                                            <td class="text-start"><span id="labUrl">正在获取...</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    ';
-
-
-
-$content .= '                </div>
+                    <a href="#" id="xxeLabLink" class="btn btn-primary btn-lg" target="_blank">
+                        <i class="fas fa-play-circle mr-2"></i>前往靶场
+                    </a>
+                </div>
             </div>
 
             <div class="card">
@@ -137,7 +119,22 @@ $content .= '                </div>
                 </div>
             </div>
         </div>
-    </div>';
+    </div>
+
+<script>
+// 使用JavaScript获取当前页面的hostname，动态构建靶场链接
+function getLabUrl() {
+    var hostname = window.location.hostname;
+    var protocol = window.location.protocol;
+    var labUrl = protocol + "//" + hostname + ":10001/";
+    
+    document.getElementById("xxeLabLink").href = labUrl;
+    document.getElementById("labUrl").textContent = labUrl;
+}
+
+// 页面加载时执行
+document.addEventListener("DOMContentLoaded", getLabUrl);
+</script>';
 
 // 包含模板
 include '../template/module_template.php';

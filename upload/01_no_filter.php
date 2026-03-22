@@ -4,6 +4,13 @@ $module_name = '无过滤文件上传';
 $module_icon = '📁';
 $module_desc = '完全没有任何过滤的文件上传漏洞，攻击者可以上传任意类型的文件。';
 
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid('upload_', true) . '.' . $ext;
+    return $randomName;
+}
+
 // 漏洞代码
 $message = '';
 $uploaded_file = '';
@@ -18,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file['name']);
+        $randomFileName = generateRandomFileName($file['name']);
+        $target_file = $upload_dir . $randomFileName;
         
         // 直接移动文件，没有任何验证
         if (move_uploaded_file($file['tmp_name'], $target_file)) {
@@ -56,7 +64,8 @@ $content = '<div class="card">
         mkdir($upload_dir, 0777, true);
     }
     
-    $target_file = $upload_dir . basename($file["name"]);
+    $randomFileName = generateRandomFileName($file["name"]);
+    $target_file = $upload_dir . $randomFileName;
     
     // 直接移动文件，没有任何验证
     if (move_uploaded_file($file["tmp_name"], $target_file)) {
@@ -64,6 +73,13 @@ $content = '<div class="card">
     } else {
         echo "文件上传失败！";
     }
+}
+
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid("upload_", true) . "." . $ext;
+    return $randomName;
 }</code></pre>
                 </div>
             </div>
@@ -82,7 +98,7 @@ $content = '<div class="card">
 system($_GET[&#39;cmd&#39;]);
 ?&gt;</code></pre>
                         <li>通过下方表单上传该文件</li>
-                        <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/webshell.php?cmd=whoami</code></li>
+                        <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/upload_123456.php?cmd=whoami</code></li>
                         <li>执行任意系统命令</li>
                     </ol>
                 </div>

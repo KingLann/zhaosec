@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+  zhaosec:
+    image: zhaosec/zhaosec:v1.0.1
+    container_name: zhaosec
+    ports:
+      - "80:80"
+    restart: always
+
+  xxelab:
+    image: lanso4/xxelab:v1.0.0
+    container_name: xxe
+    ports:
+      - "10001:80"
+    restart: always
+
+  unserialize:
+    image: mcc0624/ser:1.8
+    container_name: unserialize
+    ports:
+      - "10002:80"
+    restart: always
+  ssti:
+    image: mcc0624/flask_ssti:last
+    container_name: ssti
+    ports:
+      - "10003:80"
+    restart: always
+
+  web-yxcms:
+    image: lanso4/web-yxcms:v1.0.0
+    container_name: web-yxcms
+    ports:
+      - "10004:80"
+    restart: always
+
+  ctflab:
+    image: lanso4/ctf1-server:2025
+    container_name: ctflab
+    command: python app.py
+    links:
+      - db
+    ports:
+      - "10005:3000"
+    restart: always
+  db:
+    image: lanso4/ctf1-db:2025
+    container_name: db  
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    restart: always
+
+  sqli:
+    image: acgpiano/sqli-labs
+    container_name: sqli
+    ports:
+      - "10006:80"
+    restart: always
+
+  xss:
+    image: c0ny1/xss-challenge-tour
+    container_name: xss
+    ports:
+      - "10007:80"
+    restart: always
+  csrf:
+    image: amolnaik4/bodhi_app
+    container_name: csrf
+    ports:
+      - "10008:80"
+      - "10009:8000"
+    restart: always

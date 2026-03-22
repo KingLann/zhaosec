@@ -4,6 +4,13 @@ $module_name = '图片马+文件包含';
 $module_icon = '🖼️';
 $module_desc = '上传包含PHP代码的图片文件，然后通过文件包含漏洞执行其中的代码。';
 
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid("upload_", true) . "." . $ext;
+    return $randomName;
+}
+
 // 漏洞代码
 $message = '';
 $uploaded_file = '';
@@ -25,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file['name']);
+        $randomFileName = generateRandomFileName($file['name']);
+        $target_file = $upload_dir . $randomFileName;
         
         if (move_uploaded_file($file['tmp_name'], $target_file)) {
             $message = '文件上传成功！';
@@ -78,7 +86,8 @@ $content = '<div class="card">
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file["name"]);
+        $randomFileName = generateRandomFileName($file["name"]);
+        $target_file = $upload_dir . $randomFileName;
         
         if (move_uploaded_file($file["tmp_name"], $target_file)) {
             $message = "文件上传成功！";
@@ -86,6 +95,13 @@ $content = '<div class="card">
             $message = "文件上传失败！";
         }
     }
+}
+
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid("upload_", true) . "." . $ext;
+    return $randomName;
 }</code></pre>
                     
                     <h5 class="mb-2 mt-4">文件包含代码：</h5>

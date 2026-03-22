@@ -98,7 +98,7 @@ $content = <<<'EOT'
             </div>
             <div class="card-body">
                 <ul class="mb-0">
-                    <li>靶场环境运行在独立的Docker容器中（端口10004）</li>
+                    <li>靶场环境运行在独立的Docker容器中</li>
                     <li>如果无法访问，请检查容器是否正常运行</li>
                     <li>建议使用团队协作模式进行CTF训练</li>
                     <li>靶场仅供学习和竞赛训练使用</li>
@@ -114,7 +114,7 @@ $content = <<<'EOT'
 function getLabUrl() {
     var hostname = window.location.hostname;
     var protocol = window.location.protocol;
-    var labUrl = protocol + '//' + hostname + ':10004/';
+    var labUrl = protocol + '//' + hostname + ':10005/';
     document.getElementById('ctfLabLink').href = labUrl;
 }
 

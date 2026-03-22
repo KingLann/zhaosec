@@ -48,7 +48,7 @@ $content = <<<'EOT'
 function getLabUrl() {
     var hostname = window.location.hostname;
     var protocol = window.location.protocol;
-    var labUrl = protocol + '//' + hostname + ':10002/';
+    var labUrl = protocol + '//' + hostname + ':10003/';
     document.getElementById('sstiLabLink').href = labUrl;
 }
 

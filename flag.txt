@@ -1,6 +1,1 @@
 flag{idor_vulnerability_exploited_successfully}
-
-This is a test flag file for IDOR vulnerability demonstration.
-If you can download this file, it means you have successfully exploited the insecure direct object reference vulnerability.
-
-Congratulations! You've demonstrated how attackers can access sensitive files through IDOR vulnerabilities.

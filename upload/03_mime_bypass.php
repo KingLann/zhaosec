@@ -4,6 +4,13 @@ $module_name = 'MIME类型绕过';
 $module_icon = '🔍';
 $module_desc = '仅验证Content-Type请求头，可通过修改请求头绕过验证。';
 
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid("upload_", true) . "." . $ext;
+    return $randomName;
+}
+
 // 漏洞代码
 $message = '';
 $uploaded_file = '';
@@ -22,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mkdir($upload_dir, 0777, true);
             }
             
-            $target_file = $upload_dir . basename($file['name']);
+            $randomFileName = generateRandomFileName($file['name']);
+            $target_file = $upload_dir . $randomFileName;
             
             if (move_uploaded_file($file['tmp_name'], $target_file)) {
                 $message = '文件上传成功！';
@@ -64,7 +72,8 @@ $content = '<div class="card">
             mkdir($upload_dir, 0777, true);
         }
         
-        $target_file = $upload_dir . basename($file["name"]);
+        $randomFileName = generateRandomFileName($file["name"]);
+        $target_file = $upload_dir . $randomFileName;
         
         if (move_uploaded_file($file["tmp_name"], $target_file)) {
             $message = "文件上传成功！";
@@ -72,6 +81,13 @@ $content = '<div class="card">
             $message = "文件上传失败！";
         }
     }
+}
+
+// 生成随机文件名
+function generateRandomFileName($originalName) {
+    $ext = pathinfo($originalName, PATHINFO_EXTENSION);
+    $randomName = uniqid("upload_", true) . "." . $ext;
+    return $randomName;
 }</code></pre>
                 </div>
             </div>
@@ -95,7 +111,7 @@ system($_GET[&#39;cmd&#39;]);
                         <pre class="bg-dark text-light p-3 rounded"><code>Content-Type: image/jpeg</code></pre>
                         <li>保持文件名不变（如webshell.php）</li>
                         <li>放行请求，文件将被成功上传</li>
-                        <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/webshell.php?cmd=whoami</code></li>
+                        <li>访问上传后的文件，例如：<code>http://localhost/zhaosec/upload/uploads/upload_123456.php?cmd=whoami</code></li>
                     </ol>
                 </div>
             </div>
