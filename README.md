@@ -32,6 +32,10 @@ ZhaoSec Web安全漏洞靶场是一个综合性的Web安全学习平台，涵盖
 
 ## 功能特性
 
+### 靶场首页
+
+![4d5ce551fc673f4990d733f707e2def1](https://limg33.oss-cn-hangzhou.aliyuncs.com/note/202603222138188.png)
+
 ### 漏洞类型
 
 | 漏洞类型 | 场景数量 | 风险等级 |
