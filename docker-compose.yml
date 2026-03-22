@@ -2,7 +2,7 @@ version: '3'
 
 services:
   zhaosec:
-    image: lanso4/zhaosec:v2.0.0
+    image: lanso4/zhaosec:v2.0.1
     container_name: zhaosec
     ports:
       - "80:80"
@@ -29,7 +29,7 @@ services:
     restart: always
 
   web-yxcms:
-    image: lanso4/web-yxcms:v1.0.0
+    image: lanso4/web-yxcms
     container_name: web-yxcms
     ports:
       - "10004:80"
