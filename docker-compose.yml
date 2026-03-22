@@ -2,7 +2,7 @@ version: '3'
 
 services:
   zhaosec:
-    image: zhaosec/zhaosec:v1.0.1
+    image: lanso4/zhaosec
     container_name: zhaosec
     ports:
       - "80:80"
