@@ -94,7 +94,7 @@
             severityLabel: "中危",
             link: "csrf/index.php",
             linkText: "进入演练",
-            count: 4
+            count: 3
         },
         {
             name: "服务端请求伪造 (SSRF)",
@@ -174,7 +174,37 @@
             severityLabel: "中危",
             link: "http/index.php",
             linkText: "进入演练",
-            count: 0
+            count: 5
+        },
+        {
+            name: "服务端模板注入 (SSTI)",
+            description: "攻击者通过注入模板语法执行任意代码，可导致服务器完全被控制，常见于使用模板引擎的Web应用。",
+            icon: "fas fa-code-branch",
+            severity: "critical",
+            severityLabel: "严重",
+            link: "ssti/index.php",
+            linkText: "进入演练",
+            count: 4
+        },
+        {
+            name: "JWT安全漏洞",
+            description: "JSON Web Token的安全缺陷，包括算法混淆、密钥泄露、令牌伪造等，可导致身份认证绕过。",
+            icon: "fas fa-key",
+            severity: "high",
+            severityLabel: "高危",
+            link: "jwt/index.php",
+            linkText: "进入演练",
+            count: 5
+        },
+        {
+            name: "综合Web安全实战",
+            description: "综合实战演练：涵盖多种Web安全漏洞的组合利用场景，模拟真实渗透测试环境，提升综合攻防能力。",
+            icon: "fas fa-shield-alt",
+            severity: "critical",
+            severityLabel: "实战",
+            link: "weblabs/index.php",
+            linkText: "开始实战",
+            count: 3
         }
     ];
 

@@ -3,6 +3,7 @@ $module_name = '文件上传漏洞';
 $module_icon = '📁';
 $module_desc = '文件上传漏洞允许攻击者上传恶意文件到服务器，可能导致获取服务器权限。';
 $vulns = [
+    ['name' => '文件上传漏洞基础', 'desc' => '学习文件上传漏洞的基本概念、类型、原理和防御方法', 'file' => '00_upload_basics.php', 'level' => 'info'],
     ['name' => '无过滤上传', 'desc' => '完全没有任何过滤的文件上传', 'file' => '01_no_filter.php', 'level' => 'low'],
     ['name' => '前端验证绕过', 'desc' => '仅前端JS验证文件类型', 'file' => '02_frontend_bypass.php', 'level' => 'low'],
     ['name' => 'MIME类型绕过', 'desc' => '仅验证Content-Type', 'file' => '03_mime_bypass.php', 'level' => 'low'],

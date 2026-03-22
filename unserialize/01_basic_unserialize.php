@@ -4,6 +4,10 @@ $module_name = '基础反序列化';
 $module_icon = '🔓';
 $module_desc = '演示PHP反序列化漏洞的基本原理和利用方法。';
 
+$output = '';
+$error = '';
+$command_output = '';
+
 // 有漏洞的类
 class Test {
     public $name;
@@ -11,23 +15,22 @@ class Test {
     
     // 漏洞：在__wakeup方法中执行命令
     public function __wakeup() {
+        global $command_output;
         if (isset($this->cmd)) {
-            // 危险操作：执行命令
-            system($this->cmd);
-        }
-    }
-    
-    // 漏洞：在__destruct方法中也有危险操作
-    public function __destruct() {
-        if (isset($this->name)) {
-            // 危险操作：写入文件
-            file_put_contents('test.txt', $this->name);
+            // 危险操作：执行命令并捕获输出
+            ob_start();
+            // 使用exec替代system，确保捕获所有输出
+            exec($this->cmd, $output_array);
+            $command_output = implode("\n", $output_array);
+            // 如果exec没有捕获到输出，尝试使用passthru
+            if (empty($command_output)) {
+                ob_start();
+                passthru($this->cmd);
+                $command_output = ob_get_clean();
+            }
         }
     }
 }
-
-$output = '';
-$error = '';
 
 // 处理反序列化
 if (isset($_GET['data'])) {
@@ -47,7 +50,7 @@ $normal_serialized = serialize($normal_test);
 
 // 生成恶意的序列化字符串
 $malicious_test = new Test();
-$malicious_test->cmd = 'echo "<h3 style=\"color:red\">命令执行成功！当前用户：$(whoami)</h3>"';
+$malicious_test->cmd = 'whoami';
 $malicious_test->name = '恶意数据';
 $malicious_serialized = serialize($malicious_test);
 
@@ -77,14 +80,6 @@ $content = '<div class="card">
         if (isset($this->cmd)) {
             // 危险操作：执行命令
             system($this->cmd);
-        }
-    }
-    
-    // 漏洞：在__destruct方法中也有危险操作
-    public function __destruct() {
-        if (isset($this->name)) {
-            // 危险操作：写入文件
-            file_put_contents("test.txt", $this->name);
         }
     }
 }
@@ -153,12 +148,10 @@ if ($error) {
                     </div>';
 }
 
-// 检查是否生成了test.txt文件
-if (file_exists('test.txt')) {
-    $file_content = file_get_contents('test.txt');
-    $content .= '<div class="alert alert-info">
-                        <strong>文件内容：</strong>
-                        <p><code>' . htmlspecialchars($file_content) . '</code></p>
+if (!empty($command_output)) {
+    $content .= '<div class="alert alert-danger">
+                        <strong>命令执行结果：</strong>
+                        <pre>' . htmlspecialchars($command_output) . '</pre>
                     </div>';
 }
 

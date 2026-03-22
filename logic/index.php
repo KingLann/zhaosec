@@ -3,6 +3,7 @@ $module_name = '逻辑漏洞';
 $module_icon = '🧩';
 $module_desc = '逻辑漏洞是指业务逻辑设计或实现上的缺陷，往往难以通过常规安全测试发现。本模块涵盖支付交易、权限控制、业务流程、认证会话等多种类型的逻辑漏洞。';
 $vulns = [
+    ['name' => '逻辑漏洞基础', 'desc' => '学习逻辑漏洞的基本概念、类型、原理和防御方法', 'file' => '00_logic_basics.php', 'level' => 'info'],
     ['name' => '数据库初始化', 'desc' => '初始化逻辑漏洞测试所需的数据库表和模拟数据', 'file' => 'init_db.php', 'level' => 'info'],
     ['name' => '价格篡改', 'desc' => '通过修改前端价格参数以低价购买商品', 'file' => '01_price_tampering.php', 'level' => 'high'],
     ['name' => '支付状态绕过', 'desc' => '直接修改订单状态绕过支付流程', 'file' => '02_payment_bypass.php', 'level' => 'high'],

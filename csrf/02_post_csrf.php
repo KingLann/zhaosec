@@ -6,6 +6,18 @@ $module_desc = '演示通过POST请求进行CSRF攻击的漏洞场景。';
 
 // 初始化数据
 session_start();
+
+// 重置功能
+if (isset($_GET['reset'])) {
+    $_SESSION['profile'] = [
+        'username' => 'user001',
+        'email' => 'user@example.com',
+        'phone' => '13800138000'
+    ];
+    header('Location: 02_post_csrf.php');
+    exit;
+}
+
 if (!isset($_SESSION['profile'])) {
     $_SESSION['profile'] = [
         'username' => 'user001',
@@ -34,6 +46,38 @@ $content = '<div class="card">
                 <strong>💡 漏洞说明：</strong><br>
                 本场景演示POST型CSRF漏洞。<br>
                 服务器使用POST请求修改用户信息，但没有验证CSRF Token，攻击者可以通过构造恶意表单诱导用户提交，从而修改用户的个人信息。
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>🔄 POST型CSRF攻击流程</h6>
+                </div>
+                <div class="card-body">
+                    <div class="bg-light p-3 rounded border mb-3">
+                        <script src="../assets/js/mermaid.min.js"></script>
+                        <div class="mermaid">
+                            sequenceDiagram
+                                participant User as 用户
+                                participant Target as 目标网站
+                                participant Evil as 恶意网站
+                                
+                                User->>Target: 1. 登录目标网站
+                                Target-->>User: 设置会话Cookie
+                                Note over User: 用户已认证状态
+                                User->>Evil: 2. 访问恶意网站
+                                Evil-->>User: 返回恶意页面
+                                Note over Evil: 页面包含自动提交的隐藏表单
+                                User->>Target: 3. 表单自动POST提交
+                                Note over User,Target: 请求自动携带用户Cookie
+                                Target->>Target: 4. 验证Cookie有效
+                                Target-->>User: 5. 修改用户信息
+                                Note over User: 用户邮箱/手机被篡改
+                        </div>
+                    </div>
+                    <div class="alert alert-warning">
+                        <strong>⚠️ 关键点：</strong>POST型CSRF通过自动提交的表单实现，页面加载时JavaScript自动执行表单提交，用户完全不知情。
+                    </div>
+                </div>
             </div>
 
             <div class="card mb-3">
@@ -95,6 +139,9 @@ $content = '<div class="card">
                     <h6>💻 当前信息</h6>
                 </div>
                 <div class="card-body">
+                    <div class="mb-3">
+                        <a href="?reset" class="btn btn-warning">重置信息</a>
+                    </div>
                     <table class="table table-bordered">
                         <tr>
                             <th>用户名</th>

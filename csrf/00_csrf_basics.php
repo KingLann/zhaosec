@@ -72,32 +72,28 @@ $content = <<<'EOT'
                 </div>
                 <div class="card-body">
                     <div class="accordion" id="csrfTypes">
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        1. GET型CSRF
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#csrfTypes">
-                                <div class="card-body">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    1. GET型CSRF
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#csrfTypes">
+                                <div class="accordion-body">
                                     <p>利用GET请求执行操作，通常通过图片标签、链接等方式触发。</p>
                                     <pre class="bg-dark text-light p-3 rounded"><code>&lt;!-- 恶意网页中的代码 --&gt;
 &lt;img src="http://bank.com/transfer?to=attacker&amount=10000" width="0" height="0"&gt;</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        2. POST型CSRF
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#csrfTypes">
-                                <div class="card-body">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    2. POST型CSRF
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#csrfTypes">
+                                <div class="accordion-body">
                                     <p>利用POST请求执行操作，通过自动提交的表单实现。</p>
                                     <pre class="bg-dark text-light p-3 rounded"><code>&lt;!-- 恶意网页中的代码 --&gt;
 &lt;form action="http://bank.com/transfer" method="POST" id="csrf-form"&gt;
@@ -108,16 +104,14 @@ $content = <<<'EOT'
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header" id="headingThree">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        3. JSON CSRF
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#csrfTypes">
-                                <div class="card-body">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    3. JSON CSRF
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#csrfTypes">
+                                <div class="accordion-body">
                                     <p>针对JSON API的CSRF攻击，利用Flash或CORS配置不当。</p>
                                     <pre class="bg-dark text-light p-3 rounded"><code>// 利用CORS配置不当
 fetch(&#39;http://api.bank.com/transfer&#39;, {

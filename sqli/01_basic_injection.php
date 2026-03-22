@@ -229,6 +229,8 @@ $conn->close();
                 <p>本页面存在SQL注入漏洞，用户输入直接拼接到SQL语句中，未进行任何过滤。</p>
             </div>
             
+            <a href="index.php" class="back-link" style="display: inline-block; margin-bottom: 15px; color: #667eea; text-decoration: none; font-weight: 600;">← 返回SQL注入模块首页</a>
+            
             <h2>1. 💉 SQL注入基础</h2>
             
             <div class="info-section">
@@ -241,7 +243,104 @@ $conn->close();
         </div>
 
         <div class="card">
-            <h3>🔍 用户查询（存在漏洞）</h3>
+            <h3>SQL注入原理</h3>
+            <div class="info-section">
+                <strong>核心问题：</strong>应用程序将用户输入的数据直接拼接到SQL语句中执行，没有进行适当的过滤或参数化处理。
+            </div>
+            
+            <div class="mermaid-container" style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <pre class="mermaid">
+flowchart TD
+    A[用户输入] --> B{应用程序处理}
+    B -->|直接拼接| C[构造SQL语句]
+    B -->|参数化处理| D[安全的SQL语句]
+    C --> E[执行恶意SQL]
+    D --> F[正常执行]
+    E --> G[数据泄露/系统被控]
+    F --> H[正常返回结果]
+    
+    style C fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#51cf66,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#51cf66,stroke:#333,stroke-width:2px,color:#fff
+    style H fill:#51cf66,stroke:#333,stroke-width:2px,color:#fff
+                </pre>
+            </div>
+
+            <div class="sql-code">
+<strong>漏洞代码示例：</strong><br>
+// ❌ 不安全的写法 - 直接拼接<br>
+$id = $_GET['id'];<br>
+$sql = "SELECT * FROM users WHERE id=$id";<br>
+// 用户输入: 1 OR 1=1<br>
+// 最终SQL: SELECT * FROM users WHERE id=1 OR 1=1<br>
+<br>
+// ✅ 安全的写法 - 参数化查询<br>
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");<br>
+$stmt->execute([$id]);<br>
+// 用户输入被当作参数处理，不会解析为SQL代码
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>⚠️ SQL注入的危害</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100 border-danger">
+                        <div class="card-header bg-danger text-white">
+                            <h6 class="mb-0">🔴 数据层面危害</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li><strong>数据泄露：</strong>获取用户账号、密码、个人信息</li>
+                                <li><strong>数据篡改：</strong>修改账户余额、权限等级</li>
+                                <li><strong>数据删除：</strong>删除重要业务数据</li>
+                                <li><strong>拖库：</strong>导出整个数据库</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-warning">
+                        <div class="card-header bg-warning text-dark">
+                            <h6 class="mb-0">🟠 系统层面危害</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li><strong>权限绕过：</strong>无需密码登录管理员账户</li>
+                                <li><strong>服务器控制：</strong>通过SQL执行系统命令</li>
+                                <li><strong>内网渗透：</strong>以数据库为跳板攻击内网</li>
+                                <li><strong>植入后门：</strong>在系统中留下持久化后门</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mermaid-container" style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <pre class="mermaid">
+flowchart LR
+    A[SQL注入点] --> B[获取数据库结构]
+    B --> C[提取敏感数据]
+    C --> D[获取管理员账号]
+    D --> E[登录后台]
+    E --> F[上传WebShell]
+    F --> G[服务器控制权]
+    
+    A --> H[执行系统命令]
+    H --> I[内网扫描]
+    I --> J[横向移动]
+    
+    style A fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+    style J fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+                </pre>
+            </div>
+        </div>
+
+        <div class="card" id="query-section">
+            <h3>用户查询（存在漏洞）</h3>
             <div class="query-box">
                 <form method="GET">
                     <div class="input-group">
@@ -376,28 +475,122 @@ SELECT user, host FROM mysql.user;<br>
         <div class="card">
             <h3>🛡️ 防御方法</h3>
             <div class="info-section">
-                1. <strong>参数化查询：</strong>使用预处理语句和绑定参数<br>
-                2. <strong>输入验证：</strong>对用户输入进行类型检查和白名单过滤<br>
-                3. <strong>最小权限原则：</strong>数据库用户只授予必要的权限<br>
-                4. <strong>WAF防护：</strong>部署Web应用防火墙<br>
-                5. <strong>错误处理：</strong>不向用户显示详细的错误信息
+                <strong>防御SQL注入的核心原则：</strong>永远不要信任用户输入，始终对输入数据进行验证和净化。
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100 border-success">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0">✅ 推荐防御措施</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li><strong>参数化查询：</strong>使用预处理语句和绑定参数</li>
+                                <li><strong>存储过程：</strong>使用数据库存储过程</li>
+                                <li><strong>ORM框架：</strong>使用安全的ORM框架</li>
+                                <li><strong>输入验证：</strong>白名单验证输入数据类型</li>
+                                <li><strong>最小权限：</strong>数据库用户最小权限原则</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-warning">
+                        <div class="card-header bg-warning text-dark">
+                            <h6 class="mb-0">⚠️ 辅助防御措施</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li><strong>WAF防护：</strong>部署Web应用防火墙</li>
+                                <li><strong>错误处理：</strong>隐藏详细错误信息</li>
+                                <li><strong>日志监控：</strong>记录异常SQL查询</li>
+                                <li><strong>代码审计：</strong>定期安全审计</li>
+                                <li><strong>安全培训：</strong>开发人员安全意识</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mermaid-container" style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <pre class="mermaid">
+flowchart TD
+    A[用户输入] --> B{输入验证}
+    B -->|验证失败| C[拒绝请求]
+    B -->|验证通过| D[参数化处理]
+    D --> E[预编译SQL]
+    E --> F[绑定参数]
+    F --> G[执行查询]
+    G --> H[返回结果]
+    
+    style B fill:#ffd43b,stroke:#333,stroke-width:2px
+    style D fill:#51cf66,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#51cf66,stroke:#333,stroke-width:2px,color:#fff
+    style F fill:#51cf66,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#51cf66,stroke:#333,stroke-width:2px,color:#fff
+    style C fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+                </pre>
             </div>
             
             <div class="sql-code">
-// 安全的参数化查询（PHP PDO示例）
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$id]);
-$user = $stmt->fetch();
-</div>
+<strong>✅ 安全的参数化查询示例：</strong><br>
+<br>
+// PHP PDO 方式<br>
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");<br>
+$stmt->execute([$id]);<br>
+$user = $stmt->fetch();<br>
+<br>
+// PHP MySQLi 方式<br>
+$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");<br>
+$stmt->bind_param("i", $id);<br>
+$stmt->execute();<br>
+$result = $stmt->get_result();<br>
+<br>
+// Java PreparedStatement 方式<br>
+String sql = "SELECT * FROM users WHERE id = ?";<br>
+PreparedStatement stmt = conn.prepareStatement(sql);<br>
+stmt.setInt(1, id);<br>
+ResultSet rs = stmt.executeQuery();
+            </div>
+
+            <div class="alert alert-info mt-3">
+                <strong>💡 关键要点：</strong><br>
+                1. 参数化查询将SQL代码和数据分离，用户输入永远不会被解释为SQL命令<br>
+                2. 预处理语句在数据库层面进行参数绑定，有效防止注入<br>
+                3. 即使使用参数化查询，也要注意动态SQL构造（如ORDER BY字段）的防护
+            </div>
             
             <a href="index.php" class="back-link">← 返回SQL注入模块首页</a>
         </div>
     </div>
 
+    <script src="../assets/js/mermaid.min.js"></script>
     <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        
         function setId(payload) {
             document.querySelector('input[name="id"]').value = payload;
         }
+        
+        // 如果有查询参数，滚动到查询结果区域
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('id')) {
+                const querySection = document.getElementById('query-section');
+                if (querySection) {
+                    querySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
     </script>
 </body>
 </html>

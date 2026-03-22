@@ -35,7 +35,7 @@ function getHostIP() {
     return $serverIP;
 }
 $hostIP = gethostbyname(gethostname());
-$targetUrl = "http://{$hostIP}:81";
+$targetUrl = "http://{$hostIP}:10001";
 
 // 页面内容
 $content = '<div class="card">

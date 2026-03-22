@@ -6,6 +6,15 @@ $module_desc = '演示通过GET请求进行CSRF攻击的漏洞场景。';
 
 // 初始化数据
 session_start();
+
+// 重置功能
+if (isset($_GET['reset'])) {
+    $_SESSION['balance'] = 10000;
+    $_SESSION['transactions'] = [];
+    header('Location: 01_get_csrf.php');
+    exit;
+}
+
 if (!isset($_SESSION['balance'])) {
     $_SESSION['balance'] = 10000;
     $_SESSION['transactions'] = [];
@@ -71,6 +80,38 @@ $content = '<div class="card">
 
             <div class="card mb-3">
                 <div class="card-header">
+                    <h6>🔄 GET型CSRF攻击流程</h6>
+                </div>
+                <div class="card-body">
+                    <div class="bg-light p-3 rounded border mb-3">
+                        <script src="../assets/js/mermaid.min.js"></script>
+                        <div class="mermaid">
+                            sequenceDiagram
+                                participant User as 用户
+                                participant Bank as 银行网站
+                                participant Evil as 恶意网站
+                                
+                                User->>Bank: 1. 登录银行网站
+                                Bank-->>User: 设置会话Cookie
+                                Note over User: 用户已认证状态
+                                User->>Evil: 2. 访问恶意网站
+                                Evil-->>User: 返回包含恶意图片的页面
+                                Note over Evil: &lt;img src="bank.com/transfer?to=攻击者&amount=5000"&gt;
+                                User->>Bank: 3. 浏览器自动请求图片URL
+                                Note over User,Bank: 请求自动携带用户Cookie
+                                Bank->>Bank: 4. 验证Cookie有效
+                                Bank-->>User: 5. 执行转账操作
+                                Note over User: 用户不知情，资金被盗
+                        </div>
+                    </div>
+                    <div class="alert alert-warning">
+                        <strong>⚠️ 关键点：</strong>浏览器在请求图片时会自动携带目标网站的Cookie，服务器无法区分是用户主动请求还是被诱导的请求。
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
                     <h6>🔍 漏洞代码</h6>
                 </div>
                 <div class="card-body">
@@ -122,6 +163,9 @@ $content = '<div class="card">
                     <h6>💻 账户信息</h6>
                 </div>
                 <div class="card-body">
+                    <div class="mb-3">
+                        <a href="?reset" class="btn btn-warning">重置账户</a>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <h5>当前余额</h5>
