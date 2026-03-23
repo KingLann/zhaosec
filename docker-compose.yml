@@ -2,11 +2,14 @@ version: '3'
 
 services:
   zhaosec:
-    image: lanso4/zhaosec:v2.0.1
+    image: lanso4/zhaosec:v2.0.3
     container_name: zhaosec
     ports:
       - "80:80"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.10
 
   xxelab:
     image: lanso4/xxelab:v1.0.0
@@ -14,6 +17,9 @@ services:
     ports:
       - "10001:80"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.11
 
   unserialize:
     image: mcc0624/ser:1.8
@@ -21,12 +27,20 @@ services:
     ports:
       - "10002:80"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.12
+
   ssti:
     image: mcc0624/flask_ssti:last
     container_name: ssti
+    command: bash -c '/etc/rc.local; /bin/bash'
     ports:
       - "10003:80"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.13
 
   web-yxcms:
     image: lanso4/web-yxcms
@@ -34,6 +48,9 @@ services:
     ports:
       - "10004:80"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.14
 
   ctflab:
     image: lanso4/ctf1-server:2025
@@ -44,12 +61,19 @@ services:
     ports:
       - "10005:3000"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.15
+
   db:
     image: lanso4/ctf1-db:2025
-    container_name: db  
+    container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: "root"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.16
 
   sqli:
     image: acgpiano/sqli-labs
@@ -57,6 +81,9 @@ services:
     ports:
       - "10006:80"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.17
 
   xss:
     image: c0ny1/xss-challenge-tour
@@ -64,6 +91,10 @@ services:
     ports:
       - "10007:80"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.18
+
   csrf:
     image: amolnaik4/bodhi_app
     container_name: csrf
@@ -71,3 +102,33 @@ services:
       - "10008:80"
       - "10009:8000"
     restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.19
+
+  ssrf_file:
+    image: lanso4/ssrf_file:v1.4
+    container_name: file
+    expose:
+      - "80"
+    restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.20
+
+  ssrf_metadata:
+    image: lanso4/ssrf_metedata:v1.0
+    container_name: metadata
+    expose:
+      - "80"
+    restart: always
+    networks:
+      ssrf-internal-network:
+        ipv4_address: 192.168.100.21
+
+networks:
+  ssrf-internal-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24
