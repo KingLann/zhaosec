@@ -41,6 +41,9 @@ dist/
 *.sql
 *.db
 
+# 本地副本
+sqlicopy/
+
 # 备份文件
 *.bak
 *.backup
