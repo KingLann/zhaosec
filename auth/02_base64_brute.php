@@ -9,17 +9,21 @@ $users = [
     'user' => '123456789'
 ];
 
+// 检查是否是退出登录后跳转回来的（浏览器会缓存Basic Auth凭据，需要忽略）
+$logged_out = isset($_GET['logout']) && $_GET['logout'] === '1';
+
 // 检查是否有HTTP基础认证头
-if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+if (!$logged_out && isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
     $username = $_SERVER['PHP_AUTH_USER'];
     $password = $_SERVER['PHP_AUTH_PW'];
-    
+
     // 验证用户名密码
     if (isset($users[$username]) && $users[$username] === $password) {
         $_SESSION['logged_in'] = true;
         $_SESSION['username'] = $username;
         $_SESSION['flag'] = 'FLAG{Base64_Encoding_Bypass_Success}';
         $_SESSION['vuln_name'] = 'Base64编码爆破';
+        $_SESSION['login_page'] = '02_base64_brute.php';
         header('Location: success.php');
         exit;
     } else {
@@ -28,7 +32,7 @@ if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
 }
 
 // 如果没有认证或认证失败，发送401响应要求认证
-if (!isset($_SESSION['logged_in']) || $error) {
+if (!$logged_out && (!isset($_SESSION['logged_in']) || $error)) {
     header('WWW-Authenticate: Basic realm="Secure Area"');
     header('HTTP/1.0 401 Unauthorized');
 }

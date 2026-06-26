@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $username;
             $_SESSION['flag'] = 'FLAG{AES_Encryption_Client_Side_Bypass}';
             $_SESSION['vuln_name'] = '前端AES加密爆破';
+            $_SESSION['login_page'] = '03_aes_brute.php';
             header('Location: success.php');
             exit;
         }

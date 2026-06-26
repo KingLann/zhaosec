@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = 'security_tester';
             $_SESSION['flag'] = 'FLAG{Account_Enumeration_Vulnerability_Found}';
             $_SESSION['vuln_name'] = '账户枚举';
+            $_SESSION['login_page'] = '04_account_enum.php';
             header('Location: success.php');
             exit;
         } else {

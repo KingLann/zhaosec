@@ -69,12 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'iat' => time()
         ];
         $token = generateJWT($payload, $secret_key);
-        
+
         // 设置Cookie，模拟真实JWT传输
         setcookie('jwt_token', $token, time() + 3600, '/', '', false, false); // httponly=false允许JS读取
         $_SESSION['token'] = $token;
         $_SESSION['logged_in'] = true;
-        
+        $_SESSION['jwt_referrer'] = '06_jwt_weak_key.php';
+
         header('Location: jwt_dashboard.php');
         exit;
     } else {

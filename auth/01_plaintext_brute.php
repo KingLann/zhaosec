@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $username;
         $_SESSION['flag'] = 'FLAG{Plaintext_Password_Brute_Force_Success}';
         $_SESSION['vuln_name'] = '明文传输密码爆破';
+        $_SESSION['login_page'] = '01_plaintext_brute.php';
         header('Location: success.php');
         exit;
     } else {

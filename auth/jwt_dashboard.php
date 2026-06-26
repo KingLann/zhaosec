@@ -36,6 +36,7 @@ if (!$payload) {
 }
 
 $is_admin = ($payload['role'] ?? '') === 'admin';
+$jwt_referrer = $_SESSION['jwt_referrer'] ?? '06_jwt_weak_key.php';
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -243,7 +244,7 @@ $is_admin = ($payload['role'] ?? '') === 'admin';
             
             <br>
             <a href="index.php" class="back-link">← 返回身份认证首页</a>
-            <a href="logout.php?redirect=06_jwt_weak_key.php" onclick="clearJWTCookie()" style="margin-left: 20px; color: #dc3545; text-decoration: none; font-weight: 600;">退出登录</a>
+            <a href="logout.php?redirect=<?php echo urlencode($jwt_referrer); ?>" onclick="clearJWTCookie()" style="margin-left: 20px; color: #dc3545; text-decoration: none; font-weight: 600;">退出登录</a>
         </div>
     </div>
     

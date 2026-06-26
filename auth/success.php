@@ -7,6 +7,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $username = $_SESSION['username'] ?? 'Unknown';
 $flag = $_SESSION['flag'] ?? 'FLAG{Default_Success_Flag}';
 $vuln_name = $_SESSION['vuln_name'] ?? '身份认证';
+$login_page = $_SESSION['login_page'] ?? '01_plaintext_brute.php';
+$logout_redirect = $login_page;
+// Base64认证页面需要带logout参数以清除浏览器缓存的凭据
+if ($login_page === '02_base64_brute.php') {
+    $logout_redirect = $login_page . '?logout=1';
+}
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -128,7 +134,7 @@ $vuln_name = $_SESSION['vuln_name'] ?? '身份认证';
         
         <div>
             <a href="index.php" class="back-link">← 返回身份认证首页</a>
-            <a href="logout.php?redirect=01_plaintext_brute.php" class="logout-btn">退出登录</a>
+            <a href="logout.php?redirect=<?php echo urlencode($logout_redirect); ?>" class="logout-btn">退出登录</a>
         </div>
     </div>
 </body>
