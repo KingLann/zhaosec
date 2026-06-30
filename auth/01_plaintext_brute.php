@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 $error = '';
 $success = '';
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -107,17 +107,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 14px;
             color: #2c3e50;
         }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-        }
+
     </style>
 </head>
 <body>
     <div class="login-container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <h2>1. 🔐 明文传输登录</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
@@ -142,7 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn">登录</button>
         </form>
-        <a href="index.php" class="back-link">← 返回身份认证首页</a>
     </div>
 </body>
 </html>

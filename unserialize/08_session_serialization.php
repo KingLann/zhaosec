@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = 'Session序列化机制缺陷';
 $module_icon = '💾';
 $module_desc = '利用Session处理器差异，通过php_serialize与php处理器混用注入恶意对象。';
@@ -54,8 +54,7 @@ if (isset($_GET['data'])) {
 }
 
 $content = <<<'EOT'
-
-        <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header"><h5 class="mb-0">💡 漏洞原理</h5></div>
             <div class="card-body">
                 <div class="alert alert-info">

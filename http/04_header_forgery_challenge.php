@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // HTTP头伪造挑战漏洞场景
 $module_name = 'HTTP头伪造挑战';
 $module_icon = '🎯';
@@ -97,7 +97,8 @@ switch ($level) {
 $sessionId = session_id();
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🎯 HTTP头伪造挑战</h5>
         </div>

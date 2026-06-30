@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = '密钥泄露攻击';
 $module_icon = '🔐';
 $module_desc = '演示JWT密钥泄露和弱密钥攻击场景。';
@@ -130,7 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $currentToken = createJWT($_SESSION['jwt_user'], $secretKey);
 
-$content = '<div class="card">
+$content = '
+<div class="card">
     <div class="card-header">
         <h5 class="mb-0">🔐 密钥泄露攻击</h5>
     </div>

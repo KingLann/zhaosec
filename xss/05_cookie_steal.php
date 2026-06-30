@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Cookie窃取伪造登录漏洞演示
 session_start();
 
@@ -55,7 +55,7 @@ $current_role = $_SESSION['role'] ?? '';
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -164,13 +164,6 @@ $current_role = $_SESSION['role'] ?? '';
             min-height: 100px;
             margin-top: 15px;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #11998e;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .flag-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -195,6 +188,7 @@ $current_role = $_SESSION['role'] ?? '';
 </head>
 <body>
     <div class="container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <div class="card">
             <div class="alert-danger">
                 <h4>🚨 Cookie窃取与伪造登录</h4>
@@ -311,8 +305,6 @@ setcookie('session_id', $value, [
     'httponly' => true,    // 禁止JS访问
     'samesite' => 'Strict' // 限制跨站发送
 ]);</div>
-            
-            <a href="index.php" class="back-link">← 返回XSS模块首页</a>
         </div>
     </div>
 

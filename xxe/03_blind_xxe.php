@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 盲XXE漏洞
 $module_name = '盲XXE';
 $module_icon = '🕵️';

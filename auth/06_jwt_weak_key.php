@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 $error = '';
 $token = '';
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -195,13 +195,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #fee;
             border-radius: 8px;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .tabs {
             display: flex;
             gap: 10px;
@@ -266,6 +259,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <div class="card">
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             <div class="alert-info">
                 <h4>🔐 JWT认证机制</h4>
                 <p>本场景使用Cookie传输JWT Token，支持Authorization: Bearer头方式。登录后可在浏览器开发者工具中查看Cookie。</p>
@@ -364,7 +358,6 @@ const secret = 'weak_secret_key_123';
                 </p>
             </div>
             
-            <a href="index.php" class="back-link">← 返回身份认证首页</a>
         </div>
     </div>
 

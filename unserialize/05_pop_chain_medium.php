@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = 'POP链构造 - 中等';
 $module_icon = '🔗';
 $module_desc = '涉及两个类的POP链，通过对象属性传递形成方法调用链。';
@@ -57,8 +57,7 @@ if (isset($_GET['data'])) {
 }
 
 $content = <<<'EOT'
-
-        <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header"><h5 class="mb-0">💡 漏洞原理</h5></div>
             <div class="card-body">
                 <div class="alert alert-info">

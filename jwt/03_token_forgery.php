@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = '令牌伪造攻击';
 $module_icon = '🎭';
 $module_desc = '演示JWT令牌伪造攻击场景。';
@@ -99,7 +99,8 @@ $currentToken = createJWT($_SESSION['jwt_user'], $secretKey);
 $header = json_decode(base64UrlDecode(explode('.', $currentToken)[0]), true);
 $payload = json_decode(base64UrlDecode(explode('.', $currentToken)[1]), true);
 
-$content = '<div class="card">
+$content = '
+<div class="card">
     <div class="card-header">
         <h5 class="mb-0">🎭 令牌伪造攻击</h5>
     </div>

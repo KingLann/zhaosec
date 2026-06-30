@@ -153,7 +153,6 @@ echo getHeader('密码重置缺陷');
                 <!-- 完成 -->
                 <div class="text-center">
                     <p class="text-success">密码重置成功！</p>
-                    <a href="07_password_reset.php" class="btn btn-primary">返回</a>
                 </div>
                 <?php endif; ?>
                 

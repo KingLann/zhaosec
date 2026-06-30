@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 $error = '';
 
@@ -46,7 +46,7 @@ if (!$logged_out && (!isset($_SESSION['logged_in']) || $error)) {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -147,13 +147,6 @@ if (!$logged_out && (!isset($_SESSION['logged_in']) || $error)) {
             margin-top: 10px;
             border: 1px solid #bee5eb;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #f5576c;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .tabs {
             display: flex;
             gap: 10px;
@@ -188,6 +181,7 @@ if (!$logged_out && (!isset($_SESSION['logged_in']) || $error)) {
 <body>
     <div class="container">
         <div class="card">
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             <div class="alert-info">
                 <h4>🔐 HTTP基础认证 (Basic Auth)</h4>
                 <p>本场景使用HTTP基础认证，用户名密码会以Base64编码形式在Authorization头中传输。</p>
@@ -274,7 +268,6 @@ fetch('/auth/02_base64_brute.php', {
                 </ol>
             </div>
             
-            <a href="index.php" class="back-link">← 返回身份认证首页</a>
         </div>
     </div>
 

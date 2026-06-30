@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 存储型XSS漏洞演示 - 使用文件持久化存储
 $comments_file = __DIR__ . '/data/comments.json';
 
@@ -53,7 +53,7 @@ if (isset($_GET['clear'])) {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -168,13 +168,6 @@ if (isset($_GET['clear'])) {
         .payload-list code:hover {
             text-decoration: underline;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #f5576c;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .flag-box {
             background: #d4edda;
             border: 2px solid #28a745;
@@ -193,6 +186,7 @@ if (isset($_GET['clear'])) {
 </head>
 <body>
     <div class="container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <div class="card">
             <div class="alert-danger">
                 <h4>🚨 存储型XSS漏洞</h4>
@@ -274,7 +268,6 @@ if (isset($_GET['clear'])) {
                 3. <strong>CSP策略：</strong>限制内联脚本的执行<br>
                 4. <strong>HttpOnly Cookie：</strong>防止脚本访问敏感Cookie
             </div>
-            <a href="index.php" class="back-link">← 返回XSS模块首页</a>
         </div>
     </div>
 

@@ -1,15 +1,12 @@
-<?php
+﻿<?php
 // SQL注入绕过场景
 // 使用真实MySQL数据库
 
-// 数据库连接信息
-$servername = "127.0.0.1";
-$username = "root";
-$password = "123456";
-$dbname = "zhao";
+// 引入公共数据库配置
+require_once __DIR__ . '/db_config.php';
 
 // 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = getDbConnection();
 
 // 检查连接
 if ($conn->connect_error) {
@@ -94,7 +91,7 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -227,13 +224,6 @@ $conn->close();
         .flag-box.show {
             display: block;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .bypass-techniques {
             background: #f0f0f0;
             padding: 20px;
@@ -252,6 +242,8 @@ $conn->close();
                 <h4>🚨 SQL注入绕过漏洞</h4>
                 <p>本页面存在SQL注入漏洞，虽然有简单的WAF过滤，但可以通过各种技巧绕过。</p>
             </div>
+            
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             
             <h2>5. 🔓 SQL注入绕过</h2>
             
@@ -455,8 +447,6 @@ $conn->close();
                 4. <strong>最小权限：</strong>限制数据库用户权限<br>
                 5. <strong>代码审计：</strong>定期进行代码安全审计
             </div>
-            
-            <a href="index.php" class="back-link">← 返回SQL注入模块首页</a>
         </div>
     </div>
 

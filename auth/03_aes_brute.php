@@ -1,26 +1,24 @@
-<?php
+﻿<?php
 session_start();
 $error = '';
 
-function aes_encrypt($data, $key) {
-    $iv = openssl_random_pseudo_bytes(16);
-    $encrypted = openssl_encrypt($data, 'AES-128-CBC', $key, OPENSSL_RAW_DATA, $iv);
-    return base64_encode($iv . $encrypted);
-}
+$aes_key = '1234567890123456';
+$aes_iv = 'abcdefghijklmnop';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $password_encrypted = $_POST['password'] ?? '';
     
     $users = [
-        'admin' => aes_encrypt('123456', 'mysecretkey123'),
-        'test' => aes_encrypt('password', 'mysecretkey123'),
-        'user' => aes_encrypt('123456789', 'mysecretkey123')
+        'admin' => '123456',
+        'test' => 'password',
+        'user' => '123456789'
     ];
     
     if (isset($users[$username])) {
-        $encrypted_input = aes_encrypt($password, 'mysecretkey123');
-        if ($users[$username] === $encrypted_input) {
+        $decrypted = openssl_decrypt(base64_decode($password_encrypted), 'AES-128-CBC', $aes_key, OPENSSL_RAW_DATA, $aes_iv);
+        
+        if ($decrypted === $users[$username]) {
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $username;
             $_SESSION['flag'] = 'FLAG{AES_Encryption_Client_Side_Bypass}';
@@ -42,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -114,21 +112,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 14px;
             color: #0c5460;
         }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #4facfe;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
     <div class="login-container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <h2>3. 🔐 AES加密登录</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
-            密码使用AES加密传输，但密钥硬编码在前端，攻击者可以获取密钥后进行加密爆破。<br>
+            密码使用AES加密传输，密钥和IV硬编码在前端，攻击者可获取密钥后自行加密爆破。<br>
             <br>
             <strong>测试账号：</strong><br>
             - admin / 123456<br>
@@ -149,26 +141,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn">登录</button>
         </form>
-        <a href="index.php" class="back-link">← 返回身份认证首页</a>
     </div>
+    <script src="../assets/js/crypto-js.min.js"></script>
     <script>
-        const secretKey = 'mysecretkey123';
+        const secretKey = CryptoJS.enc.Utf8.parse('1234567890123456');
+        const secretIv = CryptoJS.enc.Utf8.parse('abcdefghijklmnop');
         
-        function aesEncrypt(text, key) {
-            const iv = CryptoJS.lib.WordArray.random(16);
-            const encrypted = CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key), {
+        function aesEncrypt(text, key, iv) {
+            const encrypted = CryptoJS.AES.encrypt(text, key, {
                 iv: iv,
                 mode: CryptoJS.mode.CBC,
                 padding: CryptoJS.pad.Pkcs7
             });
-            const combined = iv.concat(encrypted.ciphertext);
-            return CryptoJS.enc.Base64.stringify(combined);
+            return CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
         }
         
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const password = document.getElementById('password').value;
-            const encryptedPassword = aesEncrypt(password, secretKey);
+            const encryptedPassword = aesEncrypt(password, secretKey, secretIv);
             
             const hiddenInput = document.createElement('input');
             hiddenInput.type = 'hidden';
@@ -182,6 +173,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             this.submit();
         });
     </script>
-    <script src="../assets/js/crypto-js.min.js"></script>
 </body>
 </html>

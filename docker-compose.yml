@@ -2,10 +2,19 @@ version: '3'
 
 services:
   zhaosec:
-    image: lanso4/zhaosec:v2.1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: zhaosec-local:latest
     container_name: zhaosec
     ports:
       - "80:80"
+      - "3306:3306"
+    volumes:
+      - ./:/var/www/html
+      - ./tmp:/var/www/html/tmp
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
     restart: always
     networks:
       ssrf-internal-network:
@@ -109,6 +118,8 @@ services:
   ssrf_file:
     image: lanso4/ssrf_file:v1.4
     container_name: file
+    ports:
+      - "10013:80"
     expose:
       - "80"
     restart: always
@@ -119,6 +130,8 @@ services:
   ssrf_metadata:
     image: lanso4/ssrf_metedata:v1.0
     container_name: metadata
+    ports:
+      - "10010:80"
     expose:
       - "80"
     restart: always

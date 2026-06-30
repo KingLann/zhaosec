@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = 'POP链构造 - 困难';
 $module_icon = '🔗';
 $module_desc = '涉及三个类的复杂POP链，通过多层对象嵌套和方法调用实现命令执行。';
@@ -86,8 +86,7 @@ if (isset($_GET['data'])) {
 }
 
 $content = <<<'EOT'
-
-        <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header"><h5 class="mb-0">💡 漏洞原理</h5></div>
             <div class="card-body">
                 <div class="alert alert-info">

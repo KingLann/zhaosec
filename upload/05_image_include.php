@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 图片马+文件包含漏洞
 $module_name = '图片马+文件包含';
 $module_icon = '🖼️';
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
 
 // 页面内容
 $content = '<div class="card">
-        <div class="card-header">
+<div class="card-header">
             <h5 class="mb-0">🖼️ 图片马+文件包含</h5>
         </div>
         <div class="card-body">

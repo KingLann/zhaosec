@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 不安全的文件下载IDOR漏洞场景
 $module_name = '不安全的文件下载';
 $module_icon = '📁';
@@ -30,7 +30,8 @@ if (isset($_GET['file'])) {
 }
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">📁 不安全的文件下载</h5>
         </div>

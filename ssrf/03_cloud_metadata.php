@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 云元数据SSRF漏洞
 $module_name = '云元数据';
 $module_icon = '☁️';
@@ -61,7 +61,7 @@ if (isset($_GET['metadata'])) {
 
 // 页面内容
 $content = '<div class="card">
-        <div class="card-header">
+<div class="card-header">
             <h5 class="mb-0">☁️ 云元数据</h5>
         </div>
         <div class="card-body">

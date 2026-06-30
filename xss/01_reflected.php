@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 反射型XSS漏洞演示
 $search = $_GET['search'] ?? '';
 ?>
@@ -11,7 +11,7 @@ $search = $_GET['search'] ?? '';
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -90,13 +90,6 @@ $search = $_GET['search'] ?? '';
         .payload-list code:hover {
             text-decoration: underline;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .flag-box {
             background: #d4edda;
             border: 2px solid #28a745;
@@ -115,6 +108,7 @@ $search = $_GET['search'] ?? '';
 </head>
 <body>
     <div class="container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <div class="card">
             <div class="alert-danger">
                 <h4>🚨 反射型XSS漏洞</h4>
@@ -177,7 +171,6 @@ $search = $_GET['search'] ?? '';
                 3. <strong>CSP策略：</strong>设置Content-Security-Policy头限制脚本执行<br>
                 4. <strong>HttpOnly Cookie：</strong>防止XSS窃取Cookie
             </div>
-            <a href="index.php" class="back-link">← 返回XSS模块首页</a>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 基础IDOR漏洞场景
 $module_name = '基础IDOR';
 $module_icon = '🔓';
@@ -74,7 +74,8 @@ if ($user) {
 }
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🔓 基础IDOR</h5>
         </div>

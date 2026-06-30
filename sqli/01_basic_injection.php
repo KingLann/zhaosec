@@ -1,15 +1,12 @@
-<?php
+﻿<?php
 // SQL注入基础场景
 // 使用真实MySQL数据库
 
-// 数据库连接信息
-$servername = "127.0.0.1";
-$username = "root";
-$password = "123456";
-$dbname = "zhao";
+// 引入公共数据库配置
+require_once __DIR__ . '/db_config.php';
 
 // 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = getDbConnection();
 
 // 检查连接
 if ($conn->connect_error) {
@@ -81,7 +78,7 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -212,13 +209,6 @@ $conn->close();
         .flag-box.show {
             display: block;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
@@ -229,7 +219,7 @@ $conn->close();
                 <p>本页面存在SQL注入漏洞，用户输入直接拼接到SQL语句中，未进行任何过滤。</p>
             </div>
             
-            <a href="index.php" class="back-link" style="display: inline-block; margin-bottom: 15px; color: #667eea; text-decoration: none; font-weight: 600;">← 返回SQL注入模块首页</a>
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             
             <h2>1. 💉 SQL注入基础</h2>
             
@@ -560,8 +550,6 @@ ResultSet rs = stmt.executeQuery();
                 2. 预处理语句在数据库层面进行参数绑定，有效防止注入<br>
                 3. 即使使用参数化查询，也要注意动态SQL构造（如ORDER BY字段）的防护
             </div>
-            
-            <a href="index.php" class="back-link">← 返回SQL注入模块首页</a>
         </div>
     </div>
 

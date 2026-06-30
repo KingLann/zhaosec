@@ -312,6 +312,23 @@ body {
     text-decoration: underline;
 }
 
+/* 统一样式：关卡返回按钮 */
+.back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #2c7da0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 14px;
+    transition: color 0.15s ease;
+}
+.back-home:hover {
+    color: #1e3c72;
+    text-decoration: none;
+}
+
 @media (max-width: 680px) {
     body {
         padding: 1rem;

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // POST型CSRF漏洞场景
 $module_name = 'POST型CSRF';
 $module_icon = '📝';
@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">📝 POST型CSRF</h5>
         </div>

@@ -199,7 +199,6 @@ echo getHeader('垂直越权漏洞');
                         </table>
                     </div>
                 </div>
-                <a href="05_vertical_privilege.php" class="btn btn-secondary mt-3">返回普通面板</a>
                 <?php endif; ?>
             </div>
         </div>

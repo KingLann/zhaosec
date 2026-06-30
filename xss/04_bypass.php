@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // XSS绕过漏洞演示
 $input = $_GET['input'] ?? '';
 
@@ -35,7 +35,7 @@ if ($filter_level === 'weak') {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -168,6 +168,7 @@ if ($filter_level === 'weak') {
 </head>
 <body>
     <div class="container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <div class="card">
             <div class="alert-danger">
                 <h4>🚨 XSS绕过漏洞</h4>
@@ -304,7 +305,6 @@ function mediumFilter($str) {
                 4. <strong>HttpOnly Cookie：</strong>防止XSS窃取Cookie<br>
                 5. <strong>框架自动转义：</strong>使用现代Web框架的自动转义功能
             </div>
-            <a href="index.php" class="back-link">← 返回XSS模块首页</a>
         </div>
     </div>
 

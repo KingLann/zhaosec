@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = '__wakeup绕过';
 $module_icon = '🛡️';
 $module_desc = '利用CVE-2016-7124漏洞，通过修改属性数量绕过__wakeup()安全检查。';
@@ -41,8 +41,7 @@ if (isset($_GET['data'])) {
 $data_attr = isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '';
 
 $content = <<<'EOT'
-
-        <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header"><h5 class="mb-0">💡 漏洞原理</h5></div>
             <div class="card-body">
                 <div class="alert alert-info">

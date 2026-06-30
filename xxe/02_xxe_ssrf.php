@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // XXE SSRF利用
 $module_name = 'SSRF利用';
 $module_icon = '🌐';
@@ -25,7 +25,8 @@ if (isset($_POST['xml'])) {
 }
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🌐 XXE SSRF利用</h5>
         </div>

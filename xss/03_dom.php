@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // DOM型XSS漏洞演示
 ?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -129,6 +129,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <div class="card">
             <div class="alert-danger">
                 <h4>🚨 DOM型XSS漏洞</h4>
@@ -212,7 +213,6 @@ if (name) {
                 3. <strong>避免使用危险函数：</strong>如document.write、eval等<br>
                 4. <strong>CSP策略：</strong>限制内联脚本的执行
             </div>
-            <a href="index.php" class="back-link">← 返回XSS模块首页</a>
         </div>
     </div>
 

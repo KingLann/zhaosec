@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = 'POP链构造 - 简单';
 $module_icon = '🔗';
 $module_desc = '通过多个类的魔术方法串联形成攻击链，入门级POP链构造。';
@@ -54,8 +54,7 @@ if (isset($_GET['data'])) {
 $data_attr = isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '';
 
 $content = <<<'EOT'
-
-        <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header"><h5 class="mb-0">💡 漏洞原理</h5></div>
             <div class="card-body">
                 <div class="alert alert-info">

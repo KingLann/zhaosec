@@ -1,11 +1,12 @@
-<?php
+﻿<?php
 // Cookie安全问题场景
 $module_name = 'Cookie安全问题';
 $module_icon = '🍪';
 $module_desc = '学习Cookie的安全配置和常见的Cookie相关漏洞';
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🍪 Cookie安全问题</h5>
         </div>

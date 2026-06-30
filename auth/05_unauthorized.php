@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 // 模拟敏感配置文件内容（未授权访问可获取）
@@ -55,7 +55,7 @@ $admin_panel_url = 'admin_panel.php';
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -161,13 +161,6 @@ $admin_panel_url = 'admin_panel.php';
         .btn-admin:hover {
             transform: translateY(-2px);
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #ff6b6b;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .flag-box {
             background: #d4edda;
             border: 2px solid #28a745;
@@ -209,6 +202,7 @@ $admin_panel_url = 'admin_panel.php';
     <div class="container">
         <!-- 漏洞说明 -->
         <div class="card">
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             <div class="alert-danger">
                 <h4>🚨 严重安全漏洞检测</h4>
                 <p>本页面存在<strong>未授权访问漏洞</strong>，攻击者无需任何认证即可访问敏感信息，包括系统配置、JWT密钥、数据库凭证等。</p>
@@ -275,8 +269,6 @@ $admin_panel_url = 'admin_panel.php';
                 🚩 FLAG{Unauthorized_Access_Sensitive_Data_Exposed}<br>
                 <span style="font-size: 0.9rem;">你发现并利用了未授权访问漏洞！</span>
             </div>
-            
-            <a href="index.php" class="back-link">← 返回身份认证首页</a>
         </div>
     </div>
 

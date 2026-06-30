@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = 'SSTI实战靶场';
 $module_icon = '🎯';
 $module_desc = '跳转到真实的SSTI模板注入靶场环境。';

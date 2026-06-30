@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 基础SSRF漏洞
 $module_name = '基础SSRF';
 $module_icon = '🌐';
@@ -35,7 +35,7 @@ if (isset($_GET['url'])) {
 
 // 页面内容
 $content = '<div class="card">
-        <div class="card-header">
+<div class="card-header">
             <h5 class="mb-0">🌐 基础SSRF漏洞</h5>
         </div>
         <div class="card-body">

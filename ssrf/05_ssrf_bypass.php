@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // SSRF绕过限制
 $module_name = 'SSRF绕过';
 $module_icon = '🔓';
@@ -49,7 +49,7 @@ if (isset($_GET['bypass'])) {
 
 // 页面内容
 $content = '<div class="card">
-        <div class="card-header">
+<div class="card-header">
             <h5 class="mb-0">🔓 SSRF绕过</h5>
         </div>
         <div class="card-body">

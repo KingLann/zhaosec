@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = 'JWT实战挑战';
 $module_icon = '🏆';
 $module_desc = '综合JWT漏洞利用挑战场景。';
@@ -61,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['token'])) {
     }
 }
 
-$content = '<div class="card">
+$content = '
+<div class="card">
     <div class="card-header">
         <h5 class="mb-0">🏆 JWT实战挑战</h5>
     </div>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 命令执行绕过演示
 $module_name = '命令执行绕过演示';
 $module_icon = '🔐';
@@ -139,6 +139,8 @@ if ($level > 0 && $level <= 5 && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // ========== 构建页面 ==========
 $content = '';
+$content .= '
+';
 
 // 关卡选择按钮
 $content .= '<div class="mb-3">';

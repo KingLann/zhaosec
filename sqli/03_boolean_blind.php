@@ -1,15 +1,12 @@
-<?php
+﻿<?php
 // 布尔盲注场景
 // 使用真实MySQL数据库
 
-// 数据库连接信息
-$servername = "127.0.0.1";
-$username = "root";
-$password = "123456";
-$dbname = "zhao";
+// 引入公共数据库配置
+require_once __DIR__ . '/db_config.php';
 
 // 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = getDbConnection();
 
 // 检查连接
 if ($conn->connect_error) {
@@ -74,7 +71,7 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -198,13 +195,6 @@ $conn->close();
         .flag-box.show {
             display: block;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .error-box {
             background: #f8d7da;
             border: 2px solid #f5c6cb;
@@ -232,6 +222,8 @@ $conn->close();
                 <h4>🚨 布尔盲注漏洞</h4>
                 <p>本页面存在布尔盲注漏洞，通过构造条件语句，根据页面返回的布尔值判断数据库信息。</p>
             </div>
+            
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             
             <h2>3. 🔍 布尔盲注</h2>
             
@@ -302,8 +294,6 @@ $conn->close();
                 4. <strong>速率限制：</strong>对同一IP的请求频率进行限制<br>
                 5. <strong>最小权限：</strong>限制数据库用户权限
             </div>
-            
-            <a href="index.php" class="back-link">← 返回SQL注入模块首页</a>
         </div>
     </div>
 

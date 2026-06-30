@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 $secret_key = 'weak_secret_key_123';
 
@@ -47,7 +47,7 @@ $jwt_referrer = $_SESSION['jwt_referrer'] ?? '06_jwt_weak_key.php';
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -124,13 +124,7 @@ $jwt_referrer = $_SESSION['jwt_referrer'] ?? '06_jwt_weak_key.php';
             border-radius: 10px;
             color: #2c3e50;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -187,6 +181,7 @@ $jwt_referrer = $_SESSION['jwt_referrer'] ?? '06_jwt_weak_key.php';
 <body>
     <div class="container">
         <div class="card">
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             <h2>🎉 JWT认证成功</h2>
             
             <?php if ($is_admin): ?>
@@ -243,7 +238,6 @@ $jwt_referrer = $_SESSION['jwt_referrer'] ?? '06_jwt_weak_key.php';
             </div>
             
             <br>
-            <a href="index.php" class="back-link">← 返回身份认证首页</a>
             <a href="logout.php?redirect=<?php echo urlencode($jwt_referrer); ?>" onclick="clearJWTCookie()" style="margin-left: 20px; color: #dc3545; text-decoration: none; font-weight: 600;">退出登录</a>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = 'Phar反序列化';
 $module_icon = '📦';
 $module_desc = '利用phar://协议触发Phar文件元数据的自动反序列化，突破上传限制。';
@@ -24,8 +24,7 @@ if (isset($_GET['file'])) {
 }
 
 $content = <<<'EOT'
-
-        <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header"><h5 class="mb-0">💡 漏洞原理</h5></div>
             <div class="card-body">
                 <div class="alert alert-info">

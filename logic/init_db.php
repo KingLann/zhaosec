@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 逻辑漏洞场景 - 数据库初始化
 // 使用真实MySQL数据库
 
@@ -299,6 +299,6 @@ echo "<hr>";
 echo "<div style='background: #d4edda; padding: 20px; border-radius: 8px; margin-top: 20px;'>";
 echo "<h3>✅ 数据库初始化完成！</h3>";
 echo "<p>所有逻辑漏洞场景所需的表和数据已创建完成。</p>";
-echo "<a href='index.php' style='display: inline-block; margin-top: 10px; padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 5px;'>返回逻辑漏洞首页</a>";
+echo "<a href='index.php' style='display: inline-block; margin-top: 10px; padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 5px;'>返回关卡列表</a>";
 echo "</div>";
 ?>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 绕过技巧
 $module_name = '绕过技巧';
 $module_icon = '🚧';
@@ -6,7 +6,7 @@ $module_desc = '常见WAF绕过和过滤绕过方法。';
 
 // 页面内容
 $content = <<<HTML
-    <div class="card">
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🚧 绕过技巧</h5>
         </div>

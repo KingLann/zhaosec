@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 命令执行漏洞
 $module_name = '命令执行漏洞';
 $module_icon = '⚡';
@@ -70,7 +70,8 @@ if (isset($_GET['ip'])) {
 }
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">⚡ 命令执行漏洞</h5>
         </div>

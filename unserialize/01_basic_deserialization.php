@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $module_name = '基本反序列化';
 $module_icon = '🎯';
 $module_desc = '通过直接利用unserialize()修改对象属性，了解反序列化漏洞的基本原理。';
@@ -38,8 +38,7 @@ if (isset($_GET['data'])) {
 $data_attr = isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '';
 
 $content = <<<'EOT'
-
-        <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header"><h5 class="mb-0">💡 漏洞原理</h5></div>
             <div class="card-body">
                 <div class="alert alert-info">

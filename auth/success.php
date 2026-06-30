@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: 01_plaintext_brute.php');
@@ -23,7 +23,7 @@ if ($login_page === '02_base64_brute.php') {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -89,13 +89,6 @@ if ($login_page === '02_base64_brute.php') {
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #11998e;
-            text-decoration: none;
-            font-weight: 600;
-        }
         .logout-btn {
             display: inline-block;
             margin-left: 20px;
@@ -119,6 +112,7 @@ if ($login_page === '02_base64_brute.php') {
 </head>
 <body>
     <div class="success-container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <div class="success-icon">✅</div>
         <div class="vuln-badge"><?php echo htmlspecialchars($vuln_name); ?></div>
         <h1>登录成功！</h1>
@@ -133,7 +127,6 @@ if ($login_page === '02_base64_brute.php') {
         </div>
         
         <div>
-            <a href="index.php" class="back-link">← 返回身份认证首页</a>
             <a href="logout.php?redirect=<?php echo urlencode($logout_redirect); ?>" class="logout-btn">退出登录</a>
         </div>
     </div>

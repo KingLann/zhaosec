@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 内网探测SSRF漏洞
 $module_name = '内网探测';
 $module_icon = '🔍';
@@ -51,7 +51,7 @@ if (isset($_GET['target'])) {
 
 // 页面内容
 $content = '<div class="card">
-        <div class="card-header">
+<div class="card-header">
             <h5 class="mb-0">🔍 内网探测</h5>
         </div>
         <div class="card-body">

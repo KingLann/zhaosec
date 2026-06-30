@@ -1,15 +1,12 @@
-<?php
+﻿<?php
 // 万能密码注入场景
 // 使用真实MySQL数据库
 
-// 数据库连接信息
-$servername = "127.0.0.1";
-$username = "root";
-$password = "123456";
-$dbname = "zhao";
+// 引入公共数据库配置
+require_once __DIR__ . '/db_config.php';
 
 // 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = getDbConnection();
 
 // 检查连接
 if ($conn->connect_error) {
@@ -53,7 +50,7 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -178,13 +175,6 @@ $conn->close();
         .flag-box.show {
             display: block;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
@@ -194,6 +184,8 @@ $conn->close();
                 <h4>🚨 万能密码注入漏洞</h4>
                 <p>本页面存在万能密码注入漏洞，攻击者可以通过构造特殊的用户名和密码来绕过登录验证。</p>
             </div>
+            
+            <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
             
             <h2>1. 🔑 万能密码注入</h2>
             
@@ -290,8 +282,6 @@ $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?")
 $stmt->execute([$username, $password]);
 $user = $stmt->fetch();
             </div>
-            
-            <a href="index.php" class="back-link">← 返回SQL注入模块首页</a>
         </div>
     </div>
 

@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 // SQL注入数据库初始化脚本
-// 使用真实MySQL数据库
+// 使用Docker网络中的MySQL数据库
 
-$servername = "127.0.0.1";
+$servername = "db";
 $username = "root";
-$password = "123456";
+$password = "root";
 $dbname = "zhao";
 $reset = isset($_GET['reset']) && $_GET['reset'] == '1';
 
@@ -13,7 +13,12 @@ $conn = new mysqli($servername, $username, $password);
 
 // 检查连接
 if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
+    // 如果服务名解析失败，尝试使用IP地址
+    $servername = "192.168.100.16";
+    $conn = new mysqli($servername, $username, $password);
+    if ($conn->connect_error) {
+        die("连接失败: " . $conn->connect_error);
+    }
 }
 
 echo "连接成功<br>";
@@ -142,5 +147,5 @@ if ($reset) {
 }
 
 // 添加操作链接
-echo "<br><a href='index.php'>返回SQL注入模块首页</a> | <a href='init_db.php?reset=1' onclick='return confirm(\'确定要重置数据库吗？这将清空所有数据并重新初始化。\');'>重置数据库</a>";
+echo "<br><a href='index.php'>返回关卡列表</a> | <a href='init_db.php?reset=1' onclick='return confirm(\'确定要重置数据库吗？这将清空所有数据并重新初始化。\');'>重置数据库</a>";
 ?>

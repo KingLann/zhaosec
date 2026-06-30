@@ -103,7 +103,6 @@ echo getHeader('水平越权漏洞');
                         </table>
                     </div>
                 </div>
-                <a href="04_horizontal_privilege.php" class="btn btn-secondary mt-3">返回</a>
                 <?php else: ?>
                 
                 <h6 class="mt-4">我的信息</h6>

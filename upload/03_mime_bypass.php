@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // MIME类型绕过漏洞
 $module_name = 'MIME类型绕过';
 $module_icon = '🔍';
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // 页面内容
 $content = '<div class="card">
-        <div class="card-header">
+<div class="card-header">
             <h5 class="mb-0">🔍 MIME类型绕过</h5>
         </div>
         <div class="card-body">

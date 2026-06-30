@@ -203,7 +203,7 @@ function getHeader($title) {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #f4f7fc;
             min-height: 100vh;
         }
         .navbar {
@@ -260,7 +260,7 @@ function getHeader($title) {
             <div class="navbar-nav flex-row align-items-center">
                 ' . $userInfo . '
                 <a class="nav-link me-3" href="index.php">首页</a>
-                <a class="nav-link" href="../index.php">返回主站</a>
+                <a class="nav-link" href="index.php">返回关卡列表</a>
             </div>
         </div>
     </nav>

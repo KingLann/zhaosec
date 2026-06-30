@@ -1,11 +1,12 @@
-<?php
+﻿<?php
 // HTTP头注入漏洞场景
 $module_name = 'HTTP头注入';
 $module_icon = '📝';
 $module_desc = '通过注入恶意HTTP头信息，执行未授权操作或绕过安全限制';
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">📝 HTTP头注入</h5>
         </div>

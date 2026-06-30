@@ -1,11 +1,12 @@
-<?php
+﻿<?php
 // HTTP请求走私漏洞场景
 $module_name = 'HTTP请求走私';
 $module_icon = '🚶';
 $module_desc = '通过构造特殊的HTTP请求，绕过安全设备或服务器的防护';
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🚶 HTTP请求走私</h5>
         </div>

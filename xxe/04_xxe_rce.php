@@ -1,11 +1,12 @@
-<?php
+﻿<?php
 // XXE RCE漏洞
 $module_name = 'XXE RCE';
 $module_icon = '💻';
 $module_desc = '利用XXE漏洞执行系统命令。';
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">💻 XXE RCE</h5>
         </div>

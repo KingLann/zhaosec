@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 $error = '';
 $found_users = [];
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background: #f4f7fc;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -124,13 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 14px;
             color: #856404;
         }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #fa709a;
-            text-decoration: none;
-        }
+
         .flag-section {
             background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
             border: 2px solid #28a745;
@@ -151,6 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
+        <a href="index.php" class="back-home"><i class="fas fa-arrow-left"></i> 返回关卡列表</a>
         <h2>4. 🔐 账户枚举</h2>
         <div class="info">
             <strong>漏洞说明：</strong><br>
@@ -190,7 +185,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn btn-success">🚩 验证并获取FLAG</button>
         </form>
         
-        <a href="index.php" class="back-link">← 返回身份认证首页</a>
     </div>
 </body>
 </html>

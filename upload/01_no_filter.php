@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 无过滤文件上传漏洞
 $module_name = '无过滤文件上传';
 $module_icon = '📁';

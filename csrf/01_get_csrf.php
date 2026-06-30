@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // GET型CSRF漏洞场景
 $module_name = 'GET型CSRF';
 $module_icon = '🔗';
@@ -67,7 +67,8 @@ if (!empty($_SESSION['transactions'])) {
 }
 
 // 页面内容
-$content = '<div class="card">
+$content = '
+<div class="card">
         <div class="card-header">
             <h5 class="mb-0">🔗 GET型CSRF</h5>
         </div>
