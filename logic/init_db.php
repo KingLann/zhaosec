@@ -1,33 +1,38 @@
-﻿<?php
+<?php
 // 逻辑漏洞场景 - 数据库初始化
 // 使用真实MySQL数据库
 
-// 数据库连接信息
-$servername = "127.0.0.1";
-$username = "root";
-$password = "123456";
-$dbname = "zhao";
-
-// 创建连接
-$conn = new mysqli($servername, $username, $password);
-
-// 检查连接
-if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
-}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 echo "<h2>🧩 逻辑漏洞场景 - 数据库初始化</h2>";
 
-// 检查并创建数据库
-$create_db_sql = "CREATE DATABASE IF NOT EXISTS $dbname CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-if ($conn->query($create_db_sql) === TRUE) {
-    echo "✅ 数据库 $dbname 检查/创建成功<br>";
-} else {
-    echo "❌ 数据库 $dbname 操作失败: " . $conn->error . "<br>";
+// 多密码容错连接
+$dbname = 'zhao';
+$passwords = ['root', '', '123456'];
+$hosts = ['127.0.0.1', 'localhost'];
+$conn = null;
+$lastError = '';
+
+foreach ($hosts as $host) {
+    foreach ($passwords as $pass) {
+        $conn = @new mysqli($host, 'root', $pass);
+        if (!$conn->connect_error) {
+            break 2;
+        }
+        $lastError = $conn->connect_error;
+    }
 }
 
-// 选择数据库
+if (!$conn || $conn->connect_error) {
+    die("数据库连接失败！请检查 MySQL 是否启动。最后错误: " . $lastError);
+}
+
+// 确保数据库存在
+$conn->query("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 $conn->select_db($dbname);
+
+echo "✅ 数据库连接成功<br>";
 
 // 检查是否需要重置
 $reset = isset($_GET['reset']) && $_GET['reset'] == '1';

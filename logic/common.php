@@ -1,20 +1,35 @@
 <?php
 // 逻辑漏洞场景 - 公共函数库
 
-// 数据库连接信息
-$servername = "127.0.0.1";
-$username = "root";
-$password = "123456";
-$dbname = "zhao";
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
 
-// 创建数据库连接
+// 创建数据库连接（多密码容错，不依赖外部配置文件）
 function getDBConnection() {
-    global $servername, $username, $password, $dbname;
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("连接失败: " . $conn->connect_error);
+    $dbname = 'zhao';
+    
+    // 密码候选列表（按优先级排序）
+    $passwords = ['root', '', '123456'];
+    // 主机候选列表
+    $hosts = ['127.0.0.1', 'localhost'];
+    
+    $lastError = '';
+    
+    foreach ($hosts as $host) {
+        foreach ($passwords as $pass) {
+            // 先不选数据库，仅连接 MySQL 服务器
+            $conn = @new mysqli($host, 'root', $pass);
+            if (!$conn->connect_error) {
+                // 确保数据库存在
+                $conn->query("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+                $conn->select_db($dbname);
+                return $conn;
+            }
+            $lastError = $conn->connect_error;
+        }
     }
-    return $conn;
+    
+    die("数据库连接失败！请检查 MySQL 是否启动。最后错误: " . $lastError);
 }
 
 // 创建访客用户

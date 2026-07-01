@@ -29,6 +29,12 @@ echo "4. 确保 tmp 目录存在且可写..."
 mkdir -p /var/www/html/tmp
 chmod 777 /var/www/html/tmp
 
+echo "5. 确保 upload/uploads 目录存在且可写（文件上传漏洞场景）..."
+for upload_dir in /var/www/html/upload/uploads /app/upload/uploads; do
+    mkdir -p "$upload_dir" 2>/dev/null
+    chmod 777 "$upload_dir" 2>/dev/null && echo "   $upload_dir 权限已设置为 777" || true
+done
+
 echo "=== 初始化完成 ==="
 echo "启动 Apache..."
 

@@ -1,25 +1,13 @@
-﻿<?php
+<?php
 // SQL注入数据库初始化脚本
-// 使用Docker网络中的MySQL数据库
+// 使用统一的数据库配置
 
-$servername = "db";
-$username = "root";
-$password = "root";
-$dbname = "zhao";
+require_once __DIR__ . '/db_config.php';
+
+$dbname = 'zhao';
 $reset = isset($_GET['reset']) && $_GET['reset'] == '1';
 
-// 先连接到MySQL服务器（不指定数据库）
-$conn = new mysqli($servername, $username, $password);
-
-// 检查连接
-if ($conn->connect_error) {
-    // 如果服务名解析失败，尝试使用IP地址
-    $servername = "192.168.100.16";
-    $conn = new mysqli($servername, $username, $password);
-    if ($conn->connect_error) {
-        die("连接失败: " . $conn->connect_error);
-    }
-}
+$conn = getDbConnection();
 
 echo "连接成功<br>";
 
