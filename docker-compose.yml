@@ -2,19 +2,17 @@ version: '3'
 
 services:
   zhaosec:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: zhaosec-local:latest
+    image: lanso4/zhaosec:v3.0
     container_name: zhaosec
     ports:
       - "80:80"
       - "3306:3306"
-    volumes:
-      - ./:/var/www/html
-      - ./tmp:/var/www/html/tmp
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
+    # 单镜像模式：不需要 volumes 挂载，代码已通过 Dockerfile COPY 打包进镜像
+    # 如需持久化 MySQL 数据，取消下面注释：
+    # volumes:
+    #   - mysql_data:/var/lib/mysql
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=root
     restart: always
     networks:
       ssrf-internal-network:
