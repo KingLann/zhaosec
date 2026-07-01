@@ -37,6 +37,9 @@ dist/
 *.swp
 *.swo
 
+# Claude AI配置
+.claude/
+
 # 数据库文件
 *.sql
 *.db
