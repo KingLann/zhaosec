@@ -39,11 +39,10 @@ services:
         ipv4_address: 192.168.100.12
 
   ssti:
-    image: mcc0624/flask_ssti:last
+    image: jerem1ah/python_sstilabs
     container_name: ssti
-    command: bash -c '/etc/rc.local; /bin/bash'
     ports:
-      - "10003:80"
+      - "10003:5000"
     restart: always
     networks:
       ssrf-internal-network:
